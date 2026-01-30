@@ -1,15 +1,15 @@
-# hhlprover
+# Isabelle/HHL
 ## usage
-   1. Install Isabelle2023 from:<br>
+   1. Install Isabelle from:<br>
         https://isabelle.in.tum.de/  <br>
    2. Download the afp package from :<br>
         https://www.isa-afp.org/ <br>
-        we need to make the whole AFP available to Isabelle (we use the version afp-2023-12-06) <br>
-   3. Launch Isabelle2023 and then change logic session to "Ordinary_Differential_Equations" <br>
+        we need to make the whole AFP available to Isabelle <br>
+   3. Launch Isabelle and then change logic session to "Ordinary_Differential_Equations" <br>
       Session change requires restart and then waiting for the session to be proved for the first time. <br>
       If the target session is not found, it means step 2 was not completed. <br> 
    4. Add the relative mars package path ".../Mars2.0/hhlprover" into the ROOTS file in Isabelle2023 <br>
-      If an error dialog box is displayed while launching Isabelle2023, it means this step was not completed.
+      If an error dialog box is displayed while launching Isabelle, it means this step was not completed.
    5. Open the following files in this package in Isabelle2023 <br>
         "Mars2.0\Examples\lander\Lander1.thy" <br>
 	      "Mars2.0\Examples\lander\Lander2.thy" <br>
