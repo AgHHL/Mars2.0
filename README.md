@@ -25,7 +25,7 @@ Used in: hhlpy, hcsp_simulator
 For the backend of hcsp_simulator, we use Flask to write the backend. Documentation for Flask can be found at their official guide: https://flask.palletsprojects.com/en/3.0.x/
 
 ### **Isabelle**
-Used in: HHLProver
+Used in: Isabelle/HHL
 
 Isabelle/HHL is an extension of Isabelle,so you may install Isabelle from:
 https://isabelle.in.tum.de/, for details, see [HHLProver_README](./HHLProver/README.md)
