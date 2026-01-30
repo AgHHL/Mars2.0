@@ -1,0 +1,177 @@
+%type: module
+
+module radar(period):
+output radar_data, pos;
+
+procedure Initialize_radar begin
+    skip;
+end
+
+procedure Input_radar begin
+    inputs["c0"]?radar_data;
+end
+
+procedure Compute_radar begin
+    pos := radar_data;
+end
+
+procedure Output_radar begin
+    outputs["c1"]!pos;
+    # {t_dot = 1 & t < period} |> [] (reqBus[0]["radar"]["obs_pos_radar"]!obs_pos_radar --> skip;)
+    # {t_dot = 1 & t < period};
+end
+
+procedure Execute begin
+    @Input_radar;
+    @Compute_radar;
+    @Output_radar;
+    wait(period);
+    @Execute_radar;
+end
+
+begin
+    @Initialize_radar;
+    @Execute_radar;
+end
+endmodule
+
+
+module actuator():
+output cmd, car_a;
+
+procedure Initialize_actuator begin
+    skip;
+end
+
+procedure Input_actuator begin
+    inputs["c2"]?cmd;
+end
+
+procedure Compute_actuator begin
+    car_a := cmd;
+end
+
+procedure Output_actuator begin
+    outputs["c3"]!car_a;
+    # reqBus[0]["actuator"]["veh_a"]!veh_a;
+end
+
+procedure Execute_actuator begin
+    @Input_actuator;
+    @Compute_actuator;
+    @Output_actuator;
+    @Execute_actuator;
+end
+
+begin
+    @Initialize_actuator;
+    @Execute_actuator;
+end
+endmodule
+
+
+module GPS(period):
+output GPS_data, pos;
+
+procedure Initialize_GPS begin
+    skip;
+end
+
+procedure Input_GPS begin
+    inputs["c4"]?GPS_data;
+end
+
+procedure Compute_GPS begin
+    pos := GPS_data;
+end
+
+procedure Output_GPS begin
+    outputs["c5"]!pos;
+    # {t_dot = 1 & t < period} |> [] (reqBus[0]["gps"]["veh_pos"]!veh_pos --> skip;)
+    # {t_dot = 1 & t < period};
+end
+
+procedure Execute_GPS begin
+    @Input_GPS;
+    @Compute_GPS;
+    @Output_GPS;
+    wait(period);
+    @Execute_GPS;
+end
+
+begin
+    @Initialize_GPS;
+    @Execute_GPS;
+end
+endmodule
+
+
+module velometer(period):
+output vel_data, vel;
+
+procedure Initialize_velometer begin
+    skip;
+end
+
+procedure Input_velometer begin
+    inputs["c6"]?vel_data;
+end
+
+procedure Compute_velometer begin
+    vel := vel_data;
+end
+
+procedure Output_velometer begin
+    outputs["c7"]!vel;
+    outputs["c8"]!vel;
+    # {t_dot = 1 & t < period} |> [] (reqBus[0]["tachymeter"]["veh_v0"]!veh_v --> skip;)
+    # {t_dot = 1 & t < period} |> [] (reqBus[0]["tachymeter"]["veh_v1"]!veh_v --> skip;)
+    # {t_dot = 1 & t < period};
+end
+
+procedure Execute_velometer begin
+    @Input_velometer;
+    @Compute_velometer;
+    @Output_velometer;
+    wait(period);
+    @Execute_velometer;
+end
+
+begin
+    @Initialize_velometer;
+    @Execute_velometer;
+end
+endmodule
+
+
+module user_panel():
+
+procedure Initialize_user_panel begin
+    skip;
+end
+
+procedure Input_user_panel begin
+    inputs["c9"]?in_event;
+end
+
+procedure Compute_user_panel begin
+    out_event := in_event;
+end
+
+procedure Output_user_panel begin
+    outputs["c10"]!out_event;
+    # reqBus[0]["user_panel"]["event1"]!event1;
+end
+
+procedure Execute_user_panel begin
+    @Input_user_panel;
+    @Compute_user_panel;
+    @Output_user_panel;
+    @Execute_user_panel;
+end
+
+begin
+    @Initialize_user_panel;
+    @Execute_user_panel;
+end
+endmodule

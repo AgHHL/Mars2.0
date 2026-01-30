@@ -1,0 +1,103 @@
+------------------------------------------------------------------------------------------------------------------------
+System :: (new \pi)((new s', s'')(Admin | Thread1 | Thread2) | Server)
+
+\Gamma = {}
+System
+\Theta = {}
+
+\Gamma = {}
+(new \pi)
+\Gamma = { \pi: client&{plus(R, R).client⊕{result(R), error(R)}, sqrt(R).client⊕{result(R), error(R)}} }
+\Gamma = { \pi: S } with \phi({S, server⊕plus(R, R).server&{result(R), error(R)}}) and \phi({S, server⊕sqrt(R).server&{result(R), error(R)}})
+(new s', s'')(Admin | Thread1 | Thread2) | Server
+\Theta = {}
+
+\Gamma = { \pi: S } with \phi({S, server⊕plus(R, R).server&{result(R), error(R)}}) and \phi({S, server⊕sqrt(R).server&{result(R), error(R)}})
+(new s')
+\Gamma = { \pi: S } with \phi({S, server⊕plus(R, R).server&{result(R), error(R)}}) and \phi({S, server⊕sqrt(R).server&{result(R), error(R)}})
+Admin | (new s'') (Thread1 | Thread2)
+\Theta = { s'[admin]: (\mu tX) thread1⊕data(R, R).thread1&{ok.tX, error.thread2⊕data(R)},
+           s'[thread1]: (\mu tX) admin&{data(R, R).admin⊕{ok.tX, error}},
+           s'[thread2]: admin&{data(R)}
+          }
+It can be proven that \phi(s'[thread2], s'[admin], s'[thread1]), therefore we remove them from \bar{\Theta} and \Theta:
+\Theta = {}
+
+\Gamma = { \pi: S } with \phi({S, server⊕plus(R, R).server&{result(R), error(R)}}) and \phi({S, server⊕sqrt(R).server&{result(R), error(R)}})
+(new s'')
+Thread1 | Thread2
+\Theta = { s'[thread]: (\mu tX) admin&{data(R, R).admin⊕{ok.tX, error}},
+           s''[parent]: (\mu tX) child⊕{ok.tX, channel(S2)},
+           s''[child]: (\mu tX) parent&{ok.tX, channel(admin&{data(R)})}
+          }
+From \phi(s''[parent], s''[child]), we can infer that S2 = admin&{data(R)}, and then we delete s'' from \Theta:
+\Theta = { s'[thread]: (\mu tX) admin&{data(R, R).admin⊕{ok.tX, error}},
+           s'[thread2]: S2 where S2 = admin&{data(R)}
+         }
+------------------------------------------------------------------------------------------------------------------------
+Admin ::=
+    [v1 := 0].[v2 := 1].
+    (\mu X) [v := v2].[v2 := v1+v2].[v1 := v].s'[admin][thread1]⊕data<v1, v2>.
+    s'[admin][thread1]&{
+        ok.X,
+        error.s'[admin][thread2]⊕data<v2>
+    }
+\Theta = { s'[admin]: (\mu tX) thread1⊕data(R, R).thread1&{ok.tX, error.thread2⊕data(R)} }
+------------------------------------------------------------------------------------------------------------------------
+\Gamma = { \pi: S } with \phi(S, server⊕plus(R, R).server&{result(R), error(R)}),
+Thread1 ::=
+    (\mu X) s'[thread1][admin]&{data(v1, v2).
+        (new s)\bar{\pi}<s[server]>.s[client][server]⊕{plus<v1, v2>.wait(1).
+            s[client][server]&{
+                result(v1).s'[thread1][admin]⊕ok.s''[parent][child]⊕ok.X,
+                error(v2).s'[thread1][admin]⊕error.s''[parent][child]⊕channel<s'[thread2]>
+            }
+        }
+    }
+\Theta = { s'[thread1]: (\mu tX) admin&{data(R, R).admin⊕{ok.tX, error}},
+           s''[parent]: (\mu tX) child⊕{ok.tX, channel(S2)},
+           s'[thread2]: S2
+         }
+------------------------------------------------------------------------------------------------------------------------
+\Gamma = { \pi: S } with \phi({s[server]: S, s[client]: server⊕sqrt(R).server&{result(R), error(R)}})
+Thread2 ::=
+(\mu X)
+    s''[child][parent]&{
+        ok.X,  \Omega_X = {T_x} = \Theta
+        channel(x).x[admin]&{data(v)
+            \Gamma = { \pi: S } with \phi({s[server]: S, s[client]: ...}), \bar{\Theta} = {}
+            (new s)
+                \Gamma = { \pi: S }
+                \bar{\pi}<s[server]>.
+                <v_dot = -2 & true> |> s[client][server]⊕sqrt<v>.s[client][server]&{result(v), error(v)}
+                \Theta = { s[client]: server⊕sqrt(R).server&{result(R), error(R)},
+                           s[server]: S
+                         }
+            \Theta = {}
+        }
+    }
+    \Theta = { s''[child]: parent&{ok.T_X, channel(admin&{data(R)})} }
+Tx = parent&{ok.T_X, channel(admin&{data(R)})}
+\Theta = { s''[child]: (\mu tX)parent&{ok.tX, channel(admin&{data(R)})} }
+------------------------------------------------------------------------------------------------------------------------
+\Gamma = { \pi: client&{plus(R, R).client⊕{result(R), error(R)}, sqrt(R).client⊕{result(R), error(R)}} }
+Server ::=
+    !\pi(x).wait(1).
+    x[client]&{
+        plus(v1, v2).
+            if v1+v2 <= 100 then
+                x[client]⊕result<v1+v2>
+            else
+                x[client]⊕error<-1>
+            endif,
+            \Theta = { x: client⊕{result(R), error(R)} }
+        sqrt(v3).
+            if v3 >= 0 then
+                x[client]⊕result<\sqrt{v3}>
+            else
+                x[client]⊕error<-2>
+            endif
+            \Theta = { x: client⊕{result(R), error(R)} }
+    }
+    \Theta = { x: client&{plus(R, R).client⊕{result(R), error(R)}, sqrt(R).client⊕{result(R), error(R)}} }
+\Theta = {}

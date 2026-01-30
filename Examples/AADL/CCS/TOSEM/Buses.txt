@@ -1,0 +1,12 @@
+%type: module
+
+module Bus(bid, d):
+
+procedure Execute_Bus begin
+    t := 0; <t_dot = 1 & true> |> [] (reqBus[bid][_conn]?msg --> wait(d); outputs[_conn]!msg; @Execute;)
+end
+
+begin
+    @Execute_Bus;
+end
+endmodule

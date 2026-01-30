@@ -1,0 +1,295 @@
+%type: module
+
+module Periodic_DIS(tid, period):
+
+procedure Execute_Periodic_DIS begin
+    dispatch[tid]!;
+    t := 0; {t_dot = 1 & t < period} |> [] (complete_comp[tid]? --> {t_dot = 1 & t < period})
+    @Execute;
+end
+
+begin
+    @Execute_Periodic_DIS;
+end
+endmodule
+
+
+module Aperiodic_DIS(tid, inConn):
+
+procedure Execute_Aperiodic_DIS begin
+    inputs[inConn]?event;
+    dispatch[tid]!event;
+    t := 0; {t_dot = 1 & true} |> [] (complete_comp[tid]? --> skip;)
+    @Execute_Aperiodic_DIS;
+end
+
+begin
+    @Execute_Aperiodic_DIS;
+end
+endmodule
+
+
+module EXE_obs_p_comp(tid, sid):
+output pos, obs_p;
+
+procedure Initialize_EXE_obs_p_comp begin
+    wcet := 0.02;
+    deadline := 0.097;
+    prior := 1;
+end
+
+procedure Input_EXE_obs_p_comp begin
+    inputs["c1"]?pos;
+end
+
+procedure Result_EXE_obs_p_comp begin
+    obs_p := pos;
+end
+
+procedure Output_EXE_obs_p_comp begin
+    @Result_EXE_obs_p_comp;
+    outputs["c11"]!obs_p;
+    # {t_dot = 1 & t < deadline} |> [] (reqBus[0]["comp_obs_pos"]["obs_pos"]!obs_pos --> skip;)
+end
+
+procedure Run_EXE_obs_p_comp begin
+    preempted := 0;
+    {t_dot = 1, c_dot = 1 & c < wcet && t < deadline} |> [] (preempt[sid][tid]? --> preempted := 1;)
+    if (preempted == 1) {
+        {t_dot = 1 & t < deadline} |> [] (run[sid][tid]? --> @Run_EXE_obs_p_comp;)
+    } else {
+        complete_exec[sid][tid]!;
+        if (c >= wcet) {
+            complete_comp[tid]!;
+            @Output_EXE_obs_p_comp;
+        }
+    }
+end
+
+procedure Execute_EXE_obs_p_comp begin
+    dispatch[tid]?;
+    @Input_EXE_obs_p_comp;
+    reqProcessor[sid][tid]![deadline, prior];
+    t := 0; {t_dot = 1 & t < deadline} |> [] (run[sid][tid]? --> c := 0; @Run;)
+    @Execute_EXE_obs_p_comp;
+end
+
+begin
+    @Initialize_EXE_obs_p_comp;
+    @Execute_EXE_obs_p_comp;
+end
+endmodule
+
+
+module EXE_emerg(tid, sid):
+output obs_p, car_p, car_v, des_a, cmd;
+
+procedure Initialize_EXE_emerg begin
+    wcet := 0.001;
+    period := 0.005;
+    deadline := 0.005;
+    prior := 2;
+    v_max := 10;
+    a_min := -3;
+end
+
+procedure Input_EXE_emerg begin
+    inputs["c11"]?obs_p;
+    inputs["c5"]?car_p;
+    inputs["c7"]?car_v;
+    inputs["c13"]?des_a;
+end
+
+procedure Comp_V_lim_EXE_emerg begin
+    if (obs_p - p >= v_max * v_max / (-2 * a_min)) {
+        v_lim := v_max;
+    } else if (obs_p - p > 0) {
+        v_lim := sqrt(-2 * a_min * (obs_p - p));
+    } else {
+        v_lim := 0;
+    }
+end
+
+procedure Result_EXE_emerg begin
+    p := car_p + car_v * period + 0.5 * des_a * period * period;
+    v := car_v + des_a * period;
+    @Comp_v_lim_EXE_emerg;
+    if (v <= v_lim) {
+        cmd := des_a;
+    } else {
+        p := car_p + car_v * period;
+        @Comp_v_lim_EXE_emerg;
+        if (car_v <= v_lim) {
+            cmd := 0;
+        } else {
+            cmd := a_min;
+        }
+    }
+end
+
+procedure Output_EXE_emerg begin
+    @Result_EXE_emerg;
+    outputs["c2"]!cmd;
+    # {t_dot = 1 & t < deadline} |> [] (reqBus[0]["emerg"]["cmd"]!cmd --> skip;)
+end
+
+procedure Run_EXE_emerg begin
+    preempted := 0;
+    {t_dot = 1, c_dot = 1 & c < wcet && t < deadline} |> [] (preempt[sid][tid]? --> preempted := 1;)
+    if (preempted == 1) {
+        {t_dot = 1 & t < deadline} |> [] (run[sid][tid]? --> @Run_EXE_emerg;)
+    } else {
+        complete_exec[sid][tid]!;
+        if (c >= wcet) {
+            complete_comp[tid]!;
+            @Output_EXE_emerg;
+        }
+    }
+end
+
+procedure Execute_EXE_emerg begin
+    dispatch[tid]?;
+    @Input_EXE_emerg;
+    reqProcessor[sid][tid]![deadline, prior];
+    t := 0; {t_dot = 1 & t < deadline} |> [] (run[sid][tid]? --> c := 0; @Run_EXE_emerg;)
+    @Execute_EXE_emerg;
+end
+
+begin
+    @Initialize_EXE_emerg;
+    @Execute_EXE_emerg;
+end
+endmodule
+
+
+module EXE_PI_ctr(tid, sid):
+output car_v, des_v, des_a;
+
+procedure Initialize_EXE_PI_ctr begin
+    wcet := 0.001;
+    period := 0.007;
+    deadline := 0.007;
+    prior := 1;
+    Integrator_DSTATE := 0;
+end
+
+procedure Input_EXE_PI_ctr begin
+    inputs["c8"]?car_v;
+    inputs["c12"]?des_v;
+end
+
+procedure Result_EXE_PI_ctr begin
+    rtb_Sum := des_v - car_v;
+    rtb_IntegralGain := rtb_Sum;
+    rtb_SumFdbk := rtb_Sum + Integrator_DSTATE;
+    if (rtb_SumFdbk > 3) {
+        rtb_SumFdbk_0 := 3;
+    } else if (rtb_SumFdbk < -3) {
+        rtb_SumFdbk_0 := -3;
+    } else {
+        rtb_SumFdbk_0 := rtb_SumFdbk;
+    }
+    rtb_IntegralGain := (rtb_SumFdbk_0 - rtb_SumFdbk + rtb_IntegralGain) * period + Integrator_DSTATE;
+    rtb_Sum := rtb_Sum + rtb_IntegralGain;
+    if (rtb_Sum > 3) {
+        des_a := 3;
+    } else if (rtb_Sum < -3) {
+        des_a := -3;
+    } else {
+        des_a := rtb_Sum;
+    }
+    Integrator_DSTATE := rtb_IntegralGain;
+end
+
+procedure Output_EXE_PI_ctr begin
+    @Result_EXE_PI_ctr;
+    outputs["c13"]!des_a;
+    # {t_dot = 1 & t < deadline} |> [] (reqBus[0]["PI_ctr"]["des_a"]!des_a --> skip;)
+end
+
+procedure Run_EXE_PI_ctr begin
+    preempted := 0;
+    {t_dot = 1, c_dot = 1 & c < wcet && t < deadline} |> [] (preempt[sid][tid]? --> preempted := 1;)
+    if (preempted == 1) {
+        {t_dot = 1 & t < deadline} |> [] (run[sid][tid]? --> @Run_EXE_PI_ctr;)
+    } else {
+        complete_exec[sid][tid]!;
+        if (c >= wcet) {
+            complete_comp[tid]!;
+            @Output_EXE_PI_ctr;
+        }
+    }
+end
+
+procedure Execute_EXE_PI_ctr begin
+    dispatch[tid]?;
+    @Input_EXE_PI_ctr;
+    reqProcessor[sid][tid]![deadline, prior];
+    t := 0; {t_dot = 1 & t < deadline} |> [] (run[sid][tid]? --> c := 0; @Run_EXE_PI_ctr;)
+    @Execute_EXE_PI_ctr;
+end
+
+begin
+    @Initialize_EXE_PI_ctr;
+    @Execute_EXE_PI_ctr;
+end
+endmodule
+
+
+module EXE_pan_ctr(tid, sid):
+output cmd, des_v;
+
+procedure Initialize_EXE_pan_ctr begin
+    # tid := "pan_ctr_th";
+    wcet := 0.01;
+    deadline := 0.1;
+    prior := 0;
+    v := 0;
+end
+
+procedure Input_EXE_pan_ctr begin
+    skip;
+end
+
+procedure Result_EXE_pan_ctr begin
+    if (cmd == "+") {
+        v := v + 1;
+    } else if (cmd == "-") {
+        v := v - 1;
+    }
+    des_v := v;
+end
+
+procedure Output_EXE_pan_ctr begin
+    @Result_EXE_pan_ctr;
+    outputs["c12"]!des_v;
+    # {t_dot = 1 & t < deadline} |> [] (reqBus[0]["pan_ctr_th"]["des_v"]!des_v --> skip;)
+end
+
+procedure Run_EXE_pan_ctr begin
+    preempted := 0;
+    {t_dot = 1, c_dot = 1 & c < wcet && t < deadline} |> [] (preempt[sid][tid]? --> preempted := 1;)
+    if (preempted == 1) {
+        {t_dot = 1 & t < deadline} |> [] (run[sid][tid]? --> @Run_EXE_pan_ctr;)
+    } else {
+        complete_exec[sid][tid]!;
+        if (c >= wcet) {
+            complete_comp[tid]!;
+            @Output_EXE_pan_ctr;
+        }
+    }
+end
+
+procedure Execute_EXE_pan_ctr begin
+    dispatch[tid]?cmd;
+    @Input_EXE_pan_ctr;
+    reqProcessor[sid][tid]![deadline, prior];
+    t := 0; {t_dot = 1 & t < deadline} |> [] (run[sid][tid]? --> c := 0; @Run_EXE_pan_ctr;)
+    @Execute_EXE_pan_ctr;
+end
+
+begin
+    @Initialize_EXE_pan_ctr;
+    @Execute_EXE_pan_ctr;
+end
+endmodule

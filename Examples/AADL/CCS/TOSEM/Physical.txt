@@ -1,0 +1,74 @@
+%type: module
+
+module truck():
+output p;
+
+procedure Initialize_truck begin
+    t := 0; p := 35;
+end
+
+procedure Stay_truck begin
+    {t_dot = 1 & t < 10} |> [] (outputs["c0"]!p --> @Stay;)
+end
+
+procedure Run_truck begin
+    {p_dot = 2 & true} |> [] (outputs["c0"]!p --> @Run;)
+end
+
+begin
+    empty_val_for_test:=0;
+    @Initialize_truck;
+    @Stay_truck;
+    @Run_truck;
+end
+endmodule
+
+
+module car():
+output p, v, a;
+
+procedure Initialize_car begin
+    p := 0;
+    v := 0;
+    a := 0;
+end
+
+procedure Execute_car begin
+    {p_dot = v, v_dot = a & true} |> [] (
+        inputs["c3"]?a --> @Execute_car;,
+        outputs["c4"]!s --> @Execute_car;,
+        outputs["c6"]!v --> @Execute_car;
+    )
+end
+
+begin
+    @Initialize_car;
+    @Execute_car;
+end
+endmodule
+
+
+module driver():
+
+procedure Up_driver begin
+    outputs["c9"]!"+";
+    wait(0.5);
+    outputs["c9"]!"+";
+    wait(0.5);
+    outputs["c9"]!"+";
+end
+
+procedure Wait_driver begin
+    wait(29);
+end
+
+procedure Down_driver begin
+    outputs["c9"]!"-";
+    wait(0.5);
+    outputs["c9"]!"-";
+end
+
+begin
+    @Up_driver; @Wait_driver; @Down_driver;
+end
+endmodule

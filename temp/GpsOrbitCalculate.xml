@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 近圆中低轨卫星GPS轨道计算 -->
+<SoftwareIP name="GpsOrbitCalculate" id="R/GJ/FC-DH-GPSWTJS-A" version="v1.00">
+    <Knowledge>
+        <Identification>
+            <Copyright>北京控制工程研究所</Copyright>
+            <Developer>北京控制工程研究所软件中心</Developer>
+            <Date/>
+            <Keyword termbase="Terminology Database">
+                <P>近圆中低轨</P>
+                <P>GNSS轨道计算</P>
+            </Keyword>
+            <Domain/>
+            <Category>轨道计算</Category>
+            <Criterion>
+                <P>五院《航天器软件编程规范（C语言部分）》</P>
+            </Criterion>
+        </Identification>
+        <Requirement content="functional description">
+            <Specification>
+                <!-- 软件IP实现的功能描述，体现软件IP特征 -->
+                <!-- 要求：基于领域术语词典进行描述 -->
+                利用GPS输出的RV数据即卫星瞬时WGS84系下的位置速度，利用注入的格林尼治恒星时角计算得到卫星当前的惯性系位置速度。
+                得到惯性系位置速度后可以根据卫星轨道运动学方程，利用经典的笛卡尔坐标系——轨道根数转换算法得到卫星当前时刻的瞬时根数
+                和参数地心距r，速度V，半长轴a，偏心率e，轨道倾角i，升交点赤经Ω，近地点幅角ω以及λ；在得到瞬时轨道参数后，
+                通过计算短周期项获得经典6根数形式的平根数，最终利用近圆中低轨道卫星根数外推算法中的相关公式计算得到卫星定轨所需要的
+                规范化19轨道根数中对应数据，需要注意的是由于算法本身适应性以及参数计算必要性的限制，
+                对应的19根数计算结果中ξ_Δ、η_Δ、η ̅_m、ω_sun、Ω_sun、λ_2均需要使用最近一次的轨道根数注入值。
+            </Specification>
+            <Graph/>
+        </Requirement>
+        <Design>
+            <Interface>
+                <Service name="GpsOrbitConvert" type="provide">
+                    <Specification>卫星在地心惯性坐标系分量计算</Specification>
+                    <Input>
+                        <P name="X"  unit="km" type="float64">WGS_84坐标系下的位置的X分量</P>
+                        <!-- 其他输入项的信息 -->
+                    </Input>
+                    <Output>
+                        <!-- 输出项信息 -->
+                    </Output>
+                    <Return>
+                        <!-- 返回项信息 -->
+                    </Return>
+                    <Parameter>
+                        <!-- 参数项的信息 -->
+                    </Parameter>
+                </Service>
+                <Service name="GpsOrbitCalculate" type="provide">
+                    <!-- 提供服务GpsOrbitCalculate的信息 -->
+                </Service>
+                <Service name="GpsOrbitIterate" type="provide">
+                    <!-- 提供服务GpsOrbitIterate的信息 -->
+                </Service>
+                <Service name="GpsOrbitIterate" type="require">
+                    <!-- 请求服务ModPNHP的信息 -->
+                </Service>
+                <Service name="MatrixMulti" type="require">
+                    <!-- 请求服务MatrixMulti的信息 -->
+                </Service>
+            </Interface>
+            <Structure>
+                <SC>./doc/graph/structure.png</SC>
+                <Protocol>
+                    <Location>./doc/graph/protocol.png</Location>
+                    <Specification/>
+                </Protocol>
+                <CFG/>
+                <DFG/>
+            </Structure>
+            <Exception>
+                <!-- 可靠性与安全性的保证措施 -->
+                <P>软件设计符合规范，按照五院编程规范和《基于构件的航天器控制软件编程风格约定》进行设计。</P>
+                <!-- 其他可靠性与安全性的保证措施 -->
+            </Exception>
+        </Design>
+        <Implementation>
+            <Language>ANSI C</Language>
+            <CompilingEnvironment/>
+            <Form>
+                <File type="code">
+                    <Location>./src/csrc/gfhgpsorbit.c</Location>
+                    <Specification>C语言源代码</Specification>
+                </File>
+            </Form>
+            <Performance>
+                <Precision>数据采用IEEE 4字节单精度浮点数</Precision>
+                <Time unit="ms">2.9</Time>
+                <Space unit="KB">3.6</Space>
+            </Performance>
+        </Implementation>
+        <Testing>
+            <UnitTesting>
+                <Service name="GpsOrbitConvert" type="provide">
+                    <TestCase>
+                        <Number>1</Number>
+                        <Location>./sim/unit_testing/GpsOrbitConvert/TestCases</Location>
+                    </TestCase>
+                    <StatementCoverage>100%</StatementCoverage>
+                    <BranchCoverage>100%</BranchCoverage>
+                    <MCDCCoverage/>
+                </Service>
+                <Service name="GpsOrbitCalculate" type="provide">
+                    <!-- 提供服务GpsOrbitCalculate的测试结果 -->
+                </Service>
+                <Service name="GpsOrbitIterate" type="provide">
+                    <!-- 提供服务GpsOrbitCalculate的测试结果 -->
+                </Service>
+            </UnitTesting>
+            <IntegrationTesting/>
+        </Testing>
+        <Maintenance>
+            <UpdateHistory/>
+            <Application>
+                <Log>./doc/log</Log>
+            </Application>
+        </Maintenance>
+        <Use>
+            <P scenario="星上控制软件">
+                <P>轨道高度低于1500km</P>
+                <P>偏心率为10^-2量级或更小</P>
+            </P>
+        </Use>
+    </Knowledge>
+    <Specification content="formal model">
+        <InterfaceModel>
+            <Interface>
+                <Service name="GpsOrbitConvert" type="provide">
+                    <Functional form="guarded design" format="location">
+                        ./doc/specification/services/GpsOrbitConvert/functional
+                    </Functional>
+                    <NonFunctional/>
+                </Service>
+                <Service name="GpsOrbitCalculate" type="provide">
+                    <Functional form="guarded design" format="location">
+                        ./doc/specification/services/GpsOrbitCalculate/functional
+                    </Functional>
+                    <NonFunctional/>
+                </Service>
+                <Service name="GpsOrbitIterate" type="provide">
+                    <Functional form="guarded design" format="location">
+                        ./doc/specification/services/GpsOrbitIterate/functional
+                    </Functional>
+                    <NonFunctional/>
+                </Service>
+                <Service name="ModPNHP" type="require">
+                    <Functional/>
+                    <NonFunctional/>
+                </Service>
+                <Service name="MatrixMulti" type="require">
+                    <Functional/>
+                    <NonFunctional/>
+                </Service>
+            </Interface>
+            <InterfaceProtocol/>
+            <GlobalProperty/>
+        </InterfaceModel>
+    </Specification>
+    <Implementation>
+        <CodeInfo>
+            <Lib/>
+            <Code format="location">./src/csrc</Code>
+            <!-- 代码映射：将接口中的提供服务映射为具体的代码片段（函数） -->
+            <CodeMapping>
+                <Service name="GpsOrbitConvert" type="provide">
+                    <CodeFragment>
+                        <Code>gfhgpsorbit.c</Code>
+                        <Function>GpsOrbitConvert</Function>
+                    </CodeFragment>
+                </Service>
+                <Service name="GpsOrbitCalculate" type="provide">
+                    <CodeFragment>
+                        <Code>gfhgpsorbit.c</Code>
+                        <Function>GpsOrbitCalculate</Function>
+                    </CodeFragment>
+                </Service>
+                <Service name="GpsOrbitIterate" type="provide">
+                    <CodeFragment>
+                        <Code>gfhgpsorbit.c</Code>
+                        <Function>GpsOrbitIterate</Function>
+                    </CodeFragment>
+                </Service>
+            </CodeMapping>
+        </CodeInfo>
+        <Product>
+            <Location>./doc/Product</Location>
+            <!-- 文档列表 -->
+            <P>GPS轨道算法需求规格说明</P>
+            <P>近圆中低轨卫星GPS轨道计算设计报告</P>
+            <P>近圆中低轨卫星GPS轨道计算使用说明</P>
+            <P>近圆中低轨卫星GPS轨道计算产品规范</P>
+        </Product>
+        <SimTest>
+            <Simulation/>
+            <Testing>
+                <UnitTesting>
+                    <Location>./sim/testing/unit_testing</Location>
+                    <Report>近圆中低轨卫星GPS轨道计算单元测试报告</Report>
+                    <TestCase/>
+                </UnitTesting>
+                <IntegrationTesting/>
+            </Testing>
+        </SimTest>
+    </Implementation>
+</SoftwareIP>

@@ -1,0 +1,58 @@
+%type: module
+
+module Sync_Conn(conn):
+
+procedure Execute_Sync_Conn begin
+    outputs[conn]?msg;
+    inputs[conn]!msg;
+    @Execute;
+end
+
+begin
+    @Execute_Sync_Conn;
+end
+endmodule
+
+
+module Async_Data_Conn(conn):
+
+procedure Input_Async_Data_Conn begin
+    outputs[conn]?data;
+end
+
+procedure Execute_Async_Data_Conn begin
+    outputs[conn]?data --> @Execute_Async_Data_Conn;
+    $
+    inputs[conn]!data --> @Execute_Async_Data_Conn;
+end
+
+begin
+    @Input_Async_Data_Conn;
+    @Execute_Async_Data_Conn;
+end
+endmodule
+
+
+module Async_Event_Conn(conn):
+
+procedure Initialize_Async_Event_Conn begin
+    Queue := [];
+end
+
+procedure Execute_Async_Event_Conn begin
+    if (len(Queue) == 0) {
+        outputs[conn]?event;
+        Queue := [event];
+    } else {
+        outputs[conn]?event --> Queue := push(Queue, event);
+        $
+        inputs[conn]!head(Queue) --> Queue := tail(Queue);
+    }
+    @Execute_Async_Event_Conn;
+end
+
+begin
+    @Initialize_Async_Event_Conn;
+    @Execute_Async_Event_Conn;
+end
+endmodule

@@ -1,0 +1,46 @@
+%type: module
+
+module SchedulerFIFO(sid):
+output tid;
+
+procedure Initialize_SchedulerFIFO begin
+    t := 0;  # The local time of the scheduler
+    Pool := [];  # Thread pool
+end
+
+procedure Idle_SchedulerFIFO begin
+    {t_dot = 1 & true} |> [] (
+        reqProcessor[sid][_tid]?x --> deadline := x(0); Pool := [[_tid, t + deadline]]; @Busy_SchedulerFIFO;
+    )
+end
+
+procedure Compute_SchedulerFIFO begin
+    {t_dot = 1 & true} |> [] (
+        reqProcessor[sid][_tid]?x --> deadline := x(0); Pool := push(Pool, [_tid, t + deadline]); @Compute_SchedulerFIFO;,
+        complete_exec[sid][tid]? --> skip;
+    )
+end
+
+procedure Busy_SchedulerFIFO begin
+    (tid, deadline) := head(Pool);
+    Pool := tail(Pool);
+    if (t < deadline) {
+        run[sid][tid]!;
+        @Compute_SchedulerFIFO;
+    }
+    @Schedule_SchedulerFIFO;
+end
+
+procedure Schedule_SchedulerFIFO begin
+    if (len(Pool) == 0) {
+        @Idle_SchedulerFIFO;
+    } else {
+        @Busy_SchedulerFIFO;
+    }
+end
+
+begin
+    @Initialize_SchedulerFIFO;
+    @Schedule_SchedulerFIFO;
+end
+endmodule

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SoftwareIP name="GyroProceed" id="GyroProceed_beta1.0" version="1.0">
+    <Copyright>北京控制工程研究所</Copyright>
+    <Developer>徐雄</Developer>
+    <Institute>中国科学院软件研究所</Institute>
+    <Date>2022-10-14</Date>
+    <!-- IP基本信息 -->
+    <Category>姿态计算</Category>
+    <Keywords>
+        <P>陀螺</P>
+        <P>角速度</P>
+        <P>积分</P>
+    </Keywords>
+    <Function>计算陀螺积分</Function>
+    <Certification>A</Certification>
+    <Restriction>被动调用</Restriction>
+</SoftwareIP>

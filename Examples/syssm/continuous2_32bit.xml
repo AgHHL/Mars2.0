@@ -1,0 +1,1534 @@
+<?xml  version='1.0' encoding='windows-1252' ?>
+<xmi:XMI xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmi:version="2.1" xmlns:uml="http://schema.omg.org/spec/UML/2.0" xmlns:thecustomprofile="http://www.sparxsystems.com/profiles/thecustomprofile/1.0" xmlns:EAUML="http://www.sparxsystems.com/profiles/EAUML/1.0">
+	<xmi:Documentation exporter="Enterprise Architect" exporterVersion="6.5" exporterID="1604"/>
+	<uml:Model xmi:type="uml:Model" name="EA_Model">
+		<ownedMember xmi:type="uml:Package" xmi:id="EAPK_C4CAB469_CD97_4a45_BA22_CA51C442E46F" name="Continuous2">
+			<ownedMember xmi:type="uml:StateMachine" xmi:id="EAID_SM000001_CD97_4a45_BA22_CA51C442E46F" name="EA_StateMachine1">
+				<region xmi:type="uml:Region" xmi:id="EAID_SR000001_CD97_4a45_BA22_CA51C442E46F" name="EA_Region1">
+					<subvertex xmi:type="uml:State" xmi:id="EAID_18996316_6714_4c2e_BFF8_7FB2C3A8AD1E" name="A">
+						<incoming xmi:idref="EAID_C8D9A52D_6649_46e8_87C8_335D89A94C22"/>
+						<outgoing xmi:idref="EAID_D03DB6ED_0F11_43b0_AA23_5DA056391A14"/>
+						<entry xmi:type="uml:OpaqueBehavior" xmi:id="EAID_B68CA1A5_8C27_43ee_855F_9308CA3EEC4F" name="f(&quot;enA&quot;)"/>
+						<exit xmi:type="uml:OpaqueBehavior" xmi:id="EAID_8186B25E_5586_491c_995D_03EB9EC491E6" name="f(&quot;exA&quot;)"/>
+						<doActivity xmi:type="uml:OpaqueBehavior" xmi:id="EAID_3909B248_1608_4252_8922_B1E651DEFB19" name="x_dot=y; y_dot=-x;"/>
+					</subvertex>
+					<transition xmi:type="uml:Transition" xmi:id="EAID_D03DB6ED_0F11_43b0_AA23_5DA056391A14" kind="local" source="EAID_18996316_6714_4c2e_BFF8_7FB2C3A8AD1E" target="EAID_7BAD61C1_46D8_4ef6_B447_C15E056A5DB7">
+						<guard xmi:type="uml:Constraint" xmi:id="EAID_CO000000_0F11_43b0_AA23_5DA056391A14">
+							<specification xmi:type="uml:OpaqueExpression" xmi:id="EAID_OE000000_0F11_43b0_AA23_5DA056391A14">
+								<body>[x &gt;= 0.5]</body>
+							</specification>
+						</guard>
+						<effect xmi:type="uml:OpaqueBehavior" xmi:id="EAID_OB000000_0F11_43b0_AA23_5DA056391A14">
+							<body>{f("conAB1")}/{f("tranAB1")}&#xD;
+</body>
+						</effect>
+					</transition>
+					<subvertex xmi:type="uml:State" xmi:id="EAID_8115BB2F_90F1_4f65_91F5_EAD92394BA01" name="B">
+						<incoming xmi:idref="EAID_3D1C4139_E80F_4526_8D58_EAF318EB5B92"/>
+						<outgoing xmi:idref="EAID_3D1C4139_E80F_4526_8D58_EAF318EB5B92"/>
+						<entry xmi:type="uml:OpaqueBehavior" xmi:id="EAID_25F4424B_BB87_40fb_8F65_C9F5874A63BB" name="f(&quot;enB&quot;); x=0;"/>
+						<doActivity xmi:type="uml:OpaqueBehavior" xmi:id="EAID_69E44B2F_22B6_4a1e_A9BA_F4952B22C596" name="x_dot=1;"/>
+						<region xmi:type="uml:Region" xmi:id="EAID_SR000002_CD97_4a45_BA22_CA51C442E46F" name="EA_Region2">
+							<subvertex xmi:type="uml:State" xmi:id="EAID_7BAD61C1_46D8_4ef6_B447_C15E056A5DB7" name="B1">
+								<incoming xmi:idref="EAID_D4135537_D701_4364_8451_469FABF4BA94"/>
+								<incoming xmi:idref="EAID_D03DB6ED_0F11_43b0_AA23_5DA056391A14"/>
+								<entry xmi:type="uml:OpaqueBehavior" xmi:id="EAID_1C2A89BF_C967_4438_B2CF_170A511A8BA2" name="f(&quot;enB1&quot;)"/>
+							</subvertex>
+							<subvertex xmi:type="uml:Pseudostate" xmi:id="EAID_E971AA58_A2DA_48e2_8A55_DDD9B21B9847" name="Initial">
+								<outgoing xmi:idref="EAID_D4135537_D701_4364_8451_469FABF4BA94"/>
+							</subvertex>
+							<transition xmi:type="uml:Transition" xmi:id="EAID_D4135537_D701_4364_8451_469FABF4BA94" kind="local" source="EAID_E971AA58_A2DA_48e2_8A55_DDD9B21B9847" target="EAID_7BAD61C1_46D8_4ef6_B447_C15E056A5DB7"/>
+						</region>
+					</subvertex>
+					<transition xmi:type="uml:Transition" xmi:id="EAID_3D1C4139_E80F_4526_8D58_EAF318EB5B92" kind="local" source="EAID_8115BB2F_90F1_4f65_91F5_EAD92394BA01" target="EAID_8115BB2F_90F1_4f65_91F5_EAD92394BA01">
+						<guard xmi:type="uml:Constraint" xmi:id="EAID_CO000000_E80F_4526_8D58_EAF318EB5B92">
+							<specification xmi:type="uml:OpaqueExpression" xmi:id="EAID_OE000000_E80F_4526_8D58_EAF318EB5B92">
+								<body>[x&gt;=1]</body>
+							</specification>
+						</guard>
+					</transition>
+					<subvertex xmi:type="uml:Pseudostate" xmi:id="EAID_07A89954_14CF_4122_93B8_8F5CFDC3B4FD" name="Initial">
+						<outgoing xmi:idref="EAID_C8D9A52D_6649_46e8_87C8_335D89A94C22"/>
+					</subvertex>
+					<transition xmi:type="uml:Transition" xmi:id="EAID_C8D9A52D_6649_46e8_87C8_335D89A94C22" kind="local" source="EAID_07A89954_14CF_4122_93B8_8F5CFDC3B4FD" target="EAID_18996316_6714_4c2e_BFF8_7FB2C3A8AD1E">
+						<guard xmi:type="uml:Constraint" xmi:id="EAID_CO000000_6649_46e8_87C8_335D89A94C22">
+							<specification xmi:type="uml:OpaqueExpression" xmi:id="EAID_OE000000_6649_46e8_87C8_335D89A94C22">
+								<body>{x=0;y=1;}</body>
+							</specification>
+						</guard>
+					</transition>
+				</region>
+			</ownedMember>
+			<ownedMember xmi:type="uml:Artifact" xmi:id="EAID_F374F0FF_5172_4590_ABA0_7DB1DDB94567" name="f(s)"/>
+			<ownedMember xmi:type="uml:DataType" xmi:id="EAID_B09B6341_863E_4446_88DF_814A9316C992" name="data">
+				<ownedAttribute xmi:type="uml:Property" xmi:id="EAID_96A19A5E_5E5E_42fa_91F8_90A0E374D095" name="s">
+					<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000001_5E5E_42fa_91F8_90A0E374D095" value="1"/>
+					<upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="EAID_LI000002_5E5E_42fa_91F8_90A0E374D095" value="1"/>
+					<type xmi:idref="EAJava_int"/>
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property" xmi:id="EAID_F7F80ACE_0EC9_4bb9_B02E_E86E4709E3BC" name="x">
+					<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000003_0EC9_4bb9_B02E_E86E4709E3BC" value="1"/>
+					<upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="EAID_LI000004_0EC9_4bb9_B02E_E86E4709E3BC" value="1"/>
+					<type xmi:idref="EAJava_int"/>
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property" xmi:id="EAID_6D9676DB_1CE2_4957_AC2D_37F293124AFC" name="y">
+					<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000005_1CE2_4957_AC2D_37F293124AFC" value="1"/>
+					<upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="EAID_LI000006_1CE2_4957_AC2D_37F293124AFC" value="1"/>
+					<type xmi:idref="EAJava_int"/>
+				</ownedAttribute>
+			</ownedMember>
+		</ownedMember>
+		<profileApplication xmi:type="uml:ProfileApplication" xmi:id="profileap_thecustomprofile">
+			<appliedProfile xmi:type="uml:Profile" href="http://www.sparxsystems.com/profiles/thecustomprofile/1.0#thecustomprofile"/>
+		</profileApplication>
+		<profileApplication xmi:type="uml:ProfileApplication" xmi:id="profileap_8C9E6706-8">
+			<appliedProfile xmi:type="uml:Profile" href="http://www.sparxsystems.com/profiles/EAUML/1.0#8C9E6706-8"/>
+		</profileApplication>
+	</uml:Model>
+	<xmi:Extension extender="Enterprise Architect" extenderID="6.5">
+		<elements>
+			<element xmi:idref="EAPK_C4CAB469_CD97_4a45_BA22_CA51C442E46F" xmi:type="uml:Package" name="Continuous2" scope="public">
+				<model package2="EAID_C4CAB469_CD97_4a45_BA22_CA51C442E46F" package="EAPK_A3B17EF5_DC0D_4924_AC1D_F550BC5D041D" tpos="0" ea_localid="2" ea_eleType="package"/>
+				<properties isSpecification="false" sType="Package" nType="0" scope="public"/>
+				<project author="17909" version="1.0" phase="1.0" created="2025-02-21 08:54:07" modified="2025-02-21 08:54:07" complexity="1" status="Proposed"/>
+				<code gentype="Java"/>
+				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+				<tags/>
+				<xrefs/>
+				<extendedProperties tagged="0" package_name="Model"/>
+				<packageproperties version="1.0"/>
+				<paths/>
+				<times created="2025-02-21 08:54:07" modified="2025-02-21 08:54:07"/>
+				<flags iscontrolled="0" isprotected="0" usedtd="0" logxml="0" packageFlags="isModel=1;VICON=3;"/>
+			</element>
+			<element xmi:idref="EAID_18996316_6714_4c2e_BFF8_7FB2C3A8AD1E" xmi:type="uml:State" name="A" scope="public">
+				<model package="EAPK_C4CAB469_CD97_4a45_BA22_CA51C442E46F" tpos="0" ea_localid="3" ea_eleType="element"/>
+				<properties isSpecification="false" sType="State" nType="0" scope="public"/>
+				<project author="17909" version="1.0" phase="1.0" created="2025-02-21 08:54:49" modified="2025-02-21 08:54:51" complexity="1" status="Proposed"/>
+				<code gentype="Java"/>
+				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=0;HSwimLanes=0;BorderStyle=0;"/>
+				<tags/>
+				<xrefs/>
+				<extendedProperties tagged="0" package_name="Continuous2">
+					<states type="entry" name="f(&quot;enA&quot;)" visibility="public" isAsynchronous="false">
+						<model ea_guid="{B68CA1A5-8C27-43ee-855F-9308CA3EEC4F}" ea_localid="1"/>
+						<type type="entry" const="false" static="false" isAbstract="false" synchronised="0" concurrency="Sequential" pure="0" isQuery="false"/>
+						<behaviour/>
+						<code/>
+						<style/>
+						<styleex/>
+						<documentation/>
+						<tags/>
+						<properties position="0"/>
+						<xrefs/>
+						<parameters>
+							<parameter xmi:idref="EAID_RETURNID_8C27_43ee_855F_9308CA3EEC4F" visibility="public">
+								<properties pos="0" type="entry" const="false" ea_guid="{RETURNID-8C27-43ee-855F-9308CA3EEC4F}"/>
+								<style/>
+								<styleex/>
+								<documentation/>
+								<tags/>
+								<xrefs/>
+							</parameter>
+						</parameters>
+					</states>
+					<states type="exit" name="f(&quot;exA&quot;)" visibility="public" isAsynchronous="false">
+						<model ea_guid="{8186B25E-5586-491c-995D-03EB9EC491E6}" ea_localid="3"/>
+						<type type="exit" const="false" static="false" isAbstract="false" synchronised="0" concurrency="Sequential" pure="0" isQuery="false"/>
+						<behaviour/>
+						<code/>
+						<style/>
+						<styleex/>
+						<documentation/>
+						<tags/>
+						<properties position="2"/>
+						<xrefs/>
+						<parameters>
+							<parameter xmi:idref="EAID_RETURNID_5586_491c_995D_03EB9EC491E6" visibility="public">
+								<properties pos="0" type="exit" const="false" ea_guid="{RETURNID-5586-491c-995D-03EB9EC491E6}"/>
+								<style/>
+								<styleex/>
+								<documentation/>
+								<tags/>
+								<xrefs/>
+							</parameter>
+						</parameters>
+					</states>
+					<states type="Transition" name="x_dot=y; y_dot=-x;" visibility="public" isAsynchronous="false">
+						<model ea_guid="{3909B248-1608-4252-8922-B1E651DEFB19}" ea_localid="2"/>
+						<type type="do" const="false" static="false" isAbstract="false" synchronised="0" concurrency="Sequential" pure="0" isQuery="false"/>
+						<behaviour/>
+						<code/>
+						<style/>
+						<styleex/>
+						<documentation/>
+						<tags/>
+						<properties position="1"/>
+						<xrefs/>
+						<parameters>
+							<parameter xmi:idref="EAID_RETURNID_1608_4252_8922_B1E651DEFB19" visibility="public">
+								<properties pos="0" type="do" const="false" ea_guid="{RETURNID-1608-4252-8922-B1E651DEFB19}"/>
+								<style/>
+								<styleex/>
+								<documentation/>
+								<tags/>
+								<xrefs/>
+							</parameter>
+						</parameters>
+					</states>
+				</extendedProperties>
+				<links>
+					<StateFlow xmi:id="EAID_D03DB6ED_0F11_43b0_AA23_5DA056391A14" start="EAID_18996316_6714_4c2e_BFF8_7FB2C3A8AD1E" end="EAID_7BAD61C1_46D8_4ef6_B447_C15E056A5DB7"/>
+					<StateFlow xmi:id="EAID_C8D9A52D_6649_46e8_87C8_335D89A94C22" start="EAID_07A89954_14CF_4122_93B8_8F5CFDC3B4FD" end="EAID_18996316_6714_4c2e_BFF8_7FB2C3A8AD1E"/>
+				</links>
+			</element>
+			<element xmi:idref="EAID_8115BB2F_90F1_4f65_91F5_EAD92394BA01" xmi:type="uml:State" name="B" scope="public">
+				<model package="EAPK_C4CAB469_CD97_4a45_BA22_CA51C442E46F" tpos="0" ea_localid="4" ea_eleType="element"/>
+				<properties isSpecification="false" sType="State" nType="0" scope="public"/>
+				<project author="17909" version="1.0" phase="1.0" created="2025-02-21 08:55:19" modified="2025-02-21 08:55:21" complexity="1" status="Proposed"/>
+				<code gentype="Java"/>
+				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=0;HSwimLanes=0;BorderStyle=0;"/>
+				<tags/>
+				<xrefs/>
+				<extendedProperties tagged="0" package_name="Continuous2">
+					<states type="entry" name="f(&quot;enB&quot;); x=0;" visibility="public" isAsynchronous="false">
+						<model ea_guid="{25F4424B-BB87-40fb-8F65-C9F5874A63BB}" ea_localid="4"/>
+						<type type="entry" const="false" static="false" isAbstract="false" synchronised="0" concurrency="Sequential" pure="0" isQuery="false"/>
+						<behaviour/>
+						<code/>
+						<style/>
+						<styleex/>
+						<documentation/>
+						<tags/>
+						<properties position="0"/>
+						<xrefs/>
+						<parameters>
+							<parameter xmi:idref="EAID_RETURNID_BB87_40fb_8F65_C9F5874A63BB" visibility="public">
+								<properties pos="0" type="entry" const="false" ea_guid="{RETURNID-BB87-40fb-8F65-C9F5874A63BB}"/>
+								<style/>
+								<styleex/>
+								<documentation/>
+								<tags/>
+								<xrefs/>
+							</parameter>
+						</parameters>
+					</states>
+					<states type="Transition" name="x_dot=1;" visibility="public" isAsynchronous="false">
+						<model ea_guid="{69E44B2F-22B6-4a1e-A9BA-F4952B22C596}" ea_localid="5"/>
+						<type type="do" const="false" static="false" isAbstract="false" synchronised="0" concurrency="Sequential" pure="0" isQuery="false"/>
+						<behaviour/>
+						<code/>
+						<style/>
+						<styleex/>
+						<documentation/>
+						<tags/>
+						<properties position="1"/>
+						<xrefs/>
+						<parameters>
+							<parameter xmi:idref="EAID_RETURNID_22B6_4a1e_A9BA_F4952B22C596" visibility="public">
+								<properties pos="0" type="do" const="false" ea_guid="{RETURNID-22B6-4a1e-A9BA-F4952B22C596}"/>
+								<style/>
+								<styleex/>
+								<documentation/>
+								<tags/>
+								<xrefs/>
+							</parameter>
+						</parameters>
+					</states>
+				</extendedProperties>
+				<links>
+					<StateFlow xmi:id="EAID_3D1C4139_E80F_4526_8D58_EAF318EB5B92" start="EAID_8115BB2F_90F1_4f65_91F5_EAD92394BA01" end="EAID_8115BB2F_90F1_4f65_91F5_EAD92394BA01"/>
+					<StateFlow xmi:id="EAID_3D1C4139_E80F_4526_8D58_EAF318EB5B92" start="EAID_8115BB2F_90F1_4f65_91F5_EAD92394BA01" end="EAID_8115BB2F_90F1_4f65_91F5_EAD92394BA01"/>
+				</links>
+			</element>
+			<element xmi:idref="EAID_7BAD61C1_46D8_4ef6_B447_C15E056A5DB7" xmi:type="uml:State" name="B1" scope="public">
+				<model package="EAPK_C4CAB469_CD97_4a45_BA22_CA51C442E46F" owner="EAID_8115BB2F_90F1_4f65_91F5_EAD92394BA01" tpos="0" ea_localid="6" ea_eleType="element"/>
+				<properties isSpecification="false" sType="State" nType="0" scope="public"/>
+				<project author="17909" version="1.0" phase="1.0" created="2025-02-21 08:55:55" modified="2025-02-21 08:56:00" complexity="1" status="Proposed"/>
+				<code gentype="Java"/>
+				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=0;HSwimLanes=0;BorderStyle=0;"/>
+				<tags/>
+				<xrefs/>
+				<extendedProperties tagged="0" package_name="Continuous2">
+					<states type="entry" name="f(&quot;enB1&quot;)" visibility="public" isAsynchronous="false">
+						<model ea_guid="{1C2A89BF-C967-4438-B2CF-170A511A8BA2}" ea_localid="6"/>
+						<type type="entry" const="false" static="false" isAbstract="false" synchronised="0" concurrency="Sequential" pure="0" isQuery="false"/>
+						<behaviour/>
+						<code/>
+						<style/>
+						<styleex/>
+						<documentation/>
+						<tags/>
+						<properties position="0"/>
+						<xrefs/>
+						<parameters>
+							<parameter xmi:idref="EAID_RETURNID_C967_4438_B2CF_170A511A8BA2" visibility="public">
+								<properties pos="0" type="entry" const="false" ea_guid="{RETURNID-C967-4438-B2CF-170A511A8BA2}"/>
+								<style/>
+								<styleex/>
+								<documentation/>
+								<tags/>
+								<xrefs/>
+							</parameter>
+						</parameters>
+					</states>
+				</extendedProperties>
+				<links>
+					<StateFlow xmi:id="EAID_D03DB6ED_0F11_43b0_AA23_5DA056391A14" start="EAID_18996316_6714_4c2e_BFF8_7FB2C3A8AD1E" end="EAID_7BAD61C1_46D8_4ef6_B447_C15E056A5DB7"/>
+					<StateFlow xmi:id="EAID_D4135537_D701_4364_8451_469FABF4BA94" start="EAID_E971AA58_A2DA_48e2_8A55_DDD9B21B9847" end="EAID_7BAD61C1_46D8_4ef6_B447_C15E056A5DB7"/>
+				</links>
+			</element>
+			<element xmi:idref="EAID_E971AA58_A2DA_48e2_8A55_DDD9B21B9847" xmi:type="uml:StateNode" name="Initial" scope="public">
+				<model package="EAPK_C4CAB469_CD97_4a45_BA22_CA51C442E46F" owner="EAID_8115BB2F_90F1_4f65_91F5_EAD92394BA01" tpos="0" ea_localid="5" ea_eleType="element"/>
+				<properties isSpecification="false" sType="StateNode" nType="3" scope="public"/>
+				<project author="17909" version="1.0" phase="1.0" created="2025-02-21 08:55:49" modified="2025-02-21 08:55:55" complexity="1" status="Proposed"/>
+				<code gentype="&lt;none&gt;"/>
+				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+				<tags/>
+				<xrefs/>
+				<extendedProperties tagged="0" package_name="Continuous2"/>
+				<links>
+					<StateFlow xmi:id="EAID_D4135537_D701_4364_8451_469FABF4BA94" start="EAID_E971AA58_A2DA_48e2_8A55_DDD9B21B9847" end="EAID_7BAD61C1_46D8_4ef6_B447_C15E056A5DB7"/>
+				</links>
+			</element>
+			<element xmi:idref="EAID_F374F0FF_5172_4590_ABA0_7DB1DDB94567" xmi:type="uml:Artifact" name="f(s)" scope="public">
+				<model package="EAPK_C4CAB469_CD97_4a45_BA22_CA51C442E46F" tpos="0" ea_localid="7" ea_eleType="element"/>
+				<properties isSpecification="false" sType="Artifact" nType="0" scope="public" stereotype="Scriptlet" isRoot="false" isLeaf="false" isAbstract="false"/>
+				<project author="17909" version="1.0" phase="1.0" created="2025-02-21 08:57:57" modified="2025-02-21 08:58:09" complexity="1" status="Proposed"/>
+				<code gentype="JavaScript" header1="function f(s)&#xA;    fprintf(s+' %.3f %.3f\n', x, y);"/>
+				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+				<tags/>
+				<xrefs value="$XREFPROP=$XID={F3EA0369-EB94-4d8c-82D6-FE17EDB991E3}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=Scriptlet;FQName=EAUML::Scriptlet;@ENDSTEREO;$DES;$CLT={F374F0FF-5172-4590-ABA0-7DB1DDB94567}$CLT;$ENDXREF;"/>
+				<extendedProperties tagged="0" package_name="Continuous2"/>
+			</element>
+			<element xmi:idref="EAID_B09B6341_863E_4446_88DF_814A9316C992" xmi:type="uml:DataType" name="data" scope="public">
+				<model package="EAPK_C4CAB469_CD97_4a45_BA22_CA51C442E46F" tpos="0" ea_localid="15" ea_eleType="element"/>
+				<properties isSpecification="false" sType="DataType" nType="0" scope="public" isRoot="false" isLeaf="false" isAbstract="false"/>
+				<project author="17909" version="1.0" phase="1.0" created="2025-02-21 09:14:43" modified="2025-02-21 09:14:43" complexity="1" status="Proposed"/>
+				<code gentype="Java"/>
+				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+				<tags/>
+				<xrefs/>
+				<extendedProperties tagged="0" package_name="Continuous2"/>
+				<attributes>
+					<attribute xmi:idref="EAID_96A19A5E_5E5E_42fa_91F8_90A0E374D095" name="s" scope="Public">
+						<initial/>
+						<documentation/>
+						<model ea_localid="6" ea_guid="{96A19A5E-5E5E-42fa-91F8-90A0E374D095}"/>
+						<properties type="int" collection="false" static="0" duplicates="0" changeability="changeable"/>
+						<coords ordered="0"/>
+						<containment containment="Not Specified" position="2"/>
+						<stereotype/>
+						<bounds lower="1" upper="1"/>
+						<options/>
+						<style/>
+						<styleex value="volatile=0;"/>
+						<tags/>
+						<xrefs/>
+					</attribute>
+					<attribute xmi:idref="EAID_F7F80ACE_0EC9_4bb9_B02E_E86E4709E3BC" name="x" scope="Public">
+						<initial/>
+						<documentation/>
+						<model ea_localid="5" ea_guid="{F7F80ACE-0EC9-4bb9-B02E-E86E4709E3BC}"/>
+						<properties type="int" collection="false" static="0" duplicates="0" changeability="changeable"/>
+						<coords ordered="0"/>
+						<containment containment="Not Specified" position="1"/>
+						<stereotype/>
+						<bounds lower="1" upper="1"/>
+						<options/>
+						<style/>
+						<styleex value="volatile=0;"/>
+						<tags/>
+						<xrefs/>
+					</attribute>
+					<attribute xmi:idref="EAID_6D9676DB_1CE2_4957_AC2D_37F293124AFC" name="y" scope="Public">
+						<initial/>
+						<documentation/>
+						<model ea_localid="4" ea_guid="{6D9676DB-1CE2-4957-AC2D-37F293124AFC}"/>
+						<properties type="int" collection="false" static="0" duplicates="0" changeability="changeable"/>
+						<coords ordered="0"/>
+						<containment containment="Not Specified" position="0"/>
+						<stereotype/>
+						<bounds lower="1" upper="1"/>
+						<options/>
+						<style/>
+						<styleex value="volatile=0;"/>
+						<tags/>
+						<xrefs/>
+					</attribute>
+				</attributes>
+			</element>
+			<element xmi:idref="EAID_07A89954_14CF_4122_93B8_8F5CFDC3B4FD" xmi:type="uml:StateNode" name="Initial" scope="public">
+				<model package="EAPK_C4CAB469_CD97_4a45_BA22_CA51C442E46F" tpos="0" ea_localid="2" ea_eleType="element"/>
+				<properties isSpecification="false" sType="StateNode" nType="3" scope="public"/>
+				<project author="17909" version="1.0" phase="1.0" created="2025-02-21 08:54:45" modified="2025-02-21 08:54:45" complexity="1" status="Proposed"/>
+				<code gentype="&lt;none&gt;"/>
+				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+				<tags/>
+				<xrefs/>
+				<extendedProperties tagged="0" package_name="Continuous2"/>
+				<links>
+					<StateFlow xmi:id="EAID_C8D9A52D_6649_46e8_87C8_335D89A94C22" start="EAID_07A89954_14CF_4122_93B8_8F5CFDC3B4FD" end="EAID_18996316_6714_4c2e_BFF8_7FB2C3A8AD1E"/>
+				</links>
+			</element>
+		</elements>
+		<connectors>
+			<connector xmi:idref="EAID_D03DB6ED_0F11_43b0_AA23_5DA056391A14">
+				<source xmi:idref="EAID_18996316_6714_4c2e_BFF8_7FB2C3A8AD1E">
+					<model ea_localid="3" type="State" name="A"/>
+					<role visibility="Public" targetScope="instance"/>
+					<type aggregation="none" containment="Unspecified"/>
+					<constraints/>
+					<modifiers isOrdered="false" changeable="none" isNavigable="false"/>
+					<style value="Union=0;Derived=0;AllowDuplicates=0;"/>
+					<documentation/>
+					<xrefs/>
+					<tags/>
+				</source>
+				<target xmi:idref="EAID_7BAD61C1_46D8_4ef6_B447_C15E056A5DB7">
+					<model ea_localid="6" type="State" name="B1"/>
+					<role visibility="Public" targetScope="instance"/>
+					<type aggregation="none" containment="Unspecified"/>
+					<constraints/>
+					<modifiers isOrdered="false" changeable="none" isNavigable="true"/>
+					<style value="Union=0;Derived=0;AllowDuplicates=0;"/>
+					<documentation/>
+					<xrefs/>
+					<tags/>
+				</target>
+				<model ea_localid="5"/>
+				<properties ea_type="StateFlow" direction="Source -&gt; Destination"/>
+				<documentation/>
+				<appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+				<labels/>
+				<extendedProperties virtualInheritance="0" privatedata2="[x &gt;= 0.5]" privatedata3="{f(&quot;conAB1&quot;)}/{f(&quot;tranAB1&quot;)}&#xA;"/>
+				<style/>
+				<xrefs/>
+				<tags>
+					<tag xmi:id="EAID_4C3C16CD_8315_4abd_B9C8_0A9314AD23D7" name="Execution order" value="1"/>
+				</tags>
+			</connector>
+			<connector xmi:idref="EAID_C8D9A52D_6649_46e8_87C8_335D89A94C22">
+				<source xmi:idref="EAID_07A89954_14CF_4122_93B8_8F5CFDC3B4FD">
+					<model ea_localid="2" type="StateNode" name="Initial"/>
+					<role visibility="Public" targetScope="instance"/>
+					<type aggregation="none" containment="Unspecified"/>
+					<constraints/>
+					<modifiers isOrdered="false" changeable="none" isNavigable="false"/>
+					<style value="Union=0;Derived=0;AllowDuplicates=0;"/>
+					<documentation/>
+					<xrefs/>
+					<tags/>
+				</source>
+				<target xmi:idref="EAID_18996316_6714_4c2e_BFF8_7FB2C3A8AD1E">
+					<model ea_localid="3" type="State" name="A"/>
+					<role visibility="Public" targetScope="instance"/>
+					<type aggregation="none" containment="Unspecified"/>
+					<constraints/>
+					<modifiers isOrdered="false" changeable="none" isNavigable="true"/>
+					<style value="Union=0;Derived=0;AllowDuplicates=0;"/>
+					<documentation/>
+					<xrefs/>
+					<tags/>
+				</target>
+				<model ea_localid="4"/>
+				<properties ea_type="StateFlow" direction="Source -&gt; Destination"/>
+				<documentation/>
+				<appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+				<labels/>
+				<extendedProperties virtualInheritance="0" privatedata2="{x=0;y=1;}"/>
+				<style/>
+				<xrefs/>
+				<tags>
+					<tag xmi:id="EAID_7C15B694_6DC2_42da_B7BA_7BAD867ABF68" name="Execution order" value="1"/>
+				</tags>
+			</connector>
+			<connector xmi:idref="EAID_3D1C4139_E80F_4526_8D58_EAF318EB5B92">
+				<source xmi:idref="EAID_8115BB2F_90F1_4f65_91F5_EAD92394BA01">
+					<model ea_localid="4" type="State" name="B"/>
+					<role visibility="Public" targetScope="instance"/>
+					<type aggregation="none" containment="Unspecified"/>
+					<constraints/>
+					<modifiers isOrdered="false" changeable="none" isNavigable="false"/>
+					<style value="Union=0;Derived=0;AllowDuplicates=0;"/>
+					<documentation/>
+					<xrefs/>
+					<tags/>
+				</source>
+				<target xmi:idref="EAID_8115BB2F_90F1_4f65_91F5_EAD92394BA01">
+					<model ea_localid="4" type="State" name="B"/>
+					<role visibility="Public" targetScope="instance"/>
+					<type aggregation="none" containment="Unspecified"/>
+					<constraints/>
+					<modifiers isOrdered="false" changeable="none" isNavigable="true"/>
+					<style value="Union=0;Derived=0;AllowDuplicates=0;"/>
+					<documentation/>
+					<xrefs/>
+					<tags/>
+				</target>
+				<model ea_localid="3"/>
+				<properties ea_type="StateFlow" direction="Source -&gt; Destination"/>
+				<documentation/>
+				<appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+				<labels/>
+				<extendedProperties virtualInheritance="0" privatedata2="[x&gt;=1]"/>
+				<style/>
+				<xrefs/>
+				<tags>
+					<tag xmi:id="EAID_71C77B1D_A6A5_4e47_BF02_A58D792D1045" name="Execution order" value="1"/>
+				</tags>
+			</connector>
+			<connector xmi:idref="EAID_D4135537_D701_4364_8451_469FABF4BA94">
+				<source xmi:idref="EAID_E971AA58_A2DA_48e2_8A55_DDD9B21B9847">
+					<model ea_localid="5" type="StateNode" name="Initial"/>
+					<role visibility="Public" targetScope="instance"/>
+					<type aggregation="none" containment="Unspecified"/>
+					<constraints/>
+					<modifiers isOrdered="false" changeable="none" isNavigable="false"/>
+					<style value="Union=0;Derived=0;AllowDuplicates=0;"/>
+					<documentation/>
+					<xrefs/>
+					<tags/>
+				</source>
+				<target xmi:idref="EAID_7BAD61C1_46D8_4ef6_B447_C15E056A5DB7">
+					<model ea_localid="6" type="State" name="B1"/>
+					<role visibility="Public" targetScope="instance"/>
+					<type aggregation="none" containment="Unspecified"/>
+					<constraints/>
+					<modifiers isOrdered="false" changeable="none" isNavigable="true"/>
+					<style value="Union=0;Derived=0;AllowDuplicates=0;"/>
+					<documentation/>
+					<xrefs/>
+					<tags/>
+				</target>
+				<model ea_localid="2"/>
+				<properties ea_type="StateFlow" direction="Source -&gt; Destination"/>
+				<documentation/>
+				<appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+				<labels/>
+				<extendedProperties virtualInheritance="0"/>
+				<style/>
+				<xrefs/>
+				<tags>
+					<tag xmi:id="EAID_3323DB68_C936_4d41_8840_CF01093C52F2" name="Execution order" value="1"/>
+				</tags>
+			</connector>
+		</connectors>
+		<primitivetypes>
+			<packagedElement xmi:type="uml:Package" xmi:id="EAPrimitiveTypesPackage" name="EA_PrimitiveTypes_Package">
+				<packagedElement xmi:type="uml:Package" xmi:id="EAJavaTypesPackage" name="EA_Java_Types_Package">
+					<packagedElement xmi:type="uml:PrimitiveType" xmi:id="EAJava_int" name="int">
+						<generalization xmi:type="uml:Generalization" xmi:id="EAJava_int_General">
+							<general href="http://schema.omg.org/spec/UML/2.0/uml.xml#Integer"/>
+						</generalization>
+					</packagedElement>
+				</packagedElement>
+			</packagedElement>
+		</primitivetypes>
+		<profiles>
+			<uml:Profile xmlns:uml="http://schema.omg.org/spec/UML/2.0" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmi:version="2.1" xmi:id="thecustomprofile" nsPrefix="thecustomprofile" name="thecustomprofile" metamodelReference="mmref01">
+				<ownedComment xmi:type="uml:Comment" xmi:id="comment01" annotatedElement="thecustomprofile">
+					<body> Version:1.0</body>
+				</ownedComment>
+				<packageImport xmi:id="mmref01">
+					<importedPackage href="http://schema.omg.org/spec/UML/2.0"/>
+				</packageImport>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="Execution order" name="Execution order">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="Execution order-base_Transition" name="base_Transition" association="Transition_Execution order">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Transition"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="Execution order-Execution order" name="Execution order">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Transition_Execution order" name="A_Transition_Execution order" memberEnd="extension_Execution order Execution order-base_Transition">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_Execution order" name="extension_Execution order" type="Execution order" isComposite="true" lower="0" upper="1" memberEnd="extension_Execution order Execution order-base_Transition"/>
+				</ownedMember>
+			</uml:Profile>
+			<uml:Profile xmlns:uml="http://schema.omg.org/spec/UML/2.0" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmi:version="2.1" xmi:id="8C9E6706-8" nsPrefix="EAUML" name="EAUML" metamodelReference="mmref01">
+				<ownedComment xmi:type="uml:Comment" xmi:id="comment01" annotatedElement="8C9E6706-8">
+					<body>EAUML Version:1.0</body>
+				</ownedComment>
+				<packageImport xmi:id="mmref01">
+					<importedPackage href="http://schema.omg.org/spec/UML/2.0"/>
+				</packageImport>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="BPSimCustomReport" name="BPSimCustomReport">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="BPSimCustomReport-base_Artifact" name="base_Artifact" association="Artifact_BPSimCustomReport">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Artifact"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Artifact_BPSimCustomReport" name="A_Artifact_BPSimCustomReport" memberEnd="extension_BPSimCustomReport BPSimCustomReport-base_Artifact">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_BPSimCustomReport" name="extension_BPSimCustomReport" type="BPSimCustomReport" isComposite="true" lower="0" upper="1" memberEnd="extension_BPSimCustomReport BPSimCustomReport-base_Artifact"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="PK" name="PK">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="PK-base_Operation" name="base_Operation" association="Operation_PK">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Operation"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Operation_PK" name="A_Operation_PK" memberEnd="extension_PK PK-base_Operation">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_PK" name="extension_PK" type="PK" isComposite="true" lower="0" upper="1" memberEnd="extension_PK PK-base_Operation"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="function" name="function">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="function-base_Class" name="base_Class" association="Class_function">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Class"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="function-DBVersion" name="DBVersion">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="function-Owner" name="Owner">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Class_function" name="A_Class_function" memberEnd="extension_function function-base_Class">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_function" name="extension_function" type="function" isComposite="true" lower="0" upper="1" memberEnd="extension_function function-base_Class"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="EAMatrixSpecification" name="EAMatrixSpecification">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="EAMatrixSpecification-base_Artifact" name="base_Artifact" association="Artifact_EAMatrixSpecification">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Artifact"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="EAMatrixSpecification-MatrixOptions" name="MatrixOptions">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Artifact_EAMatrixSpecification" name="A_Artifact_EAMatrixSpecification" memberEnd="extension_EAMatrixSpecification EAMatrixSpecification-base_Artifact">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_EAMatrixSpecification" name="extension_EAMatrixSpecification" type="EAMatrixSpecification" isComposite="true" lower="0" upper="1" memberEnd="extension_EAMatrixSpecification EAMatrixSpecification-base_Artifact"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="business worker" name="business worker">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="business worker-base_Object" name="base_Object" association="Object_business worker">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Object"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Object_business worker" name="A_Object_business worker" memberEnd="extension_business worker business worker-base_Object">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_business worker" name="extension_business worker" type="business worker" isComposite="true" lower="0" upper="1" memberEnd="extension_business worker business worker-base_Object"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="instantiate" name="instantiate">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="instantiate-base_Dependency" name="base_Dependency" association="Dependency_instantiate">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Dependency"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Dependency_instantiate" name="A_Dependency_instantiate" memberEnd="extension_instantiate instantiate-base_Dependency">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_instantiate" name="extension_instantiate" type="instantiate" isComposite="true" lower="0" upper="1" memberEnd="extension_instantiate instantiate-base_Dependency"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="XSDall" name="XSDall">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="XSDall-base_Class" name="base_Class" association="Class_XSDall">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Class"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Class_XSDall" name="A_Class_XSDall" memberEnd="extension_XSDall XSDall-base_Class">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_XSDall" name="extension_XSDall" type="XSDall" isComposite="true" lower="0" upper="1" memberEnd="extension_XSDall XSDall-base_Class"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="xslt" name="xslt">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="xslt-base_Artifact" name="base_Artifact" association="Artifact_xslt">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Artifact"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Artifact_xslt" name="A_Artifact_xslt" memberEnd="extension_xslt xslt-base_Artifact">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_xslt" name="extension_xslt" type="xslt" isComposite="true" lower="0" upper="1" memberEnd="extension_xslt xslt-base_Artifact"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="executable statemachine" name="executable statemachine">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="executable statemachine-base_Artifact" name="base_Artifact" association="Artifact_executable statemachine">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Artifact"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="executable statemachine-base_Component" name="base_Component" association="Component_executable statemachine">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Component"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Artifact_executable statemachine" name="A_Artifact_executable statemachine" memberEnd="extension_executable statemachine executable statemachine-base_Artifact">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_executable statemachine" name="extension_executable statemachine" type="executable statemachine" isComposite="true" lower="0" upper="1" memberEnd="extension_executable statemachine executable statemachine-base_Artifact"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Component_executable statemachine" name="A_Component_executable statemachine" memberEnd="extension_executable statemachine executable statemachine-base_Component">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_executable statemachine" name="extension_executable statemachine" type="executable statemachine" isComposite="true" lower="0" upper="1" memberEnd="extension_executable statemachine executable statemachine-base_Component"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="SSDynamicChart" name="SSDynamicChart">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="SSDynamicChart-base_Class" name="base_Class" association="Class_SSDynamicChart">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Class"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="SSDynamicChart-ChartProperties" name="ChartProperties">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Class_SSDynamicChart" name="A_Class_SSDynamicChart" memberEnd="extension_SSDynamicChart SSDynamicChart-base_Class">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_SSDynamicChart" name="extension_SSDynamicChart" type="SSDynamicChart" isComposite="true" lower="0" upper="1" memberEnd="extension_SSDynamicChart SSDynamicChart-base_Class"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="case worker" name="case worker">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="case worker-base_Object" name="base_Object" association="Object_case worker">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Object"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Object_case worker" name="A_Object_case worker" memberEnd="extension_case worker case worker-base_Object">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_case worker" name="extension_case worker" type="case worker" isComposite="true" lower="0" upper="1" memberEnd="extension_case worker case worker-base_Object"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="DataModel" name="DataModel">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="DataModel-base_Package" name="base_Package" association="Package_DataModel">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Package"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Package_DataModel" name="A_Package_DataModel" memberEnd="extension_DataModel DataModel-base_Package">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_DataModel" name="extension_DataModel" type="DataModel" isComposite="true" lower="0" upper="1" memberEnd="extension_DataModel DataModel-base_Package"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="derive" name="derive">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="derive-base_Dependency" name="base_Dependency" association="Dependency_derive">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Dependency"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Dependency_derive" name="A_Dependency_derive" memberEnd="extension_derive derive-base_Dependency">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_derive" name="extension_derive" type="derive" isComposite="true" lower="0" upper="1" memberEnd="extension_derive derive-base_Dependency"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="abstraction" name="abstraction">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="abstraction-base_Dependency" name="base_Dependency" association="Dependency_abstraction">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Dependency"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Dependency_abstraction" name="A_Dependency_abstraction" memberEnd="extension_abstraction abstraction-base_Dependency">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_abstraction" name="extension_abstraction" type="abstraction" isComposite="true" lower="0" upper="1" memberEnd="extension_abstraction abstraction-base_Dependency"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="procedures" name="procedures">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="procedures-base_Class" name="base_Class" association="Class_procedures">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Class"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Class_procedures" name="A_Class_procedures" memberEnd="extension_procedures procedures-base_Class">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_procedures" name="extension_procedures" type="procedures" isComposite="true" lower="0" upper="1" memberEnd="extension_procedures procedures-base_Class"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="testcut" name="testcut">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="testcut-base_Object" name="base_Object" association="Object_testcut">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Object"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Object_testcut" name="A_Object_testcut" memberEnd="extension_testcut testcut-base_Object">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_testcut" name="extension_testcut" type="testcut" isComposite="true" lower="0" upper="1" memberEnd="extension_testcut testcut-base_Object"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="Checklist" name="Checklist">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="Checklist-base_Artifact" name="base_Artifact" association="Artifact_Checklist">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Artifact"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="Checklist-Checklist" name="Checklist">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Artifact_Checklist" name="A_Artifact_Checklist" memberEnd="extension_Checklist Checklist-base_Artifact">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_Checklist" name="extension_Checklist" type="Checklist" isComposite="true" lower="0" upper="1" memberEnd="extension_Checklist Checklist-base_Artifact"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="xmlFile" name="xmlFile">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="xmlFile-base_Artifact" name="base_Artifact" association="Artifact_xmlFile">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Artifact"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Artifact_xmlFile" name="A_Artifact_xmlFile" memberEnd="extension_xmlFile xmlFile-base_Artifact">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_xmlFile" name="extension_xmlFile" type="xmlFile" isComposite="true" lower="0" upper="1" memberEnd="extension_xmlFile xmlFile-base_Artifact"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="DiagramPattern" name="DiagramPattern">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="DiagramPattern-base_Artifact" name="base_Artifact" association="Artifact_DiagramPattern">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Artifact"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Artifact_DiagramPattern" name="A_Artifact_DiagramPattern" memberEnd="extension_DiagramPattern DiagramPattern-base_Artifact">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_DiagramPattern" name="extension_DiagramPattern" type="DiagramPattern" isComposite="true" lower="0" upper="1" memberEnd="extension_DiagramPattern DiagramPattern-base_Artifact"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="business use case" name="business use case">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="business use case-base_UseCase" name="base_UseCase" association="UseCase_business use case">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#UseCase"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="UseCase_business use case" name="A_UseCase_business use case" memberEnd="extension_business use case business use case-base_UseCase">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_business use case" name="extension_business use case" type="business use case" isComposite="true" lower="0" upper="1" memberEnd="extension_business use case business use case-base_UseCase"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="business control" name="business control">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="business control-base_Object" name="base_Object" association="Object_business control">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Object"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Object_business control" name="A_Object_business control" memberEnd="extension_business control business control-base_Object">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_business control" name="extension_business control" type="business control" isComposite="true" lower="0" upper="1" memberEnd="extension_business control business control-base_Object"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="worker" name="worker">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="worker-base_Object" name="base_Object" association="Object_worker">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Object"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Object_worker" name="A_Object_worker" memberEnd="extension_worker worker-base_Object">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_worker" name="extension_worker" type="worker" isComposite="true" lower="0" upper="1" memberEnd="extension_worker worker-base_Object"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="package" name="package">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="package-base_Class" name="base_Class" association="Class_package">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Class"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="package-DBVersion" name="DBVersion">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="package-Owner" name="Owner">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Class_package" name="A_Class_package" memberEnd="extension_package package-base_Class">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_package" name="extension_package" type="package" isComposite="true" lower="0" upper="1" memberEnd="extension_package package-base_Class"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="FK" name="FK">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="FK-base_Association" name="base_Association" association="Association_FK">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Association"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="FK-base_Operation" name="base_Operation" association="Operation_FK">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Operation"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Association_FK" name="A_Association_FK" memberEnd="extension_FK FK-base_Association">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_FK" name="extension_FK" type="FK" isComposite="true" lower="0" upper="1" memberEnd="extension_FK FK-base_Association"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Operation_FK" name="A_Operation_FK" memberEnd="extension_FK FK-base_Operation">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_FK" name="extension_FK" type="FK" isComposite="true" lower="0" upper="1" memberEnd="extension_FK FK-base_Operation"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="control" name="control">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="control-base_Object" name="base_Object" association="Object_control">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Object"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Object_control" name="A_Object_control" memberEnd="extension_control control-base_Object">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_control" name="extension_control" type="control" isComposite="true" lower="0" upper="1" memberEnd="extension_control control-base_Object"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="view" name="view">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="view-base_Class" name="base_Class" association="Class_view">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Class"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="view-DBVersion" name="DBVersion">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="view-Owner" name="Owner">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Class_view" name="A_Class_view" memberEnd="extension_view view-base_Class">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_view" name="extension_view" type="view" isComposite="true" lower="0" upper="1" memberEnd="extension_view view-base_Class"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="func" name="func">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="func-base_Operation" name="base_Operation" association="Operation_func">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Operation"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Operation_func" name="A_Operation_func" memberEnd="extension_func func-base_Operation">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_func" name="extension_func" type="func" isComposite="true" lower="0" upper="1" memberEnd="extension_func func-base_Operation"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="EAReportSpecification" name="EAReportSpecification">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="EAReportSpecification-base_Artifact" name="base_Artifact" association="Artifact_EAReportSpecification">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Artifact"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="EAReportSpecification-DocumentOptions" name="DocumentOptions">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Artifact_EAReportSpecification" name="A_Artifact_EAReportSpecification" memberEnd="extension_EAReportSpecification EAReportSpecification-base_Artifact">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_EAReportSpecification" name="extension_EAReportSpecification" type="EAReportSpecification" isComposite="true" lower="0" upper="1" memberEnd="extension_EAReportSpecification EAReportSpecification-base_Artifact"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="EncryptedDocument" name="EncryptedDocument">
+					<generalization xmi:type="uml:Generalization" xmi:id="EncryptedDocument_StandardProfileL2::Document_generalization" general="StandardProfileL2::Document"/>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="EncryptedDocument-base_Artifact" name="base_Artifact" association="Artifact_EncryptedDocument">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Artifact"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Artifact_EncryptedDocument" name="A_Artifact_EncryptedDocument" memberEnd="extension_EncryptedDocument EncryptedDocument-base_Artifact">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_EncryptedDocument" name="extension_EncryptedDocument" type="EncryptedDocument" isComposite="true" lower="0" upper="1" memberEnd="extension_EncryptedDocument EncryptedDocument-base_Artifact"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="TimeSeriesChart" name="TimeSeriesChart">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="TimeSeriesChart-base_Class" name="base_Class" association="Class_TimeSeriesChart">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Class"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="TimeSeriesChart-ChartProperties" name="ChartProperties">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Class_TimeSeriesChart" name="A_Class_TimeSeriesChart" memberEnd="extension_TimeSeriesChart TimeSeriesChart-base_Class">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_TimeSeriesChart" name="extension_TimeSeriesChart" type="TimeSeriesChart" isComposite="true" lower="0" upper="1" memberEnd="extension_TimeSeriesChart TimeSeriesChart-base_Class"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="Model" name="Model">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="Model-base_Package" name="base_Package" association="Package_Model">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Package"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Package_Model" name="A_Package_Model" memberEnd="extension_Model Model-base_Package">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_Model" name="extension_Model" type="Model" isComposite="true" lower="0" upper="1" memberEnd="extension_Model Model-base_Package"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="procedure" name="procedure">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="procedure-base_Class" name="base_Class" association="Class_procedure">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Class"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="procedure-DBVersion" name="DBVersion">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="procedure-Owner" name="Owner">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Class_procedure" name="A_Class_procedure" memberEnd="extension_procedure procedure-base_Class">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_procedure" name="extension_procedure" type="procedure" isComposite="true" lower="0" upper="1" memberEnd="extension_procedure procedure-base_Class"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="ModelView" name="ModelView">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="ModelView-base_Class" name="base_Class" association="Class_ModelView">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Class"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="ModelView-ViewProperties" name="ViewProperties">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Class_ModelView" name="A_Class_ModelView" memberEnd="extension_ModelView ModelView-base_Class">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_ModelView" name="extension_ModelView" type="ModelView" isComposite="true" lower="0" upper="1" memberEnd="extension_ModelView ModelView-base_Class"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="EADiscussion" name="EADiscussion">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="EADiscussion-base_Artifact" name="base_Artifact" association="Artifact_EADiscussion">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Artifact"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Artifact_EADiscussion" name="A_Artifact_EADiscussion" memberEnd="extension_EADiscussion EADiscussion-base_Artifact">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_EADiscussion" name="extension_EADiscussion" type="EADiscussion" isComposite="true" lower="0" upper="1" memberEnd="extension_EADiscussion EADiscussion-base_Artifact"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="XSDchoice" name="XSDchoice">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="XSDchoice-base_Class" name="base_Class" association="Class_XSDchoice">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Class"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Class_XSDchoice" name="A_Class_XSDchoice" memberEnd="extension_XSDchoice XSDchoice-base_Class">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_XSDchoice" name="extension_XSDchoice" type="XSDchoice" isComposite="true" lower="0" upper="1" memberEnd="extension_XSDchoice XSDchoice-base_Class"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="ExternalReference" name="ExternalReference">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="ExternalReference-base_Artifact" name="base_Artifact" association="Artifact_ExternalReference">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Artifact"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Artifact_ExternalReference" name="A_Artifact_ExternalReference" memberEnd="extension_ExternalReference ExternalReference-base_Artifact">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_ExternalReference" name="extension_ExternalReference" type="ExternalReference" isComposite="true" lower="0" upper="1" memberEnd="extension_ExternalReference ExternalReference-base_Artifact"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="functions" name="functions">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="functions-base_Class" name="base_Class" association="Class_functions">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Class"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Class_functions" name="A_Class_functions" memberEnd="extension_functions functions-base_Class">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_functions" name="extension_functions" type="functions" isComposite="true" lower="0" upper="1" memberEnd="extension_functions functions-base_Class"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="Database" name="Database">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="Database-base_Package" name="base_Package" association="Package_Database">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Package"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Package_Database" name="A_Package_Database" memberEnd="extension_Database Database-base_Package">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_Database" name="extension_Database" type="Database" isComposite="true" lower="0" upper="1" memberEnd="extension_Database Database-base_Package"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="testset" name="testset">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="testset-base_UseCase" name="base_UseCase" association="UseCase_testset">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#UseCase"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="UseCase_testset" name="A_UseCase_testset" memberEnd="extension_testset testset-base_UseCase">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_testset" name="extension_testset" type="testset" isComposite="true" lower="0" upper="1" memberEnd="extension_testset testset-base_UseCase"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="business boundary" name="business boundary">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="business boundary-base_Object" name="base_Object" association="Object_business boundary">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Object"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Object_business boundary" name="A_Object_business boundary" memberEnd="extension_business boundary business boundary-base_Object">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_business boundary" name="extension_business boundary" type="business boundary" isComposite="true" lower="0" upper="1" memberEnd="extension_business boundary business boundary-base_Object"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="diagram profile" name="diagram profile">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="diagram profile-base_Package" name="base_Package" association="Package_diagram profile">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Package"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Package_diagram profile" name="A_Package_diagram profile" memberEnd="extension_diagram profile diagram profile-base_Package">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_diagram profile" name="extension_diagram profile" type="diagram profile" isComposite="true" lower="0" upper="1" memberEnd="extension_diagram profile diagram profile-base_Package"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="outputArtifact" name="outputArtifact">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="outputArtifact-base_Artifact" name="base_Artifact" association="Artifact_outputArtifact">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Artifact"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Artifact_outputArtifact" name="A_Artifact_outputArtifact" memberEnd="extension_outputArtifact outputArtifact-base_Artifact">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_outputArtifact" name="extension_outputArtifact" type="outputArtifact" isComposite="true" lower="0" upper="1" memberEnd="extension_outputArtifact outputArtifact-base_Artifact"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="trace" name="trace">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="trace-base_Dependency" name="base_Dependency" association="Dependency_trace">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Dependency"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="trace-base_Abstraction" name="base_Abstraction" association="Abstraction_trace">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Abstraction"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Dependency_trace" name="A_Dependency_trace" memberEnd="extension_trace trace-base_Dependency">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_trace" name="extension_trace" type="trace" isComposite="true" lower="0" upper="1" memberEnd="extension_trace trace-base_Dependency"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Abstraction_trace" name="A_Abstraction_trace" memberEnd="extension_trace trace-base_Abstraction">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_trace" name="extension_trace" type="trace" isComposite="true" lower="0" upper="1" memberEnd="extension_trace trace-base_Abstraction"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="business actor" name="business actor">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="business actor-base_Actor" name="base_Actor" association="Actor_business actor">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Actor"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Actor_business actor" name="A_Actor_business actor" memberEnd="extension_business actor business actor-base_Actor">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_business actor" name="extension_business actor" type="business actor" isComposite="true" lower="0" upper="1" memberEnd="extension_business actor business actor-base_Actor"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="use" name="use">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="use-base_Dependency" name="base_Dependency" association="Dependency_use">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Dependency"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Dependency_use" name="A_Dependency_use" memberEnd="extension_use use-base_Dependency">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_use" name="extension_use" type="use" isComposite="true" lower="0" upper="1" memberEnd="extension_use use-base_Dependency"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="model document" name="model document">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="model document-base_Class" name="base_Class" association="Class_model document">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Class"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="model document-ReportTitle" name="ReportTitle">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="model document-ReportVersion" name="ReportVersion">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="model document-ReportAuthor" name="ReportAuthor">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="model document-ReportStatus" name="ReportStatus">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="model document-RTFTemplate" name="RTFTemplate">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="model document-ReportAlias" name="ReportAlias">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="model document-ReportKeywords" name="ReportKeywords">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="model document-SearchValue" name="SearchValue">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="model document-ReportName" name="ReportName">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="model document-ReportSummary" name="ReportSummary">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="model document-SearchName" name="SearchName">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Class_model document" name="A_Class_model document" memberEnd="extension_model document model document-base_Class">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_model document" name="extension_model document" type="model document" isComposite="true" lower="0" upper="1" memberEnd="extension_model document model document-base_Class"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="EAFeatureMapping" name="EAFeatureMapping">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="EAFeatureMapping-base_Artifact" name="base_Artifact" association="Artifact_EAFeatureMapping">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Artifact"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="EAFeatureMapping-MatrixOptions" name="MatrixOptions">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Artifact_EAFeatureMapping" name="A_Artifact_EAFeatureMapping" memberEnd="extension_EAFeatureMapping EAFeatureMapping-base_Artifact">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_EAFeatureMapping" name="extension_EAFeatureMapping" type="EAFeatureMapping" isComposite="true" lower="0" upper="1" memberEnd="extension_EAFeatureMapping EAFeatureMapping-base_Artifact"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="dbsequence" name="dbsequence">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="dbsequence-base_Class" name="base_Class" association="Class_dbsequence">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Class"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="dbsequence-DBVersion" name="DBVersion">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="dbsequence-Owner" name="Owner">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Class_dbsequence" name="A_Class_dbsequence" memberEnd="extension_dbsequence dbsequence-base_Class">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_dbsequence" name="extension_dbsequence" type="dbsequence" isComposite="true" lower="0" upper="1" memberEnd="extension_dbsequence dbsequence-base_Class"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="sequ" name="sequ">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="sequ-base_Operation" name="base_Operation" association="Operation_sequ">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Operation"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Operation_sequ" name="A_Operation_sequ" memberEnd="extension_sequ sequ-base_Operation">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_sequ" name="extension_sequ" type="sequ" isComposite="true" lower="0" upper="1" memberEnd="extension_sequ sequ-base_Operation"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="AuditedChecklist" name="AuditedChecklist">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="AuditedChecklist-base_Artifact" name="base_Artifact" association="Artifact_AuditedChecklist">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Artifact"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="AuditedChecklist-Checklist" name="Checklist">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Artifact_AuditedChecklist" name="A_Artifact_AuditedChecklist" memberEnd="extension_AuditedChecklist AuditedChecklist-base_Artifact">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_AuditedChecklist" name="extension_AuditedChecklist" type="AuditedChecklist" isComposite="true" lower="0" upper="1" memberEnd="extension_AuditedChecklist AuditedChecklist-base_Artifact"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="taggedValue" name="taggedValue">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="taggedValue-base_Association" name="base_Association" association="Association_taggedValue">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Association"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Association_taggedValue" name="A_Association_taggedValue" memberEnd="extension_taggedValue taggedValue-base_Association">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_taggedValue" name="extension_taggedValue" type="taggedValue" isComposite="true" lower="0" upper="1" memberEnd="extension_taggedValue taggedValue-base_Association"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="check" name="check">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="check-base_Operation" name="base_Operation" association="Operation_check">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Operation"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Operation_check" name="A_Operation_check" memberEnd="extension_check check-base_Operation">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_check" name="extension_check" type="check" isComposite="true" lower="0" upper="1" memberEnd="extension_check check-base_Operation"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="SysMLSimConfiguration" name="SysMLSimConfiguration">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="SysMLSimConfiguration-base_Artifact" name="base_Artifact" association="Artifact_SysMLSimConfiguration">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Artifact"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Artifact_SysMLSimConfiguration" name="A_Artifact_SysMLSimConfiguration" memberEnd="extension_SysMLSimConfiguration SysMLSimConfiguration-base_Artifact">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_SysMLSimConfiguration" name="extension_SysMLSimConfiguration" type="SysMLSimConfiguration" isComposite="true" lower="0" upper="1" memberEnd="extension_SysMLSimConfiguration SysMLSimConfiguration-base_Artifact"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="sequences" name="sequences">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="sequences-base_Class" name="base_Class" association="Class_sequences">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Class"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Class_sequences" name="A_Class_sequences" memberEnd="extension_sequences sequences-base_Class">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_sequences" name="extension_sequences" type="sequences" isComposite="true" lower="0" upper="1" memberEnd="extension_sequences sequences-base_Class"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="Image" name="Image">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="Image-base_Artifact" name="base_Artifact" association="Artifact_Image">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Artifact"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Artifact_Image" name="A_Artifact_Image" memberEnd="extension_Image Image-base_Artifact">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_Image" name="extension_Image" type="Image" isComposite="true" lower="0" upper="1" memberEnd="extension_Image Image-base_Artifact"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="unique" name="unique">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="unique-base_Operation" name="base_Operation" association="Operation_unique">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Operation"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Operation_unique" name="A_Operation_unique" memberEnd="extension_unique unique-base_Operation">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_unique" name="extension_unique" type="unique" isComposite="true" lower="0" upper="1" memberEnd="extension_unique unique-base_Operation"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="report package" name="report package">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="report package-base_Package" name="base_Package" association="Package_report package">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Package"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="report package-ReportTitle" name="ReportTitle">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="report package-ReportVersion" name="ReportVersion">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="report package-ReportAuthor" name="ReportAuthor">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="report package-ReportStatus" name="ReportStatus">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="report package-ReportAlias" name="ReportAlias">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="report package-ReportKeywords" name="ReportKeywords">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="report package-ReportName" name="ReportName">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="report package-ReportSummary" name="ReportSummary">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Package_report package" name="A_Package_report package" memberEnd="extension_report package report package-base_Package">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_report package" name="extension_report package" type="report package" isComposite="true" lower="0" upper="1" memberEnd="extension_report package report package-base_Package"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="database connection" name="database connection">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="database connection-base_Artifact" name="base_Artifact" association="Artifact_database connection">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Artifact"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="database connection-OtherSchemas" name="OtherSchemas">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="database connection-ConnectionOptions" name="ConnectionOptions">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Artifact_database connection" name="A_Artifact_database connection" memberEnd="extension_database connection database connection-base_Artifact">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_database connection" name="extension_database connection" type="database connection" isComposite="true" lower="0" upper="1" memberEnd="extension_database connection database connection-base_Artifact"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="XSDsequence" name="XSDsequence">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="XSDsequence-base_Class" name="base_Class" association="Class_XSDsequence">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Class"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Class_XSDsequence" name="A_Class_XSDsequence" memberEnd="extension_XSDsequence XSDsequence-base_Class">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_XSDsequence" name="extension_XSDsequence" type="XSDsequence" isComposite="true" lower="0" upper="1" memberEnd="extension_XSDsequence XSDsequence-base_Class"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="CustomDocument" name="CustomDocument">
+					<generalization xmi:type="uml:Generalization" xmi:id="CustomDocument_StandardProfileL2::Document_generalization" general="StandardProfileL2::Document"/>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="CustomDocument-base_Artifact" name="base_Artifact" association="Artifact_CustomDocument">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Artifact"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Artifact_CustomDocument" name="A_Artifact_CustomDocument" memberEnd="extension_CustomDocument CustomDocument-base_Artifact">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_CustomDocument" name="extension_CustomDocument" type="CustomDocument" isComposite="true" lower="0" upper="1" memberEnd="extension_CustomDocument CustomDocument-base_Artifact"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="BPSimReport" name="BPSimReport">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="BPSimReport-base_Artifact" name="base_Artifact" association="Artifact_BPSimReport">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Artifact"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Artifact_BPSimReport" name="A_Artifact_BPSimReport" memberEnd="extension_BPSimReport BPSimReport-base_Artifact">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_BPSimReport" name="extension_BPSimReport" type="BPSimReport" isComposite="true" lower="0" upper="1" memberEnd="extension_BPSimReport BPSimReport-base_Artifact"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="Scriptlet" name="Scriptlet">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="Scriptlet-base_Artifact" name="base_Artifact" association="Artifact_Scriptlet">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Artifact"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Artifact_Scriptlet" name="A_Artifact_Scriptlet" memberEnd="extension_Scriptlet Scriptlet-base_Artifact">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_Scriptlet" name="extension_Scriptlet" type="Scriptlet" isComposite="true" lower="0" upper="1" memberEnd="extension_Scriptlet Scriptlet-base_Artifact"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="master document" name="master document">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="master document-base_Package" name="base_Package" association="Package_master document">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Package"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="master document-ReportTitle" name="ReportTitle">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="master document-ReportVersion" name="ReportVersion">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="master document-ReportAuthor" name="ReportAuthor">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="master document-ReportStatus" name="ReportStatus">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="master document-RTFTemplate" name="RTFTemplate">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="master document-ReportAlias" name="ReportAlias">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="master document-ReportKeywords" name="ReportKeywords">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="master document-ReportName" name="ReportName">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="master document-ReportSummary" name="ReportSummary">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Package_master document" name="A_Package_master document" memberEnd="extension_master document master document-base_Package">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_master document" name="extension_master document" type="master document" isComposite="true" lower="0" upper="1" memberEnd="extension_master document master document-base_Package"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="EAUserStory" name="EAUserStory">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="EAUserStory-base_DocumentArtifact" name="base_DocumentArtifact" association="DocumentArtifact_EAUserStory">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#DocumentArtifact"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="DocumentArtifact_EAUserStory" name="A_DocumentArtifact_EAUserStory" memberEnd="extension_EAUserStory EAUserStory-base_DocumentArtifact">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_EAUserStory" name="extension_EAUserStory" type="EAUserStory" isComposite="true" lower="0" upper="1" memberEnd="extension_EAUserStory EAUserStory-base_DocumentArtifact"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="business entity" name="business entity">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="business entity-base_Object" name="base_Object" association="Object_business entity">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Object"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Object_business entity" name="A_Object_business entity" memberEnd="extension_business entity business entity-base_Object">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_business entity" name="extension_business entity" type="business entity" isComposite="true" lower="0" upper="1" memberEnd="extension_business entity business entity-base_Object"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="import" name="import">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="import-base_Dependency" name="base_Dependency" association="Dependency_import">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Dependency"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Dependency_import" name="A_Dependency_import" memberEnd="extension_import import-base_Dependency">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_import" name="extension_import" type="import" isComposite="true" lower="0" upper="1" memberEnd="extension_import import-base_Dependency"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="xmlTransform" name="xmlTransform">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="xmlTransform-base_Activity" name="base_Activity" association="Activity_xmlTransform">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Activity"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Activity_xmlTransform" name="A_Activity_xmlTransform" memberEnd="extension_xmlTransform xmlTransform-base_Activity">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_xmlTransform" name="extension_xmlTransform" type="xmlTransform" isComposite="true" lower="0" upper="1" memberEnd="extension_xmlTransform xmlTransform-base_Activity"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="adhoc table" name="adhoc table">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="adhoc table-base_Artifact" name="base_Artifact" association="Artifact_adhoc table">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Artifact"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="adhoc table-dataFormat" name="dataFormat">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="adhoc table-data" name="data">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Artifact_adhoc table" name="A_Artifact_adhoc table" memberEnd="extension_adhoc table adhoc table-base_Artifact">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_adhoc table" name="extension_adhoc table" type="adhoc table" isComposite="true" lower="0" upper="1" memberEnd="extension_adhoc table adhoc table-base_Artifact"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="BPSimCustomResultChart" name="BPSimCustomResultChart">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="BPSimCustomResultChart-base_Class" name="base_Class" association="Class_BPSimCustomResultChart">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Class"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="BPSimCustomResultChart-ChartProperties" name="ChartProperties">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Class_BPSimCustomResultChart" name="A_Class_BPSimCustomResultChart" memberEnd="extension_BPSimCustomResultChart BPSimCustomResultChart-base_Class">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_BPSimCustomResultChart" name="extension_BPSimCustomResultChart" type="BPSimCustomResultChart" isComposite="true" lower="0" upper="1" memberEnd="extension_BPSimCustomResultChart BPSimCustomResultChart-base_Class"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="testsuite" name="testsuite">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="testsuite-base_UseCase" name="base_UseCase" association="UseCase_testsuite">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#UseCase"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="UseCase_testsuite" name="A_UseCase_testsuite" memberEnd="extension_testsuite testsuite-base_UseCase">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_testsuite" name="extension_testsuite" type="testsuite" isComposite="true" lower="0" upper="1" memberEnd="extension_testsuite testsuite-base_UseCase"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="navigate" name="navigate">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="navigate-base_Association" name="base_Association" association="Association_navigate">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Association"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Association_navigate" name="A_Association_navigate" memberEnd="extension_navigate navigate-base_Association">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_navigate" name="extension_navigate" type="navigate" isComposite="true" lower="0" upper="1" memberEnd="extension_navigate navigate-base_Association"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="ReadingList" name="ReadingList">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="ReadingList-base_Artifact" name="base_Artifact" association="Artifact_ReadingList">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Artifact"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="ReadingList-CustomStyle" name="CustomStyle">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Artifact_ReadingList" name="A_Artifact_ReadingList" memberEnd="extension_ReadingList ReadingList-base_Artifact">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_ReadingList" name="extension_ReadingList" type="ReadingList" isComposite="true" lower="0" upper="1" memberEnd="extension_ReadingList ReadingList-base_Artifact"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="trigger" name="trigger">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="trigger-base_Operation" name="base_Operation" association="Operation_trigger">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Operation"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Operation_trigger" name="A_Operation_trigger" memberEnd="extension_trigger trigger-base_Operation">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_trigger" name="extension_trigger" type="trigger" isComposite="true" lower="0" upper="1" memberEnd="extension_trigger trigger-base_Operation"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="Chart" name="Chart">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="Chart-base_Class" name="base_Class" association="Class_Chart">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Class"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="Chart-ChartProperties" name="ChartProperties">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Class_Chart" name="A_Class_Chart" memberEnd="extension_Chart Chart-base_Class">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_Chart" name="extension_Chart" type="Chart" isComposite="true" lower="0" upper="1" memberEnd="extension_Chart Chart-base_Class"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="table" name="table">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="table-base_Class" name="base_Class" association="Class_table">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Class"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="table-DBVersion" name="DBVersion">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="table-Owner" name="Owner">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="table-Tablespace" name="Tablespace">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Class_table" name="A_Class_table" memberEnd="extension_table table-base_Class">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_table" name="extension_table" type="table" isComposite="true" lower="0" upper="1" memberEnd="extension_table table-base_Class"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="internal worker" name="internal worker">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="internal worker-base_Object" name="base_Object" association="Object_internal worker">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Object"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Object_internal worker" name="A_Object_internal worker" memberEnd="extension_internal worker internal worker-base_Object">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_internal worker" name="extension_internal worker" type="internal worker" isComposite="true" lower="0" upper="1" memberEnd="extension_internal worker internal worker-base_Object"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="BPSim" name="BPSim">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="BPSim-base_Artifact" name="base_Artifact" association="Artifact_BPSim">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Artifact"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Artifact_BPSim" name="A_Artifact_BPSim" memberEnd="extension_BPSim BPSim-base_Artifact">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_BPSim" name="extension_BPSim" type="BPSim" isComposite="true" lower="0" upper="1" memberEnd="extension_BPSim BPSim-base_Artifact"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="boundary" name="boundary">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="boundary-base_Object" name="base_Object" association="Object_boundary">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Object"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Object_boundary" name="A_Object_boundary" memberEnd="extension_boundary boundary-base_Object">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_boundary" name="extension_boundary" type="boundary" isComposite="true" lower="0" upper="1" memberEnd="extension_boundary boundary-base_Object"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="EAWorkingSet" name="EAWorkingSet">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="EAWorkingSet-base_Artifact" name="base_Artifact" association="Artifact_EAWorkingSet">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Artifact"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Artifact_EAWorkingSet" name="A_Artifact_EAWorkingSet" memberEnd="extension_EAWorkingSet EAWorkingSet-base_Artifact">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_EAWorkingSet" name="extension_EAWorkingSet" type="EAWorkingSet" isComposite="true" lower="0" upper="1" memberEnd="extension_EAWorkingSet EAWorkingSet-base_Artifact"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="entity" name="entity">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="entity-base_Object" name="base_Object" association="Object_entity">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Object"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Object_entity" name="A_Object_entity" memberEnd="extension_entity entity-base_Object">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_entity" name="extension_entity" type="entity" isComposite="true" lower="0" upper="1" memberEnd="extension_entity entity-base_Object"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="xsd" name="xsd">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="xsd-base_Artifact" name="base_Artifact" association="Artifact_xsd">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Artifact"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Artifact_xsd" name="A_Artifact_xsd" memberEnd="extension_xsd xsd-base_Artifact">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_xsd" name="extension_xsd" type="xsd" isComposite="true" lower="0" upper="1" memberEnd="extension_xsd xsd-base_Artifact"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="custom table" name="custom table">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="custom table-base_Artifact" name="base_Artifact" association="Artifact_custom table">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Artifact"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="custom table-dataFormat" name="dataFormat">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="custom table-data" name="data">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Artifact_custom table" name="A_Artifact_custom table" memberEnd="extension_custom table custom table-base_Artifact">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_custom table" name="extension_custom table" type="custom table" isComposite="true" lower="0" upper="1" memberEnd="extension_custom table custom table-base_Artifact"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="redefines" name="redefines">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="redefines-base_Generalization" name="base_Generalization" association="Generalization_redefines">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Generalization"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Generalization_redefines" name="A_Generalization_redefines" memberEnd="extension_redefines redefines-base_Generalization">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_redefines" name="extension_redefines" type="redefines" isComposite="true" lower="0" upper="1" memberEnd="extension_redefines redefines-base_Generalization"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="removed" name="removed">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="removed-base_Attribute" name="base_Attribute" association="Attribute_removed">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Attribute"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Attribute_removed" name="A_Attribute_removed" memberEnd="extension_removed removed-base_Attribute">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_removed" name="extension_removed" type="removed" isComposite="true" lower="0" upper="1" memberEnd="extension_removed removed-base_Attribute"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="sqlquery" name="sqlquery">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="sqlquery-base_Artifact" name="base_Artifact" association="Artifact_sqlquery">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Artifact"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="sqlquery-SQL" name="SQL">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Artifact_sqlquery" name="A_Artifact_sqlquery" memberEnd="extension_sqlquery sqlquery-base_Artifact">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_sqlquery" name="extension_sqlquery" type="sqlquery" isComposite="true" lower="0" upper="1" memberEnd="extension_sqlquery sqlquery-base_Artifact"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="enumeration" name="enumeration">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="enumeration-base_Class" name="base_Class" association="Class_enumeration">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Class"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Class_enumeration" name="A_Class_enumeration" memberEnd="extension_enumeration enumeration-base_Class">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_enumeration" name="extension_enumeration" type="enumeration" isComposite="true" lower="0" upper="1" memberEnd="extension_enumeration enumeration-base_Class"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="proc" name="proc">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="proc-base_Operation" name="base_Operation" association="Operation_proc">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Operation"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Operation_proc" name="A_Operation_proc" memberEnd="extension_proc proc-base_Operation">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_proc" name="extension_proc" type="proc" isComposite="true" lower="0" upper="1" memberEnd="extension_proc proc-base_Operation"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="business use-case realization" name="business use-case realization">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="business use-case realization-base_Collaboration" name="base_Collaboration" association="Collaboration_business use-case realization">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Collaboration"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Collaboration_business use-case realization" name="A_Collaboration_business use-case realization" memberEnd="extension_business use-case realization business use-case realization-base_Collaboration">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_business use-case realization" name="extension_business use-case realization" type="business use-case realization" isComposite="true" lower="0" upper="1" memberEnd="extension_business use-case realization business use-case realization-base_Collaboration"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="BPSimResultChart" name="BPSimResultChart">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="BPSimResultChart-base_Class" name="base_Class" association="Class_BPSimResultChart">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Class"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="BPSimResultChart-ChartProperties" name="ChartProperties">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Class_BPSimResultChart" name="A_Class_BPSimResultChart" memberEnd="extension_BPSimResultChart BPSimResultChart-base_Class">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_BPSimResultChart" name="extension_BPSimResultChart" type="BPSimResultChart" isComposite="true" lower="0" upper="1" memberEnd="extension_BPSimResultChart BPSimResultChart-base_Class"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="column" name="column">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="column-base_Attribute" name="base_Attribute" association="Attribute_column">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Attribute"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Attribute_column" name="A_Attribute_column" memberEnd="extension_column column-base_Attribute">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_column" name="extension_column" type="column" isComposite="true" lower="0" upper="1" memberEnd="extension_column column-base_Attribute"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="toolbox profile" name="toolbox profile">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="toolbox profile-base_Package" name="base_Package" association="Package_toolbox profile">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Package"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Package_toolbox profile" name="A_Package_toolbox profile" memberEnd="extension_toolbox profile toolbox profile-base_Package">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_toolbox profile" name="extension_toolbox profile" type="toolbox profile" isComposite="true" lower="0" upper="1" memberEnd="extension_toolbox profile toolbox profile-base_Package"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="index" name="index">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="index-base_Operation" name="base_Operation" association="Operation_index">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Operation"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Operation_index" name="A_Operation_index" memberEnd="extension_index index-base_Operation">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_index" name="extension_index" type="index" isComposite="true" lower="0" upper="1" memberEnd="extension_index index-base_Operation"/>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Stereotype" xmi:id="profile" name="profile">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="profile-base_Package" name="base_Package" association="Package_profile">
+						<type href="http://schema.omg.org/spec/UML/2.0/uml.xml#Package"/>
+					</ownedAttribute>
+				</ownedMember>
+				<ownedMember xmi:type="uml:Extension" xmi:id="Package_profile" name="A_Package_profile" memberEnd="extension_profile profile-base_Package">
+					<ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="extension_profile" name="extension_profile" type="profile" isComposite="true" lower="0" upper="1" memberEnd="extension_profile profile-base_Package"/>
+				</ownedMember>
+			</uml:Profile>
+		</profiles>
+		<diagrams>
+			<diagram xmi:id="EAID_21D14613_684D_4520_BFFA_C08A332BB722">
+				<model package="EAPK_C4CAB469_CD97_4a45_BA22_CA51C442E46F" localID="1" owner="EAPK_C4CAB469_CD97_4a45_BA22_CA51C442E46F"/>
+				<properties name="Chart" type="Statechart"/>
+				<project author="17909" version="1.0" created="2025-02-21 08:54:18" modified="2025-02-21 08:59:22"/>
+				<style1 value="ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=0;PPgs.cx=0;PPgs.cy=0;DocSize.cx=827;DocSize.cy=1169;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=0;HideProps=0;ShowReqs=0;ShowCons=0;PaperSize=9;HideParents=0;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;ShowShape=1;AllDockable=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;SPT=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"/>
+				<style2 value="ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=1;MatrixActive=0;SwimlanesActive=1;KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;SPT=1;MDGDgm=SysML1.4::StateMachine;STBLDgm=;ShowNotes=0;VisibleAttributeDetail=0;ShowOpRetType=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;SF=1;Theme=:119;SaveTag=5C1A2929;"/>
+				<swimlanes value="locked=false;orientation=0;width=0;inbar=false;names=false;color=-1;bold=false;fcol=0;tcol=-1;ofCol=-1;ufCol=-1;hl=1;ufh=0;hh=0;cls=0;bw=0;hli=0;bro=0;SwimlaneFont=lfh:-10,lfw:0,lfi:0,lfu:0,lfs:0,lfface:Calibri,lfe:0,lfo:0,lfchar:1,lfop:0,lfcp:0,lfq:0,lfpf=0,lfWidth=0;"/>
+				<matrixitems value="locked=false;matrixactive=false;swimlanesactive=true;kanbanactive=false;width=1;clrLine=0;"/>
+				<extendedProperties/>
+				<persistentstyle value="DGS=On=0:CNT=8:W=120:H=40:SG=0:SGH=0:AEB=0:;AR=0;DCL=0;"/>
+				<xrefs/>
+				<elements>
+					<element geometry="Left=158;Top=302;Right=268;Bottom=352;" subject="EAID_F374F0FF_5172_4590_ABA0_7DB1DDB94567" seqno="1" style="HideIcon=0;DUID=ACD7684C;"/>
+					<element geometry="Left=335;Top=192;Right=455;Bottom=252;" subject="EAID_7BAD61C1_46D8_4ef6_B447_C15E056A5DB7" seqno="2" style="DUID=3B6B82A8;"/>
+					<element geometry="Left=381;Top=147;Right=401;Bottom=167;" subject="EAID_E971AA58_A2DA_48e2_8A55_DDD9B21B9847" seqno="3" style="DUID=F87F61C2;LBL=CX=23:CY=14:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"/>
+					<element geometry="Left=255;Top=95;Right=463;Bottom=256;" subject="EAID_8115BB2F_90F1_4f65_91F5_EAD92394BA01" seqno="4" style="DUID=61BBE303;"/>
+					<element geometry="Left=34;Top=191;Right=154;Bottom=260;" subject="EAID_18996316_6714_4c2e_BFF8_7FB2C3A8AD1E" seqno="5" style="DUID=FF53DC94;"/>
+					<element geometry="Left=85;Top=143;Right=105;Bottom=163;" subject="EAID_07A89954_14CF_4122_93B8_8F5CFDC3B4FD" seqno="6" style="DUID=5E4206BD;LBL=CX=23:CY=14:OX=21:OY=21:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"/>
+					<element geometry="Left=10;Top=10;Right=500;Bottom=389;" subject="EAID_C4CAB469_CD97_4a45_BA22_CA51C442E46F" seqno="7" style=" DUID=292362A0;NSL=1;"/>
+					<element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=3;$LLB=;LLT=;LMT=CX=48:CY=14:OX=30:OY=3:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:DIR=0:ROT=0;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_C8D9A52D_6649_46e8_87C8_335D89A94C22" style="Mode=3;EOID=FF53DC94;SOID=5E4206BD;Color=-1;LWidth=0;Hidden=0;"/>
+					<element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=2;$LLB=;LLT=;LMT=CX=119:CY=27:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:DIR=0:ROT=0;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_D03DB6ED_0F11_43b0_AA23_5DA056391A14" style="Mode=3;EOID=3B6B82A8;SOID=FF53DC94;Color=-1;LWidth=0;Hidden=0;"/>
+					<element geometry="SX=0;SY=0;EX=0;EY=0;SCME=1;SCTR=1;EDGE=3;SCTR.LEFT=331;SCTR.TOP=-285;SCTR.RIGHT=392;SCTR.BOTTOM=-255;$LLB=;LLT=;LMT=CX=32:CY=14:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:DIR=0:ROT=0;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=331:-256$331:-285$392:-285$392:-256$;" subject="EAID_3D1C4139_E80F_4526_8D58_EAF318EB5B92" style="Mode=3;EOID=61BBE303;SOID=61BBE303;Color=-1;LWidth=0;Hidden=0;"/>
+					<element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=3;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_D4135537_D701_4364_8451_469FABF4BA94" style="Mode=3;EOID=3B6B82A8;SOID=F87F61C2;Color=-1;LWidth=0;Hidden=0;"/>
+				</elements>
+			</diagram>
+		</diagrams>
+	</xmi:Extension>
+	<thecustomprofile:Execution_order base_Transition="EAID_D03DB6ED_0F11_43b0_AA23_5DA056391A14" __EAStereoName="Execution order" Execution_order="1"/>
+	<thecustomprofile:Execution_order base_Transition="EAID_3D1C4139_E80F_4526_8D58_EAF318EB5B92" __EAStereoName="Execution order" Execution_order="1"/>
+	<thecustomprofile:Execution_order base_Transition="EAID_D4135537_D701_4364_8451_469FABF4BA94" __EAStereoName="Execution order" Execution_order="1"/>
+	<EAUML:Scriptlet base_Artifact="EAID_F374F0FF_5172_4590_ABA0_7DB1DDB94567"/>
+	<thecustomprofile:Execution_order base_Transition="EAID_C8D9A52D_6649_46e8_87C8_335D89A94C22" __EAStereoName="Execution order" Execution_order="1"/>
+</xmi:XMI>

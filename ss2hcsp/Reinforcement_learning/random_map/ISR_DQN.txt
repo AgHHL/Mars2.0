@@ -1,0 +1,194 @@
+%type: module
+
+module P0():
+procedure init begin
+    action_base := [0, 1, 2, 3];
+    current_state := $$get_start_pos();
+    oval_position := $$get_end_pos();
+    mmap := $$get_map();
+end
+
+procedure get_partial_observation begin
+    agent_coords := current_state; 
+    aa := 0;
+    up_observation := [agent_coords[0] - 1, agent_coords[1]];
+    if (up_observation[0] >= 0 && mmap[up_observation[0]][up_observation[1]] == -1) {
+        up := 1;
+    } else if (up_observation[0] >= 0 && mmap[up_observation[0]][up_observation[1]] == 2) {
+        up := 2;
+    } else {
+        if (up_observation[0] < 0) {
+            up := 1;
+        } else {
+            up := 0;
+        }
+    }
+
+    down_observation := [agent_coords[0] + 1, agent_coords[1]];
+    if (down_observation[0] <= len(mmap)-1 && mmap[down_observation[0]][down_observation[1]] == -1) {
+        down := 1;
+    } else if (down_observation[0] <= len(mmap)-1 && mmap[down_observation[0]][down_observation[1]] == 2) {
+        down := 2;
+    } else {
+        if (down_observation[0] > len(mmap) - 1) {
+            down := 1;
+        } else {
+            down := 0;
+        }
+    }
+    
+    right_observation := [agent_coords[0], agent_coords[1] + 1];
+    if (right_observation[1] <= len(mmap[0])-1 && mmap[right_observation[0]][right_observation[1]] == -1) {
+        right := 1;
+    } else if (right_observation[1] <= len(mmap[0])-1 && mmap[right_observation[0]][right_observation[1]] == 2) {
+        right := 2;
+    } else {
+        if (right_observation[1] > len(mmap[0]) - 1) {
+            right := 1;
+        } else {
+            right := 0;
+        }
+    }   
+    
+    left_observation := [agent_coords[0], agent_coords[1] - 1];
+    if (left_observation[1] >= 0 && mmap[left_observation[0]][left_observation[1]] == -1) {
+        left := 1;
+    } else if (left_observation[1] >= 0 && mmap[left_observation[0]][left_observation[1]] == 2) {
+        left := 2;
+    } else {
+        if (left_observation[1] < 0) {
+            left := 1;
+        } else {
+            left := 0;
+        }
+    }
+    partial_observation := [up, down, right, left]; 
+end
+
+procedure step begin
+    if (mmap[current_state[0]][current_state[1]] == 2) {
+        reward := 100;
+        done := true;
+        success := true;
+    } else if (mmap[current_state[0]][current_state[1]] == -1) {
+        reward := -100;
+        done := true;
+        success := false;
+    } else {
+        reward := -10;
+        done := false;
+        success := false;
+    }
+end
+
+begin
+    @init;
+    
+    chtx!len(mmap);
+    chty!len(mmap[0]);
+    chtc!current_state;
+    {
+        @get_partial_observation;
+        chsp!partial_observation;
+        cha?current_state;
+        @step;
+        chtr!reward;
+        chss!success;
+    }*(success==false)
+end
+endmodule
+
+module P1():
+procedure afer_step begin
+    if (action == 0) {
+        if (current_state[0] > 0) {
+            map[current_state[0]][current_state[1]] := 0;
+            map[current_state[0]-1][current_state[1]] := 1;
+            current_state[0] := current_state[0] - 1;
+        }
+    } else if (action == 1) {
+        if (current_state[0] < len(map)-1) {
+            map[current_state[0]][current_state[1]] := 0;
+            map[current_state[0]+1][current_state[1]] := 1;
+            current_state[0] := current_state[0] + 1;
+        }
+    } else if (action == 2) {
+        if (current_state[1] < len(map[0])-1) {
+            map[current_state[0]][current_state[1]] := 0;
+            map[current_state[0]][current_state[1]+1] := 1;
+            current_state[1] := current_state[1] + 1;
+        }
+    } else if (action == 3) {
+        if (current_state[1] > 0) {
+            map[current_state[0]][current_state[1]] := 0;
+            map[current_state[0]][current_state[1]-1] := 1;
+            current_state[1] := current_state[1] - 1; 
+        }
+    }
+end
+
+procedure update_map begin
+    agent_coords := current_state; 
+    up_observation := [agent_coords[0] - 1, agent_coords[1]];
+    if (up_observation[0] >= 0 && partial_observation[0] == 1) {
+        map[up_observation[0]][up_observation[1]] := -1;
+    } else if (up_observation[0] >= 0 && partial_observation[0] == 2) {
+        map[up_observation[0]][up_observation[1]] := 2;
+    }
+
+    down_observation := [agent_coords[0] + 1, agent_coords[1]];
+    if (down_observation[0] <= len(map)-1 && partial_observation[1] == 1) {
+        down := 1;
+        map[down_observation[0]][down_observation[1]] := -1;
+    } else if (down_observation[0] <= len(map)-1 && partial_observation[1] == 2) {
+        map[down_observation[0]][down_observation[1]] := 2;
+    }
+    
+    right_observation := [agent_coords[0], agent_coords[1] + 1];
+    if (right_observation[1] <= len(map[0])-1 && partial_observation[2] == 1) {
+        right := 1;
+        map[right_observation[0]][right_observation[1]] := -1;
+    } else if (right_observation[1] <= len(map[0])-1 && partial_observation[2] == 2) {
+        map[right_observation[0]][right_observation[1]] := 2;
+    }
+    
+    left_observation := [agent_coords[0], agent_coords[1] - 1];
+    if (left_observation[1] >= 0 && partial_observation[3] == 1) {
+        left := 1;
+        map[left_observation[0]][left_observation[1]] := -1;
+    } else if (left_observation[1] >= 0 && partial_observation[3] == 2) {
+        map[left_observation[0]][left_observation[1]] := 2;
+    }
+
+    observation_ := map;
+end
+
+begin
+    
+    chtx?x;
+    chty?y;
+    num_step := 0;
+    chtc?current_state;
+    map := $$init_agent(x, y, current_state);   
+    {
+        chsp?partial_observation;
+        @update_map;
+        action := $$choose_action(partial_observation, map);
+        @afer_step;
+        cha!current_state;
+        num_step := num_step + 1;
+        global_step := $$get_global_step();
+        chtr?reward;
+        chss?success;
+        $$store_transition(observation_, action, reward, map);
+        if (global_step > 200 && global_step % 5 == 0) {
+            $$learn();
+        }
+    }*(success==false)
+end
+endmodule
+
+system
+P0 = P0() ||
+P1 = P1()
+endsystem

@@ -1,0 +1,11 @@
+{
+  "EnvConfig": {"CPU": {"version": "SiP2115", "freq": "25 MHz"},
+                "Compiler": {"version": "sparc-rtems-gcc-2.3.2", "option": "o2"},
+                "OS": {"version": 0}},
+  "MemoryReq": {"code": "1 KB",
+                "constant": "10 B",
+                "heap": "1.2 KB",
+                "stack": "100 B",
+                "register": 0,
+                "external": 0}
+}

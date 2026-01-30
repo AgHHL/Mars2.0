@@ -1,0 +1,120 @@
+{} + {s[train]:S_train, s[next]:S_next}
+Centre'
+{x:prior⊕channel(S_train).⊕channel(S_next)} + {}
+
+if \phi(S_train, S_next) =>
+{\pi_c:prior⊕channel(S_train).⊕channel(S_next)} + {}
+Centre
+{} + {}
+
+
+{} + {}
+Leaving
+{x:sec⊕train_pos(R).sec&{not_exit.Yx, exit(Xx).Xx}, y:Yy=Xy} + {p:R, v:R, a:R} ; {x:Xx, y:Xy}, {x:Yx, y:Yy}
+
+{} + {}
+Return''
+{
+x:sec⊕train_pos(R).sec&{not_exit.Yx, exit(Xx).Xx},
+y:sec⊕data(R, R, R).sec&{cmd(R).Yy}
+}
++ {p:R, v:R, a:R} ; {x:Xx, y:Yy}, {x:Yx, y:Yy}
+
+{} + {}
+Evolve
+{
+x:(\mu Yx)sec⊕train_pos(R).sec&{not_exit.Yx, exit(Xx).Xx},
+y:(\mu Yy)sec&{data.sec⊕data(R, R, R).sec&{cmd(R).Yy}}
+}
++ {p:R, v:R, a:R} ; {x:Xx, y:Yy}, {x:Yx, y:Yy}
+
+{} + {}
+Return'
+{
+x:(\mu Yx)sec⊕train_pos(R).sec&{not_exit.Yx, exit(Xx).Xx},
+y:sec⊕data(R, R, R).sec&{cmd(R).(\mu Yy)sec&{data.sec⊕data(R, R, R).sec&{cmd(R).Yy}}}
+}
++ {p:R, v:R, a:R} ;
+{x:Xx, y:Yy}, {x:Yx, y:Yy}
+
+{} + {}
+Switch
+{
+x:(\mu Yx)sec⊕train_pos(R).sec&{not_exit.Yx, exit(Xx).Xx},
+y:sec&{data.sec⊕data(R, R, R).sec&{cmd(R).(\mu Yy)sec&{data.sec⊕data(R, R, R).sec&{cmd(R).Yy}}}}
+}
++ {p:R, v:R, a:R} ;
+{x:Xx, y:Yy}, {x:Yx, y:Yy}
+
+{} + {}
+Return
+{x:sec⊕data(R, R, R).sec&{cmd(R).Xx, channel(sec&{data.sec⊕data(R, R, R).sec&{cmd(R).(\mu Yy)sec&{data.sec⊕data(R, R, R).sec&{cmd(R).Yy}}}}).(\mu Yx)sec⊕train_pos(R).sec&{not_exit.Yx, exit(Xx).Xx}}}
++ {p:R, v:R, a:R} ;
+{x:Xx, y:Yy}, {x:Yx, y:Yy}
+
+{} + {}
+ODE
+{x:(\mu Xx)sec&{data.sec⊕data(R, R, R).sec&{cmd(R).Xx, channel(sec&{data.sec⊕data(R, R, R).sec&{cmd(R).(\mu Yy)sec&{data.sec⊕data(R, R, R).sec&{cmd(R).Yy}}}}).(\mu Yx)sec⊕train_pos(R).sec&{not_exit.Yx, exit(Xx).Xx}}}}
++ {p:R, v:R, a:R} ;
+{x:Xx, y:Yy}, {x:Yx, y:Yy}
+
+{\pi_t:admin&{init(R, R, R).x:(\mu Xx)sec&{data.sec⊕data(R, R, R).sec&{cmd(R).Xx, channel(sec&{data.sec⊕data(R, R, R).sec&{cmd(R).(\mu Yy)sec&{data.sec⊕data(R, R, R).sec&{cmd(R).Yy}}}}).(\mu Yx)sec⊕train_pos(R).sec&{not_exit.Yx, exit(Xx).Xx}}}}} + {}
+Train
+{} + {p:R, v:R, a:R} ;
+{x:Xx, y:Yy}, {x:Yx, y:Yy}
+
+
+{} + {w:S_w}
+Exit
+{z:train⊕exit(S_w).Xz, y:Xy, x:Xx} + {p:R, v:R, a:R} ; {z:Xz, y:Xy, x: Xx}
+
+{} + {}
+NotExit
+{z:train⊕not_exit.Az, y:Ay, x:Ax} + {p:R, v:R, a:R} ; {z:Az, y:Ay, x:Ax}
+
+{} + {w:S_w}
+Leave
+{
+z:train&{train_pos(R).<train⊕not_exit.Az, train⊕exit(S_w).Xz>},
+y:<Ay, Xy>,
+x:<Ax, Xx>
+}
++ {p:R, v:R, a:R} ;
+{z:Az, y:Ay, x:Ax}, {z:Xz, y:Xy, x: Xx}
+
+{} + {w:S_w}
+Delay'
+{
+y:(\mu Ay)(\mu Zy)<prior&{handover.prior⊕failure.Zy}, <Ay, Xy>>,
+z:(\mu Az)(\mu Zz)<Zz, train&{train_pos(R).<train⊕not_exit.Az, train⊕exit(S_w).Xz>}>
+x:(\mu Ax)(\mu Zx)<Zx, <Ax, Xx>>
+}
++ {p:R, v:R, a:R} ;
+{z:Az, y:Ay, x:Ax}, {z:Xz, y:Xy, x: Xx}, {y:Zy, z:Zz, x:Zx}
+
+{\pi_c:S_c} + {c:S_c}
+Success
+{
+y:(\mu Ay)(\mu Zy)<prior&{handover.prior⊕failure.Zy}, <Ay, Xy>>,
+z:train⊕{channel(S_w).(\mu Az)(\mu Zz)<Zz, train&{train_pos(R).<train⊕not_exit.Az, train⊕exit(S_w).Xz>}>}
+x:centre&{channel(S_w).(\mu Ax)(\mu Zx)<Zx, <Ax, Xx>>}
+}
++ {p:R, v:R, a:R} ;
+{z:Az, y:Ay, x:Ax}, {z:Xz, y:Xy, x: Xx}, {y:Zy, z:Zz, x:Zx}
+
+{} + {}
+Failure
+{
+x: (\mu Zx)<Zx, Yx>,
+y: (\mu Zy)<prior&{handover.prior⊕failure.Zy}, Yy>,
+z: train⊕cmd(R).(\mu Zz)<Zz, Yz>
+}
++ {p:R, v:R, a:R} ;
+{z:Yz, y:Yy, x: Yx}, {y:Zy, z:Zz, x:Zx}
+
+{} + {}
+Handover
+{
+x: next⊕handover.next&{success.centre&{channel(S_w).(\mu Ax)(\mu Zx)<Zx, <Ax, Xx>>}, failure.(\mu Zx)<Zx, Yx>},
+y:
+}

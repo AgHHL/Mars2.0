@@ -1,0 +1,165 @@
+
+------------------------------------------------------------------------------------------------------------------------
+Sector ::=
+!\pi_s(x).x[admin]&{
+    init(start_pos, handover_pos, end_pos, period, has_train).[handover_success := 0].
+        x[admin]&{
+            channels(y, c).
+            x[admin]&{
+                no_train.NoTrain
+                has_train(z).HasTrain
+            }
+        }
+}
+
+NoTrain ::=
+(\mu X)
+y[prior]&{
+    ok.y[prior]⊕ok.x[next]⊕ok.x[next]&{ok.wait(1).X},
+    handover.y[prior]⊕success.x[next]⊕ok.x[next]&{ok.y[centre]&{channel(z).wait(1).HasTrain'}}
+}
+
+HasTrain' ::=
+(\mu Y)
+y[prior]&{
+    ok.y[prior]⊕ok.Control',
+    handover.y[prior]⊕failure.Control'
+}
+
+Control' ::=
+z[train]&{
+    data(p, v, a).
+    if p < handover_pos then
+        z[train]⊕cmd<f(p, v, a, end_pos)>.x[next]⊕ok.x[next]&{ok.wait(1).Y}
+    elif !handover_success then
+        x[next]⊕handover.x[next]&{
+            success.Success',
+            failure.Failure'
+        }
+    else
+        if p < end_pos then
+            z[train]⊕ok.x[next]⊕ok.x[next]&{ok.wait(1).Y}
+        else
+            z[train]⊕bye.[handover_success := 0].x[next]⊕ok.x[next]&{ok.wait(1).X}
+        endif
+    endif
+}
+
+Success' ::= \bar{\pi_c}<c>.x[centre]&{channel(w).[handover_success := 1].z[train]⊕channel<w>.x[centre]&{switch(z).wait(1).Y}}
+
+Failure' ::= z[train]⊕cmd<f(p, v, a, end_pos)>.wait(1).Y
+
+HasTrain ::=
+(\mu X)
+y[prior]&{
+    ok.y[prior]⊕ok.Control,
+    handover.y[prior]⊕failure.Control
+}
+
+Control ::=
+z[train]&{
+    data(p, v, a).
+    if p < handover_pos then
+        z[train]⊕cmd<f(p, v, a, end_pos)>.x[next]⊕ok.x[next]&{ok.wait(1).X}
+    elif !handover_success then
+        x[next]⊕handover.x[next]&{
+            success.Success,
+            failure.Failure
+        }
+    else
+        if p < end_pos then
+            z[train]⊕ok.x[next]⊕ok.x[next]&{ok.wait(1).X}
+        else
+            z[train]⊕bye.[handover_success := 0].x[next]⊕ok.x[next]&{ok.wait(1).NoTrain'}
+        endif
+    endif
+}
+
+Success ::= \bar{\pi_c}<c>.x[centre]&{channel(w).[handover_success := 1].z[train]⊕channel<w>.x[centre]&{switch(z).wait(1).X}}
+
+Failure ::= z[train]⊕cmd<f(p, v, a, end_pos)>.wait(1).X
+
+NoTrain' ::=
+(\mu Y)
+y[prior]&{
+    ok.y[prior]⊕ok.x[next]⊕ok.x[next]&{ok.wait(1).Y},
+    handover.y[prior]⊕success.x[next]⊕ok.x[next]&{ok.y[centre]&{channel(z).wait(1).X}}
+}
+
+
+
+
+HasTrain ::=
+y[prior]&{
+    ok.y[prior]⊕ok.Control,
+    handover.y[prior]⊕failure.Control
+}
+{
+ x: next⊕{ok.next&{ok.Xx}, handover.next&{success.centre&{channel(S_w).centre&{switch(Xz).Xx}}, failure.Xx}},
+ y: prior&{ok.prior⊕ok.Xy, handover.prior⊕failure.Xy},
+ z: train⊕{cmd(R).Xz, channel(S_w), ok.Xz, bye.Xz}
+}
+
+Control ::=
+z[train]&{
+    data(p, v, a).
+    if p < handover_pos then
+        z[train]⊕cmd<f(p, v, a, end_pos)>.x[next]⊕ok.x[next]&{ok.wait(1).X}
+        {
+         x: next⊕ok.next&{ok.Xx},
+         y: Xy,
+         z: train⊕cmd(R).Xz
+        }
+    elif !handover_success then
+        x[next]⊕handover.x[next]&{
+            success.Success,
+            failure.Failure
+        }
+        {
+         x: next⊕handover.next&{success.centre&{channel(S_w).centre&{switch(Xz).Xx}}, failure.Xx},
+         y: Xy,
+         z: train⊕{channel(S_w), cmd(R).Xz}
+        }
+    else
+        if p < end_pos then
+            z[train]⊕ok.x[next]⊕ok.x[next]&{ok.wait(1).X}
+            {
+             x: next⊕ok.next&{ok.Xx},
+             y: Xy,
+             z: train⊕ok.Xz
+            }
+        else
+            z[train]⊕bye.[handover_success := 0].[has_train := 0].x[next]⊕ok.x[next]&{ok.wait(1).X}
+            {
+             x: next⊕ok.next&{ok.Xx},
+             y: Xy,
+             z: train⊕bye.Xz
+            }
+        endif
+        {
+         x: next⊕ok.next&{ok.Xx},
+         y: Xy,
+         z: train⊕{ok.Xz, bye.Xz}
+        }
+    endif
+    {
+     x: next⊕{ok.next&{ok.Xx}, handover.next&{success.centre&{channel(S_w).centre&{switch(Xz).Xx}}, failure.Xx}},
+     y: Xy,
+     z: train⊕{cmd(R).Xz, channel(S_w), ok.Xz, bye.Xz}
+    }
+}
+
+{\pi_c: S_c} + {c: S_c}
+Success ::= \bar{\pi_c}<c>.x[centre]&{channel(w).[handover_success := 1].z[train]⊕channel<w>.x[centre]&{switch(z).wait(1).X}}
+{
+ x: centre&{channel(S_w).centre&{switch(Xz).Xx}},
+ y: Xy,
+ z: train⊕channel(S_w)
+}
+
+Failure ::= z[train]⊕cmd<f(p, v, a, end_pos)>.wait(1).X
+{
+ x: Xx,
+ y: Xy,
+ z: train⊕cmd(R).Xz
+}

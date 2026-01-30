@@ -1,0 +1,21 @@
+constants
+    g > 0;
+    L > 0;
+    k > 0;
+end
+
+
+
+pre[th == 0][w == 0];
+{
+  p:=*(true);
+  if ((1/2)*(w-p)^2 < cos(th)*g/L)
+    {w:=w-p;}
+  else
+    {skip;}
+  t := * (t >= 0); 
+  {th_dot=w, w_dot=-g/L*sin(th)-k*w, t_dot=-1 & t>0&&th<pi&&th>-pi}
+	invariant [(1-cos(th))*g/L+1/2*w^2<g/L]{{init 1: wolfram, init 2: wolfram, maintain: wolfram}};
+}*
+	invariant [(1-cos(th))*g/L+1/2*w^2<g/L]{{init: wolfram, maintain 1.skip: wolfram, maintain 2.skip: wolfram, maintain exec: wolfram}}[th<=pi && th>=-pi]{{init: wolfram, maintain 1.skip: wolfram, maintain 2.skip: wolfram, maintain exec: wolfram}};
+post[th<pi/2 && th>-pi/2]{{wolfram}};

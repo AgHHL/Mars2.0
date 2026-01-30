@@ -1,0 +1,27 @@
+%type: module
+
+module P():
+output HeatCost = Costin * cost, Temperatures = [9 / 5 * HouseTemp + 32, 50 + 15 * sin(0.262 * t)];
+begin
+  t := 0;
+  _tick := 0;
+  F2Cin := 70;
+  Thermostat_sub_Relay1_state := 0;
+  tt := 0;
+  Costin := 0;
+  HouseTemp := 20;
+  {
+    F2Cout := 5 / 9 * (70 - 32);
+    Terr := F2Cout - HouseTemp;
+    blowercmd := (if Terr > 5*(5/9) then 1 else (if Terr < -5*(5/9) then 0 else Thermostat_sub_Relay1_state));
+    Thermostat_sub_Relay1_state := blowercmd;
+    {tt_dot = 1, Costin_dot = blowercmd * ((-HouseTemp + 50) * (Mdot * c)), HouseTemp_dot = (blowercmd * ((-HouseTemp + 50) * (Mdot * c)) - (HouseTemp - 5 / 9 * (50 + 15 * sin(0.262 * t) - 32)) * (1 / Req)) * (1 / (M * c)) & tt < 0.001}
+    t := t + tt;
+    _tick := _tick + 1;
+    tt := 0;
+  }*
+end
+endmodule
+system
+  P=P()
+endsystem

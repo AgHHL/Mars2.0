@@ -1,0 +1,28 @@
+constants
+    a > 0;
+    g > 0;
+    a < p;
+    T >=0;
+    c == (g/p)^(1/2);
+    m < -(g/p)^(1/2);
+end
+
+
+
+pre[x >= 0][a == r][v > -(g/p)^(1/2)][v < 0];
+{ if (r==a && v-g*T>-(g/p)^(1/2))
+    {skip; ++ r:=p;
+      t:=0;
+      {x_dot = v, v_dot=r*v^2-g, t_dot=1 & x>0&&v<0&&t<T}
+	invariant [r>0][v-g*(T-t)>-c];
+    }
+    else
+    {r:=p;
+      t:=0;
+      {x_dot = v, v_dot=r*v^2-g, t_dot=1 & x>0&&v<0&&t<T}
+	    invariant ghost y (y_dot= -(1/2) * p * (v-c)*y)
+	          [r==p][y^2*(v+c)==1][r>0]{{init_all: wolfram}};
+    }
+}*
+	invariant [x>=0&&v<=0][r>0][v>-c];
+post[!(x==0) || v^2<=m^2];

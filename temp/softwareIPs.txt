@@ -1,0 +1,204 @@
+data ADDR_AD_START  /* 陀螺脉冲采集锁存信号 */
+    type: unint08 *;
+    default: 1;
+end data ADDR_AD_START;
+
+data pGyroGAInput  /* 12路正反转脉冲计数 */
+    type: unint16 [12];
+    default: {GA1_P_PULSE_CNT, GA1_N_PULSE_CNT,
+        GA2_P_PULSE_CNT, GA2_N_PULSE_CNT,
+        GA3_P_PULSE_CNT, GA3_N_PULSE_CNT,
+        GA4_P_PULSE_CNT, GA4_N_PULSE_CNT,
+        GA5_P_PULSE_CNT, GA5_N_PULSE_CNT,
+        GA6_P_PULSE_CNT, GA6_N_PULSE_CNT};
+end pGyroGAInput;
+
+data GyroUnint  /* 陀螺脉冲当量（parameter）*/
+    type: float64;
+    default: 1.0e-5;
+end GyroUnint;
+
+data Gyrosel  /* 陀螺选择（command）*/
+    type: unint32;
+    /* D0~D5代表陀螺1-6，1选用，0不选用 */
+end Gyrosel;
+
+data Rgtemp  /* 陀螺安装矩阵（parameter）*/
+    type: float64 [6][3];
+    default: {{0.7672553f, -0.2792581f, 0.5773510f},
+        {-0.1417830f, -0.8040916f, 0.5773510f},
+        {-0.1417830f, 0.8040916f, 0.5773510f},
+        {0.7672553f, 0.2792581f, 0.5773510f},
+        {-0.6254722f, -0.5248335f, 0.5773510f},
+        {-0.6254722f, 0.5248335f, 0.5773510f}};
+end Rgtemp;
+
+data GyroRate  /* 三轴惯性角速度 */
+    type: float64 [3];
+end GyroRate;
+
+data AttiRate  /* 星体姿态角速度 */
+    type: float64 [3];
+end AttiRate;
+
+data AttiAng  /* 星体姿态角度 */
+    type: float64 [3];
+end AttiAng;
+
+data CTRL_PARAM_SAM  /* 控制器参数（parameter）*/
+    type: float64 [2][3];  /* [[Kp, Kd]] */
+    default: {{0.567232f, 6.387905f},
+        {0.342085f,	3.850196f},
+        {0.0f, 3.813545f}};
+end CTRL_PARAM_SAM;
+
+data fy  /* 三轴控制力矩 */
+    type: float64 [3];
+end fy;
+
+data CTRL_PARAM_H1  /* 控制器限幅参数（parameter）*/
+    type: float64 [3];
+    default: {0.568f, 0.342f, 0.339f};
+end CTRL_PARAM_H1;
+
+data pModulator  /* 伪速率反馈力矩（INOUT） */
+    type: float64 [3];
+    default: 0.0;
+end pModulator;
+
+data wPulse  /* 推力器分配 */
+    type: unint32;
+end wPulse;
+
+data pulseLen  /* 喷气长度（parameter）*/
+    type: unint32;
+    default: 32;  /* 毫秒 */
+end pulseLen;
+
+ports RI2:
+    0: in data GyroGAInput;
+    1: in data GyroUnint;
+    2: in data Gyrosel;
+    3: in data Rgtemp;
+end RI2;
+
+ports PI3:
+    0: out data AttiRate;
+    1: out data AttiAng;
+end PI3;
+
+ports RI4:
+    0: in data AttiRate;
+    1: in data AttiAng;
+    2: in data CTRL_PARAM_SAM;
+end RI4;
+
+ports RI5:
+    0: in data fy;
+    1: in data CTRL_PARAM_H1;
+    // 2: in data pModulator;
+end RI4;
+
+ports PI5;
+    // 0: out data pModulator;
+    0: out data wPulse;
+    1: out data pulseLen;
+end PI5;
+
+abstract software IP GetGyroData
+    category:  /* 类别 */
+    keywords:  /* 关键词 */
+    function:  /* 功能描述 */
+    interface:
+        RI1: in data ADDR_AD_START;
+        PI1: out data pGyroGAInput;
+    dependency:
+        RI1 < PI1;
+end GetGyroData;
+
+abstract software IP GyroDataPro
+    category:  /* 类别 */
+    keywords:  /* 关键词 */
+    function:  /* 功能描述 */
+    interface:
+        RI2: in ports RI2;
+        PI2: out data GyroRate;
+    dependency:
+        RI2 < PI2;
+end GyroDataPro;
+
+abstract software IP GyroAttiEsti
+    category:  /* 类别 */
+    keywords:  /* 关键词 */
+    function:  /* 功能描述 */
+    interface:
+        RI3: in data GyroRate;
+        PI3: out ports PI3;
+    dependency:
+        RI3 < PI3;
+end GyroAttiEsti;
+
+abstract software IP ThreeAxisController
+    category:  /* 类别 */
+    keywords:  /* 关键词 */
+    function:  /* 功能描述 */
+    interface:
+        RI4: in ports RI4;
+        PI4: out data fy;
+    dependency:
+        RI4 < PI4;
+end ThreeAxisController;
+
+abstract software IP PulseOut
+    category:  /* 类别 */
+    keywords:  /* 关键词 */
+    function:  /* 功能描述 */
+    variables:
+        state: local data pModulator;
+    interface:
+        RI5: in ports RI5;
+        PI5: out ports PI5;
+    dependency:
+        {RI5, state} < PI5;
+end PulseOut;
+
+abstract software IP RDSM  /* 太搜速度阻尼 */
+    category:  /* 类别 */
+    keywords:  陀螺, 推力器
+    function:  通过推力器作用于星体，控制星体的三轴角速度，使星体保持姿态稳定（三轴角速度较小）。
+    interface:
+        in0: in data ADDR_AD_START;
+        in1: in data GyroUnint;
+        in2: in data Gyrosel;
+        in3: in data Rgtemp;
+        in4: in data CTRL_PARAM_SAM;
+        in5: in data CTRL_PARAM_H1;
+        out0: out data wPulse;
+        out1: out data pulseLen;
+    dependency:
+        {in0, in1, in2, in3, in4, in5} < {out1, out2};
+end RDSM;
+
+composite software IP RDSM0 refines RDSM
+    software IPs:
+        GetGyroData: abstract GetGyroData;
+        GyroDataPro: abstract GyroDataPro;
+        GyroAttiEsti: abstract GyroAttiEsti;
+        ThreeAxisController: abstract ThreeAxisController;
+        PulseOut: abstract PulseOut;
+    connections:
+        c0: in0 -> GetGyroData.RI1;
+        c1: in1 -> GyroDataPro.RI2[1];
+        c2: in2 -> GyroDataPro.RI2[2];
+        c3: in3 -> GyroDataPro.RI2[3];
+        c4: in4 -> ThreeAxisController.RI4[2];
+        c5: in5 -> PulseOut.RI5[1];
+        c6: PulseOut.PI5[0] -> out0;
+        c7: PulseOut.PI5[1] -> out1;
+
+        c8: GetGyroData.PI1 -> GyroDataPro.RI2[0];
+        c9: GyroDataPro.PI2 -> GyroAttiEsti.RI3;
+        c10: GyroAttiEsti.PI3[0] -> ThreeAxisController.RI4[0];
+        c11: GyroAttiEsti.PI3[1] -> ThreeAxisController.RI4[1];
+        c12: ThreeAxisController.PI4 -> PulseOut.RI5[0];
+end RDSM0;

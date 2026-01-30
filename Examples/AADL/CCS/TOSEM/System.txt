@@ -1,0 +1,42 @@
+%type: module
+
+import Scheduler_HPF
+import Threads
+import Devices
+import Connections
+# import Buses
+import Physical
+
+system
+
+# Physical Level
+truck() || car() || driver() ||
+
+# Software Level
+Periodic_DIS($0, $0.097) || EXE_obs_p_comp($0, $0) ||
+Periodic_DIS($1, $0.005) || EXE_emerg($1, $0) ||
+Periodic_DIS($2, $0.007) || EXE_PI_ctr($2, $0) ||
+Aperiodic_DIS($3, $"c10") || EXE_pan_ctr($3, $0) ||
+
+# Platform Level
+Scheduler_HPF($0) || radar($0.01) || actuator() || GPS($0.006) || velometer($0.01) || user_panel() ||
+
+# Connections
+Sync_Conn($"c0") ||
+Async_Data_Conn($"c1") ||
+Sync_Conn($"c2") ||
+Sync_Conn($"c3") ||
+Sync_Conn($"c4") ||
+Async_Data_Conn($"c5") ||
+Sync_Conn($"c6") ||
+Async_Data_Conn($"c7") ||
+Async_Data_Conn($"c8") ||
+Sync_Conn($"c9") ||
+Async_Event_Conn($"c10") ||
+Async_Data_Conn($"c11") ||
+Async_Data_Conn($"c12") ||
+Async_Data_Conn($"c13")
+
+# || bus0 = Bus(0, 0.001)
+
+endsystem

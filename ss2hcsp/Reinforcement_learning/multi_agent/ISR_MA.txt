@@ -1,0 +1,397 @@
+%type: module
+
+module P0():
+procedure init begin
+    map_code := 1;
+    mmap := $$get_fullmap(map_code);
+    action_base := [0, 1, 2, 3];
+    current_state_1 := [7, 0];  
+    current_state_2 := [6, 3];  
+    oval_position_1 := [6, 3];  
+    oval_position_2 := [7, 0]; 
+    success_1 := false;        
+    success_2 := false;         
+end
+
+procedure get_partial_observation begin
+    
+    if (!success_1) {  
+        agent_coords_1 := current_state_1; 
+        
+        
+        up_observation_1 := [agent_coords_1[0] - 1, agent_coords_1[1]];
+        if (up_observation_1[0] >= 0 && mmap[up_observation_1[0]][up_observation_1[1]] == -1) {
+            up_1 := 1;
+        } else if (up_observation_1[0] >= 0 && mmap[up_observation_1[0]][up_observation_1[1]] == 2) {
+            up_1 := 2;
+        } else {
+            if (up_observation_1[0] < 0) {
+                up_1 := 1;
+            } else {
+                up_1 := 0;
+            }
+        }
+
+        
+        down_observation_1 := [agent_coords_1[0] + 1, agent_coords_1[1]];
+        if (down_observation_1[0] <= len(mmap)-1 && mmap[down_observation_1[0]][down_observation_1[1]] == -1) {
+            down_1 := 1;
+        } else if (down_observation_1[0] <= len(mmap)-1 && mmap[down_observation_1[0]][down_observation_1[1]] == 2) {
+            down_1 := 2;
+        } else {
+            if (down_observation_1[0] > len(mmap) - 1) {
+                down_1 := 1;
+            } else {
+                down_1 := 0;
+            }
+        }
+
+        
+        right_observation_1 := [agent_coords_1[0], agent_coords_1[1] + 1];
+        if (right_observation_1[1] <= len(mmap[0])-1 && mmap[right_observation_1[0]][right_observation_1[1]] == -1) {
+            right_1 := 1;
+        } else if (right_observation_1[1] <= len(mmap[0])-1 && mmap[right_observation_1[0]][right_observation_1[1]] == 2) {
+            right_1 := 2;
+        } else {
+            if (right_observation_1[1] > len(mmap[0]) - 1) {
+                right_1 := 1;
+            } else {
+                right_1 := 0;
+            }
+        }
+
+        
+        left_observation_1 := [agent_coords_1[0], agent_coords_1[1] - 1];
+        if (left_observation_1[1] >= 0 && mmap[left_observation_1[0]][left_observation_1[1]] == -1) {
+            left_1 := 1;
+        } else if (left_observation_1[1] >= 0 && mmap[left_observation_1[0]][left_observation_1[1]] == 2) {
+            left_1 := 2;
+        } else {
+            if (left_observation_1[1] < 0) {
+                left_1 := 1;
+            } else {
+                left_1 := 0;
+            }
+        }
+
+        partial_observation_1 := [up_1, down_1, right_1, left_1]; 
+    } else {
+        partial_observation_1 := [0, 0, 0, 0];  
+    }
+
+    
+    if (!success_2) {  
+        agent_coords_2 := current_state_2; 
+        
+        
+        up_observation_2 := [agent_coords_2[0] - 1, agent_coords_2[1]];
+        if (up_observation_2[0] >= 0 && mmap[up_observation_2[0]][up_observation_2[1]] == -1) {
+            up_2 := 1;
+        } else if (up_observation_2[0] >= 0 && mmap[up_observation_2[0]][up_observation_2[1]] == 2) {
+            up_2 := 2;
+        } else {
+            if (up_observation_2[0] < 0) {
+                up_2 := 1;
+            } else {
+                up_2 := 0;
+            }
+        }
+
+        
+        down_observation_2 := [agent_coords_2[0] + 1, agent_coords_2[1]];
+        if (down_observation_2[0] <= len(mmap)-1 && mmap[down_observation_2[0]][down_observation_2[1]] == -1) {
+            down_2 := 1;
+        } else if (down_observation_2[0] <= len(mmap)-1 && mmap[down_observation_2[0]][down_observation_2[1]] == 2) {
+            down_2 := 2;
+        } else {
+            if (down_observation_2[0] > len(mmap) - 1) {
+                down_2 := 1;
+            } else {
+                down_2 := 0;
+            }
+        }
+
+       
+        right_observation_2 := [agent_coords_2[0], agent_coords_2[1] + 1];
+        if (right_observation_2[1] <= len(mmap[0])-1 && mmap[right_observation_2[0]][right_observation_2[1]] == -1) {
+            right_2 := 1;
+        } else if (right_observation_2[1] <= len(mmap[0])-1 && mmap[right_observation_2[0]][right_observation_2[1]] == 2) {
+            right_2 := 2;
+        } else {
+            if (right_observation_2[1] > len(mmap[0]) - 1) {
+                right_2 := 1;
+            } else {
+                right_2 := 0;
+            }
+        }
+
+       
+        left_observation_2 := [agent_coords_2[0], agent_coords_2[1] - 1];
+        if (left_observation_2[1] >= 0 && mmap[left_observation_2[0]][left_observation_2[1]] == -1) {
+            left_2 := 1;
+        } else if (left_observation_2[1] >= 0 && mmap[left_observation_2[0]][left_observation_2[1]] == 2) {
+            left_2 := 2;
+        } else {
+            if (left_observation_2[1] < 0) {
+                left_2 := 1;
+            } else {
+                left_2 := 0;
+            }
+        }
+
+        partial_observation_2 := [up_2, down_2, right_2, left_2]; 
+    } else {
+        partial_observation_2 := [0, 0, 0, 0];  
+    }
+end
+
+procedure step begin
+    
+    if (!success_1) {  
+        if (current_state_1 == oval_position_1) {
+            reward_1 := 100;
+            success_1 := true;
+        } else if (mmap[current_state_1[0]][current_state_1[1]] == -1) {
+            reward_1 := -100;
+            success_1 := false;
+        } else {
+            reward_1 := -10;
+            success_1 := false;
+        }
+    } else {
+        skip;
+    }
+
+
+    if (!success_2) {  
+        if (current_state_2 == oval_position_2) {
+            reward_2 := 100;
+            success_2 := true;
+        } else if (mmap[current_state_2[0]][current_state_2[1]] == -1) {
+            reward_2 := -100;
+            success_2 := false;
+        } else {
+            reward_2 := -10;
+            success_2 := false;
+        }
+    } else {
+        skip;
+    }
+
+ 
+    if (success_1 && success_2) {
+        done := true;
+    } else {
+        done := false;
+    }
+end
+
+begin
+    @init;
+    chtx!len(mmap);
+    chty!len(mmap[0]);
+    {
+        @get_partial_observation;
+        
+        chpa!partial_observation_1;
+        chpb!partial_observation_2;
+        chaa?current_state_1;
+        chab?current_state_2;
+        @step;
+        chra!reward_1;
+        chrb!reward_2;
+        chsa!success_1;
+        chsb!success_2;
+    }*(done==false)
+end
+endmodule
+
+module P1():
+procedure afer_step begin
+    if (!success_1) {  
+        if (action_1 == 0) {
+            if (current_state_1[0] > 0 && (current_state_1[0]-1 != current_state_2[0] || current_state_1[1] != current_state_2[1])) {
+                map1[current_state_1[0]][current_state_1[1]] := 0;
+                map1[current_state_1[0]-1][current_state_1[1]] := 1;
+                current_state_1[0] := current_state_1[0] - 1;
+            }
+        } else if (action_1 == 1) {
+            if (current_state_1[0] < len(map1)-1 && (current_state_1[0]+1 != current_state_2[0] || current_state_1[1] != current_state_2[1])) {
+                map1[current_state_1[0]][current_state_1[1]] := 0;
+                map1[current_state_1[0]+1][current_state_1[1]] := 1;
+                current_state_1[0] := current_state_1[0] + 1;
+            }
+        } else if (action_1 == 2) {
+            if (current_state_1[1] < len(map1[0])-1 && (current_state_1[0] != current_state_2[0] || current_state_1[1]+1 != current_state_2[1])) {
+                map1[current_state_1[0]][current_state_1[1]] := 0;
+                map1[current_state_1[0]][current_state_1[1]+1] := 1;
+                current_state_1[1] := current_state_1[1] + 1;
+            }
+        } else if (action_1 == 3) {
+            if (current_state_1[1] > 0&& (current_state_1[0] != current_state_2[0] || current_state_1[1]-1 != current_state_2[1])) {
+                map1[current_state_1[0]][current_state_1[1]] := 0;
+                map1[current_state_1[0]][current_state_1[1]-1] := 1;
+                current_state_1[1] := current_state_1[1] - 1; 
+            }
+        }
+    }
+
+    if (!success_2) {  
+        if (action_2 == 0) {
+            if (current_state_2[0] > 0 && (current_state_1[0] != current_state_2[0]-1 || current_state_1[1] != current_state_2[1])) {
+                map2[current_state_2[0]][current_state_2[1]] := 0;
+                map2[current_state_2[0]-1][current_state_2[1]] := 1;
+                current_state_2[0] := current_state_2[0] - 1;
+            }
+        } else if (action_2 == 1) {
+            if (current_state_2[0] < len(map2)-1&& (current_state_1[0] != current_state_2[0]+1 || current_state_1[1] != current_state_2[1])) {
+                map2[current_state_2[0]][current_state_2[1]] := 0;
+                map2[current_state_2[0]+1][current_state_2[1]] := 1;
+                current_state_2[0] := current_state_2[0] + 1;
+            }
+        } else if (action_2 == 2) {
+            if (current_state_2[1] < len(map2[0])-1&& (current_state_1[0] != current_state_2[0] || current_state_1[1] != current_state_2[1]+1)) {
+                map2[current_state_2[0]][current_state_2[1]] := 0;
+                map2[current_state_2[0]][current_state_2[1]+1] := 1;
+                current_state_2[1] := current_state_2[1] + 1;
+            }
+        } else if (action_2 == 3) {
+            if (current_state_2[1] > 0&& (current_state_1[0]-1 != current_state_2[0] || current_state_1[1] != current_state_2[1]-1)) {
+                map2[current_state_2[0]][current_state_2[1]] := 0;
+                map2[current_state_2[0]][current_state_2[1]-1] := 1;
+                current_state_2[1] := current_state_2[1] - 1; 
+            }
+        }
+    }
+end
+
+procedure update_map begin  
+
+    if (!success_1) {  
+        agent_coords_1 := current_state_1; 
+        up_observation_1 := [agent_coords_1[0] - 1, agent_coords_1[1]];
+        if (up_observation_1[0] >= 0 && partial_observation_1[0] == 1) {
+            map1[up_observation_1[0]][up_observation_1[1]] := -1;
+        } else if (up_observation_1[0] >= 0 && partial_observation_1[0] == 2) {
+            map1[up_observation_1[0]][up_observation_1[1]] := 2;
+        }
+
+        down_observation_1 := [agent_coords_1[0] + 1, agent_coords_1[1]];
+        if (down_observation_1[0] <= len(map1)-1 && partial_observation_1[1] == 1) {
+            map1[down_observation_1[0]][down_observation_1[1]] := -1;
+        } else if (down_observation_1[0] <= len(map1)-1 && partial_observation_1[1] == 2) {
+            map1[down_observation_1[0]][down_observation_1[1]] := 2;
+        }
+
+        right_observation_1 := [agent_coords_1[0], agent_coords_1[1] + 1];
+        if (right_observation_1[1] <= len(map1[0])-1 && partial_observation_1[2] == 1) {
+            map1[right_observation_1[0]][right_observation_1[1]] := -1;
+        } else if (right_observation_1[1] <= len(map1[0])-1 && partial_observation_1[2] == 2) {
+            map1[right_observation_1[0]][right_observation_1[1]] := 2;
+        }
+
+        left_observation_1 := [agent_coords_1[0], agent_coords_1[1] - 1];
+        if (left_observation_1[1] >= 0 && partial_observation_1[3] == 1) {
+            map1[left_observation_1[0]][left_observation_1[1]] := -1;
+        } else if (left_observation_1[1] >= 0 && partial_observation_1[3] == 2) {
+            map1[left_observation_1[0]][left_observation_1[1]] := 2;
+        }
+    }
+
+ 
+    if (!success_2) {  
+        agent_coords_2 := current_state_2; 
+        up_observation_2 := [agent_coords_2[0] - 1, agent_coords_2[1]];
+        if (up_observation_2[0] >= 0 && partial_observation_2[0] == 1) {
+            map2[up_observation_2[0]][up_observation_2[1]] := -1;
+        } else if (up_observation_2[0] >= 0 && partial_observation_2[0] == 2) {
+            map2[up_observation_2[0]][up_observation_2[1]] := 2;
+        }
+
+        down_observation_2 := [agent_coords_2[0] + 1, agent_coords_2[1]];
+        if (down_observation_2[0] <= len(map2)-1 && partial_observation_2[1] == 1) {
+            map2[down_observation_2[0]][down_observation_2[1]] := -1;
+        } else if (down_observation_2[0] <= len(map2)-1 && partial_observation_2[1] == 2) {
+            map2[down_observation_2[0]][down_observation_2[1]] := 2;
+        }
+
+        right_observation_2 := [agent_coords_2[0], agent_coords_2[1] + 1];
+        if (right_observation_2[1] <= len(map2[0])-1 && partial_observation_2[2] == 1) {
+            map2[right_observation_2[0]][right_observation_2[1]] := -1;
+        } else if (right_observation_2[1] <= len(map2[0])-1 && partial_observation_2[2] == 2) {
+            map2[right_observation_2[0]][right_observation_2[1]] := 2;
+        }
+
+        left_observation_2 := [agent_coords_2[0], agent_coords_2[1] - 1];
+        if (left_observation_2[1] >= 0 && partial_observation_2[3] == 1) {
+            map2[left_observation_2[0]][left_observation_2[1]] := -1;
+        } else if (left_observation_2[1] >= 0 && partial_observation_2[3] == 2) {
+            map2[left_observation_2[0]][left_observation_2[1]] := 2;
+        }
+    }
+
+    observation_1 := map1;
+    observation_2 := map2;
+end
+
+begin
+    chtx?x;
+    chty?y;
+    num_step := 0;
+    current_state_1 := [7, 0]; 
+    current_state_2 := [6, 3]; 
+    success_1 := false;
+    success_2 := false;
+    map1 := $$init_agent1(x, y, current_state_1);
+    map2 := $$init_agent2(x, y, current_state_2);
+
+    {
+        chpa?partial_observation_1;
+        chpb?partial_observation_2;
+        @update_map;
+
+        if (!success_1) {
+            action_1 := $$choose_action(1, partial_observation_1, map1);  
+        } else {
+            action_1 := 0;  
+        }
+
+        if (!success_2) {
+            action_2 := $$choose_action(2, partial_observation_2, map2);  
+        } else {
+            action_2 := 0;  
+        }
+
+        @afer_step;
+        chaa!current_state_1;
+        chab!current_state_2;
+        num_step := num_step + 1;
+        chra?reward_1;
+        chrb?reward_2;
+        chsa?success_1;
+        chsb?success_2;
+
+        if (!success_1) {
+            $$store_transition(1, observation_1, action_1, reward_1, map1);  
+        }
+
+        if (!success_2) {
+            $$store_transition(2, observation_2, action_2, reward_2, map2);  
+        }
+
+        if (num_step > 200 && num_step % 5 == 0) {
+            if (!success_1) {
+                $$learn(1); 
+            }
+            if (!success_2) {
+                $$learn(2);  
+            }
+        }
+    }*(success_1==false || success_2==false)
+end
+endmodule
+
+system
+P0 = P0() ||
+P1 = P1()
+endsystem

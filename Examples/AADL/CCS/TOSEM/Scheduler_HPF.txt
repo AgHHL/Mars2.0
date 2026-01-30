@@ -1,0 +1,81 @@
+%type: module
+
+module Scheduler_HPF(sid):
+output tid;
+
+procedure Initialize_Scheduler_HPF begin
+    t := 0;  # The local time of the scheduler
+    Pool := [];  # Thread pool
+end
+
+procedure Idle_Scheduler_HPF begin
+    {t_dot = 1 & true} |> [] (
+        reqProcessor[sid][_tid]?x --> deadline := x(0); prior := x(1);
+            Pool := [[_tid, t + deadline, prior]]; @Busy_Scheduler_HPF;
+    )
+end
+
+procedure Loop_Scheduler_HPF begin
+    if (success == 0 && len(Pool) > 0) {
+        (tid__, deadline__, prior__) := head(Pool);
+        Pool := tail(Pool);
+        if (prior_ > prior__) {
+            success := 1;
+        }
+        else {
+            Pool_ := push(Pool_, [tid__, deadline__, prior__]);
+        }
+        @Loop_Scheduler_HPF;
+    }
+    else {
+        Pool_ := push(Pool_, [_tid, t + deadline_, prior_]);
+        Pool := push(Pool_, Pool);
+    }
+end
+
+procedure Insert_Scheduler_HPF begin
+    Pool_ := []; success := 0; @Loop_Scheduler_HPF;
+end
+
+procedure Preempt_Scheduler_HPF begin
+    if (prior_ > prior) {
+        preempt[sid][tid]!;
+        Pool := push([tid, deadline, prior], Pool);
+        tid := _tid; deadline := t + deadline_; prior := prior_;
+        run[sid][tid]!;
+    } else {
+        @Insert_Scheduler_HPF;
+    }
+    @Compute_Scheduler_HPF;
+end
+
+procedure Compute_Scheduler_HPF begin
+    {t_dot = 1 & true} |> [] (
+        reqProcessor[sid][_tid]?x --> deadline_:= x(0); prior_ := x(1); @Preempt_Scheduler_HPF;,
+        complete_exec[sid][tid]? --> skip;
+    )
+end
+
+procedure Busy_Scheduler_HPF begin
+    (tid, deadline, prior) := head(Pool);
+    Pool := tail(Pool);
+    if (t < deadline) {
+        run[sid][tid]!;
+        @Compute_Scheduler_HPF;
+    }
+    @Schedule_Scheduler_HPF;
+end
+
+procedure Schedule_Scheduler_HPF begin
+    if (len(Pool) == 0) {
+        @Idle;
+    } else {
+        @Busy;
+    }
+end
+
+begin
+    @Initialize_Scheduler_HPF;
+    @Schedule_Scheduler_HPF;
+end
+endmodule

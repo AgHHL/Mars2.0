@@ -1,0 +1,73 @@
+%type: module
+
+module P():
+output x7 = x11 * (1 / 100);
+begin
+  t := 0;
+  _tick := 0;
+  pre_x2 := 0;
+  x3 := 0;
+  x3_0 := 0;
+  x3_1 := 0;
+  x14 := 0;
+  Unit_Delay_state := 0;
+  x4 := 10;
+  x6 := 2;
+  pre_x1 := 0;
+  x5 := 0;
+  x5_0 := 0;
+  x15 := 20;
+  Check_if_tank_level_stays_higher_than_limit_for_more_than_30_seconds_sub_Unit_Delay_state := 0;
+  tt := 0;
+  x11 := 500;
+  {
+    x8 := Check_if_tank_level_stays_higher_than_limit_for_more_than_30_seconds_sub_Unit_Delay_state;
+    x0 := x11 * (1 / 100);
+    x9 := x8 + 1;
+    if (x0 < 8) {
+      x9 := 0;
+    }
+    if (x0 <= 2) {
+      x1 := 1;
+    } else {
+      x1 := 0;
+    }
+    if (x9 >= 30) {
+      x2 := 1;
+    } else {
+      x2 := 0;
+    }
+    if (pre_x2 < 0 && x2 >= 0 || pre_x2 == 0 && x2 > 0) {
+      x12 := Unit_Delay_state;
+      x13 := x12 + 1;
+      x3 := 1;
+      x3_0 := 0;
+      x3_1 := x13;
+      Unit_Delay_state := x13;
+    }
+    pre_x2 := x2;
+    if (pre_x1 < 0 && x1 >= 0 || pre_x1 == 0 && x1 > 0) {
+      x5 := 1;
+      x5_0 := 20;
+    }
+    pre_x1 := x1;
+    if (x3 == 1) {
+      x6 := 0;
+    }
+    if (x5 == 1) {
+      x6 := x5_0;
+    }
+    x10 := x6 - 10;
+    Check_if_tank_level_stays_higher_than_limit_for_more_than_30_seconds_sub_Unit_Delay_state := x9;
+    x3 := 0;
+    x5 := 0;
+    {tt_dot = 1, x11_dot = x10 & tt < 1}
+    t := t + tt;
+    _tick := _tick + 1;
+    tt := 0;
+  }*
+end
+endmodule
+system
+  P=P()
+endsystem

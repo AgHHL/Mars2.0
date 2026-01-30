@@ -1,0 +1,138 @@
+------------------------------------------------------------------------------------------------------------------------
+Sector ::=
+!\pi_s(x).x[admin]&{
+    init(start_pos, handover_pos, end_pos, period).
+        [handover_success := 0].
+        x[admin]&{
+            channels(y, c).
+                {\pi_c: S_c} + {c: S_c}
+                x[admin]&{
+                    no_train.NoTrain,
+                    has_train(z).HasTrain
+                }
+                {
+                x: admin&{no_train.next⊕ok.next&{ok.(\mu t_X)(\mu t_Y)<next⊕ok.next&{ok.t_Y}, next⊕handover.next&{success.centre&{channel(S_w).centre&{switch((\mu t_Y)<train⊕cmd(R).t_Y, train⊕{channel(S_w), cmd(R).t_Y}, <train⊕{ok.t_Y}, train⊕{bye.(\mu t_X)(\mu t_Y)<train⊕cmd(R).t_Y, train⊕{channel(S_w), cmd(R).t_Y}, <train⊕{ok.t_Y}, train⊕{bye.t_X}>>}>>).t_Y}}, failure.t_Y}, <next⊕ok.next&{ok.t_Y}, next⊕ok.next&{ok.t_X}>>},
+                          has_train((\mu t_Y)<train⊕cmd(R).t_Y, train⊕{channel(S_w), cmd(R).t_Y}, <train⊕{ok.t_Y}, train⊕{bye.Xz}>>).(\mu t_Y)<next⊕ok.next&{ok.t_Y}, next⊕handover.next&{success.centre&{channel(S_w).centre&{switch((\mu t_Y)<train⊕cmd(R).t_Y, train⊕{channel(S_w), cmd(R).t_Y}, <train⊕{ok.t_Y}, train⊕{bye.Xz}>>).t_Y}}, failure.t_Y}, <next⊕ok.next&{ok.t_Y}, next⊕ok.next&{ok.Xx}>>}
+                y:
+                }
+        }
+}
+
+
+NoTrain ::=
+{\pi_c: S_c} + {c: S_c}
+(\mu X)
+y[prior]&{
+    ok.y[prior]⊕ok.x[next]⊕ok.x[next]&{ok.wait(1).X},
+    handover.y[prior]⊕success.x[next]⊕ok.x[next]&{ok.y[centre]&{channel(z).wait(1).HasTrain}}
+}
+{
+ x: next⊕ok.next&{ok.(\mu t_X)(\mu t_Y)<next⊕ok.next&{ok.t_Y}, next⊕handover.next&{success.centre&{channel(S_w).centre&{switch((\mu t_Y)<train⊕cmd(R).t_Y, train⊕{channel(S_w), cmd(R).t_Y}, <train⊕{ok.t_Y}, train⊕{bye.(\mu t_X)(\mu t_Y)<train⊕cmd(R).t_Y, train⊕{channel(S_w), cmd(R).t_Y}, <train⊕{ok.t_Y}, train⊕{bye.t_X}>>}>>).t_Y}}, failure.t_Y}, <next⊕ok.next&{ok.t_Y}, next⊕ok.next&{ok.t_X}>>}
+ y: (\mu t_X)prior&{ok.prior⊕ok.t_X, handover.prior⊕success.centre&{channel((\mu t_Y)<train⊕cmd(R).t_Y, train⊕{channel(S_w), cmd(R).t_Y}, <train⊕{ok.t_Y}, train⊕{bye.(\mu t_X)(\mu t_Y)<train⊕cmd(R).t_Y, train⊕{channel(S_w), cmd(R).t_Y}, <train⊕{ok.t_Y}, train⊕{bye.t_X}>>}>>).(\mu t_Y)prior&{ok.prior⊕ok.<t_Y, t_Y, <t_Y, t_X>>}}},
+ z: (\mu t_X)(\mu t_Y)<train⊕cmd(R).t_Y, train⊕{channel(S_w), cmd(R).t_Y}, <train⊕{ok.t_Y}, train⊕{bye.t_X}>>
+} + {x: Yx, z: Yz, y: Yy} + {z: Xz, x: Xx, y: Xy}
+
+HasTrain ::=
+{\pi_c: S_c} + {c: S_c}
+(\mu Y)
+y[prior]&{
+    ok.y[prior]⊕ok.Control,
+    handover.y[prior]⊕failure.Control
+}
+{
+ x: (\mu t_Y)<next⊕ok.next&{ok.t_Y}, next⊕handover.next&{success.centre&{channel(S_w).centre&{switch((\mu t_Y)<train⊕cmd(R).t_Y, train⊕{channel(S_w), cmd(R).t_Y}, <train⊕{ok.t_Y}, train⊕{bye.Xz}>>).t_Y}}, failure.t_Y}, <next⊕ok.next&{ok.t_Y}, next⊕ok.next&{ok.Xx}>>,
+ y: (\mu t_Y)prior&{ok.prior⊕ok.<t_Y, t_Y, <t_Y, Xy>>},
+ z: (\mu t_Y)<train⊕cmd(R).t_Y, train⊕{channel(S_w), cmd(R).t_Y}, <train⊕{ok.t_Y}, train⊕{bye.Xz}>>
+}
+
+
+{
+ x: <next⊕ok.next&{ok.Yx}, next⊕handover.next&{success.centre&{channel(S_w).centre&{switch(Yz).Yx}}, failure.Yx}, <next⊕ok.next&{ok.Yx}, next⊕ok.next&{ok.Xx}>>,
+ y: <Yy, Yy, <Yy, Xy>>,
+ z: <train⊕cmd(R).Yz, train⊕{channel(S_w), cmd(R).Yz}, <train⊕{ok.Yz}, train⊕{bye.Xz}>>
+}
++ {x: Yx, z: Yz, y: Yy} + {z: Xz, x: Xx, y: Xy}
+
+
+Control ::=
+{\pi_c: S_c} + {c: S_c}
+z[train]&{
+    data(p, v, a).
+    {\pi_c: S_c} + {c: S_c}
+    if p < handover_pos then
+        {} + {}
+        z[train]⊕cmd<f(p, v, a, end_pos)>.x[next]⊕ok.x[next]&{ok.wait(1).Y}
+        {z: train⊕cmd(R).Yz, x: next⊕ok.next&{ok.Yx}, y: Yy}
+        + {x: Yx, z:Yz, y: Yy}
+    elif !handover_success then
+        {\pi_c: S_c} + {c: S_c}
+        x[next]⊕handover.x[next]&{
+            success.Success,
+            failure.Failure
+        }
+        {x: next⊕handover.next&{success.centre&{channel(S_w).centre&{switch(Yz).Yx}}, failure.Yx},
+         z: train⊕{channel(S_w), cmd(R).Yz},
+         y: Yy
+        } + {x: Yx, z:Yz, y: Yy}
+    else
+        {} + {}
+        if p < end_pos then
+            {} + {}
+            z[train]⊕ok.x[next]⊕ok.x[next]&{ok.wait(1).Y}
+            {z: train⊕ok.Yz, x: next⊕ok.next&{ok.Yx}, y: Yy}
+            + {x: Yx, z: Yz, y: Yy}
+        else
+            {} + {}
+            z[train]⊕bye.[handover_success := 0].x[next]⊕ok.x[next]&{ok.wait(1).X}
+            {z: train⊕bye.Xz, x:next⊕ok.next&{ok.Xx}, y: Xy}
+            + {z: Xz, x: Xx, y: Xy}
+        {
+         z: <train⊕{ok.Yz}, train⊕{bye.Xz}>,
+         x: <next⊕ok.next&{ok.Yx}, next⊕ok.next&{ok.Xx}>,
+         y: <Yy, Xy>
+        }
+        + {x: Yx, z: Yz, y: Yy} + {z: Xz, x: Xx, y: Xy}
+    {
+     x: <next⊕ok.next&{ok.Yx}, next⊕handover.next&{success.centre&{channel(S_w).centre&{switch(Yz).Yx}}, failure.Yx}, <next⊕ok.next&{ok.Yx}, next⊕ok.next&{ok.Xx}>>,
+     y: <Yy, Yy, <Yy, Xy>>,
+     z: <train⊕cmd(R).Yz, train⊕{channel(S_w), cmd(R).Yz}, <train⊕{ok.Yz}, train⊕{bye.Xz}>>
+    }
+    + {x: Yx, z: Yz, y: Yy} + {z: Xz, x: Xx, y: Xy}
+}
+{x: next⊕{ok.next&{ok.Yx=Xx}, handover.next&{success.centre&{channel(S_w).centre&{switch(Yz).Yx}}, failure.Yx}},
+ z: train&data(R, R, R).train⊕{cmd(R).Yz, channel(S_w), ok.Yz, bye.Xz},
+ y: Yy=Xy}
++ {x: Yx, z: Yz, y: Yy} + {z: Xz, x: Xx, y: Xy}
+
+{\pi_c: S_c} + {c: S_c}
+Success ::= \bar{\pi_c}<c>.x[centre]&{channel(w).[handover_success := 1].z[train]⊕channel<w>.x[centre]&{switch(z).wait(1).Y}}
+{x: centre&{channel(S_w).centre&{switch(Yz).Yx}}, z: train⊕channel(S_w), y: Yy}
++ {x: Yx, z: Yz, y: Yy}
+
+{} + {}
+Failure ::= z[train]⊕cmd<f(p, v, a, end_pos)>.wait(1).Y
+{z: train⊕cmd(R).Yz, x:Yx, y: Yy}
++ {z: Yz, x: Yx, y: Yy}
+
+------------------------------------------------------------------------------------------------------------------------
+Train ::=
+!\pi_t(x).x[admin]&{init(p, v, a).ODE}
+
+ODE ::=
+(\mu X)
+<p_dot = v, v_dot = a & true>|>x[sec]⊕data<p, v, a>.
+x[sec]&{
+    cmd(a).X,
+    channel(x).Leaving
+}
+
+Leaving ::=
+(\mu Y)
+<p_dot = v, v_dot = a & true>|>x[sec]⊕data<p, v, a>.
+x[sec]&{
+    cmd(a).x[pre_sec]⊕data<p, v, a>.x[pre_sec]&{ok.Y, bye.X}
+}
+
+------------------------------------------------------------------------------------------------------------------------
+Centre ::=
+!\pi_c(x).(new s)x[prior]⊕channel<s[train]>.x[prior]⊕switch<s[pre_sec]>.x[next]⊕channel<s[sec]>

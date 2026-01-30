@@ -1,0 +1,194 @@
+%type: module
+
+module P0():
+procedure init begin
+    mmap := [
+        [5, 0, 0, 0,  0, 0],
+        [0, 0, 0, 0,  0, 0],
+        [0, 0, 0, 0,  0, 0],
+        [0, 0, 0, 0,  0, 0],
+        [0, 0, 0, 0, -1, 0],
+        [0, 0, 0, 0,  0, 1]
+    ]; 
+    action_base := [0, 1, 2, 3];
+    current_state := [0, 0];
+    oval_position := [5, 5];
+    hell_position := [4, 4];
+end
+
+procedure reset begin
+    map := [
+        [5, 0, 0, 0,  0, 0],
+        [0, 0, 0, 0,  0, 0],
+        [0, 0, 0, 0,  0, 0],
+        [0, 0, 0, 0,  0, 0],
+        [0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0,  0, 0]
+    ]; 
+    x := 0;
+    y := 0;
+    current_state := [0, 0];
+end
+
+procedure get_partial_observation begin
+    agent_coords := current_state; 
+    up_observation := [agent_coords[0] - 1, agent_coords[1]];
+    if (up_observation == hell_position) {
+        up := 1;
+        map[up_observation[0]][up_observation[1]] := -1;
+    } else {
+        up := 0;
+    }
+    if (up_observation == oval_position) {
+        map[up_observation[0]][up_observation[1]] := 1;
+    }
+
+    down_observation := [agent_coords[0] + 1, agent_coords[1]];
+    if (down_observation == hell_position) {
+        down := 1;
+        map[down_observation[0]][down_observation[1]] := -1;
+    }else {
+        down := 0;
+    }
+    if (down_observation == oval_position) {
+        map[down_observation[0]][down_observation[1]] := 1;
+    }
+
+    right_observation := [agent_coords[0], agent_coords[1] + 1];
+    if(right_observation == hell_position) {
+        right := 1;
+        map[right_observation[0]][right_observation[1]] := -1;
+    }else {
+        right := 0;
+    }
+    if (right_observation == oval_position) {
+        map[right_observation[0]][right_observation[1]] := 1;
+    }
+
+    left_observation := [agent_coords[0], agent_coords[1] - 1];
+    if(left_observation == hell_position) {
+        left := 1;
+        map[left_observation[0]][left_observation[1]] := -1;
+    }else {
+        left := 0;
+    }
+    if (left_observation == oval_position) {
+        map[left_observation[0]][left_observation[1]] := 1;
+    }
+    partial_observation := [up, down, right, left]; 
+end
+
+procedure step begin
+    if (action == 0) {
+        if (y > 0) {
+        map[y][x] := 0;
+        map[y-1][x] := 1;
+        y := y - 1;
+        }
+    } else if (action == 1) {
+        if (y < 5) {
+            map[y][x] := 0;
+            map[y+1][x] := 1;
+            y := y + 1;
+        }
+    } else if (action == 2) {
+        if (x < 5) {
+            map[y][x] := 0;
+            map[y][x+1] := 1;
+            x := x + 1;
+        }
+    } else if(action == 3) {
+        if (x > 0) {
+            map[y][x] := 0;
+            map[y][x-1] := 1;
+            x := x - 1; 
+        }
+    }
+
+    current_state := [y, x];
+    
+    if (current_state == oval_position) {
+        reward := 100;
+        done := true;
+        success := true;
+    } else if (current_state == hell_position) {
+        reward := -100;
+        done := true;
+        success := false;
+    } else {
+        reward := -1;
+        done := false;
+        success := false;
+    }
+    observation_ := map;
+    
+    map[hell_position[0]][hell_position[1]] := 0;
+    if (hell_position[0] == 0) {
+        move_direction := 1;
+        }
+    else if (hell_position[0] == 4) {
+        move_direction := -1;
+        }
+    else {
+        move_direction := move_direction;
+        }
+
+    hell_position[0] := hell_position[0] + move_direction;
+    map[hell_position[0]][hell_position[1]] := -1;
+end
+
+begin
+    @init;
+    @reset;
+    {
+        chgetc!current_state;
+        chgeth!hell_position;
+        @get_partial_observation;
+        chsp!partial_observation;
+        chsm!map;
+        cha?action;
+        @step;
+        chtr!reward;
+        chss!success;
+        chto!observation_;
+        obervation := observation_;
+    }*(success==false)
+    chgetc!current_state;
+end
+endmodule
+
+module P1():
+begin
+    num_step := 0;
+    {
+        chsp?partial_observation;
+        chsm?map;
+        action := $$choose_action(partial_observation, map);
+        cha!action;
+        chtr?reward;
+        chss?success;
+        chto?observation_;
+        $$store_transition(map, action, reward, observation_);
+        if (num_step > 200 && num_step % 5 == 0) {
+            $$learn();
+        }
+    num_step := num_step + 1;
+    }*(success==false)
+    num_step := num_step - 1;
+end
+endmodule
+
+module P2():
+begin
+    {
+        chgetc?current_state;
+        chgeth?hell_position;
+    }*
+end
+endmodule
+
+system
+P0 = P0() ||
+P1 = P1() ||
+P2 = P2()
+endsystem

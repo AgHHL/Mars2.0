@@ -1,0 +1,1 @@
+This folder contains the examples from the *Journal of Systems Architecture (JSA)*. The `.txt` file is the HCSP model of the *househeat* system, generated using our MARS tool. The `.slx` file is a MATLAB Simulink model, which represents the *househeat* example we use for validation. These files can be used together to verify and demonstrate the functionality of our tool.

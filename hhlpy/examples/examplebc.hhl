@@ -1,0 +1,18 @@
+constants
+    a < 0;
+    b <= 0;
+    b^2 + 4 * a > 0;
+    w == ((b^2 + 4 * a)^(1/2) - b)/2;
+end
+
+
+pre [x == 0];
+{
+  x := * (x > 0); y := 0;
+  t := * (t >= 0); 
+  {x_dot = y, y_dot = a * x + b * y, t_dot = -1 & t>0}
+	invariant [y+w*x>=0 && y<=0]{bc}{{maintain: wolfram}};
+	
+}*
+	invariant [x >= 0]{{maintain exec: wolfram}};
+post[x >= 0];

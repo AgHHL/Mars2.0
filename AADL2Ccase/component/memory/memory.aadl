@@ -1,0 +1,26 @@
+
+MEMORY l1_cache
+PROPERTIES
+	BYTE_COUNT => 8000;
+    LINE_SIZE => 32Bytes;
+    CACHE_TYPE => Instruction_Cache;
+    SET_ASSOCIATIVITY => Set_Associative;
+    WRITE_POLICY => No_Allocated_Write_Through;
+    REPLACEMENT_POLICY => LRR;
+    CACHE_LEVEL => 1;
+    SET_SIZE => 2;
+    CACHE_COHERENCY_PROTOCOL => Private_Invalid;
+
+END l1_cache;
+
+
+-- The device monitors and regulates a patient's heart rate.
+-- The device detects and provides therapy for bradycardia conditions.
+-- The device provides programmable, single- and dual-chamber, rate-adaptive
+--  pacing, both permanent and temporary.
+-- In adaptive rate modes, an accelerometer is used to measure physical activity
+--  resulting in a sensor indicated rate for pacing the heart.
+-- The device is programmed and interrogated via bi-directional telemetry from
+--  the Device Controller-Monitor (DCM). 
+-- This allows the physician to change the operating mode or parameters of
+--  the device non-invasively after implantation.

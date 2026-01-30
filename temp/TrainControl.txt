@@ -1,0 +1,88 @@
+System ::= (new a, b, c)((new s)(Admin | Termination) | Part | Train | Center)
+
+
+Administrator ::=
+(new s1)b!<s1[prior]>.s1[admin][prior]⊕init<0, 900, 1000>.(new s0)s1[admin][prior]⊕next<s0[next]>.
+(new s2)b!<s2[prior]>.s2[Admin][prior]⊕init<1000, 1900, 2000>.s2[admin][prior]⊕next<s1[next]>.
+(new s3)b!<s3[prior]>.s3[Admin][prior]⊕init<2000, 2900, 3000>.s3[admin][prior]⊕next<s2[next]>.
+s[admin][terminus]⊕next<s3[next]>.
+(new s)c!<s[train]>.s[Admin][train]⊕init<0, 0, 1>.s1[Admin][prior]⊕hastrain<s[part]>.s2[Admin][prior]⊕notrain.s3[Admin][prior]⊕notrain
+
+
+Termination ::= s[terminus][admin]&{next(x).(rec X)x[prior]&{handover.x[prior]⊕fail.X}}
+
+
+Part ::= !b(x).x[Admin]&{init(start_point, end_point).x[Admin]&{next(s').x[Admin]&{notrain.NOTRAIN, hastrain(y).HASTRAIN}}}
+
+NOTRAIN ::= (rec Z)s[pre][post]&{handover.s[pre][post]⊕success.s[pre][Center]&{switch(y).HASTRAIN}}
+
+HASTRAIN ::=
+(rec X)y[train]⊕data.y[train]&{data(p, v, a).DATA}
+
+DATA ::=
+if p < handover_point then
+    y[train]⊕cmd<f(p, v, a)>.[t := 0].(rec Y)<t_dot = 1 & t < 10>|>s[pre][post]&{handover.s[pre][post]⊕fail.Y}&X
+else
+    s'[post][pre]⊕handover.s'[post][pre]&{success.SUCCESS, fail.FAIL}
+endif
+
+SUCCESS ::=
+a!<s'[Center]>.s'[post][Center]&{switch(z).
+    y[train]⊕switch<z>.
+    [t := 0].(rec Y)<t_dot = 1 & t < 10>|>s[pre][post]&{handover.s[pre][post]⊕fail.Y}&LEAVE
+}
+
+FAIL ::= y[train]⊕cmd<f(p, v, a)>.[t := 0].(rec Y)<t_dot = 1 & t < 10>|>s[pre][post]&{handover.s[pre][post]⊕fail.Y}&X
+
+LEAVE ::=
+(rec A)y[train]&{position(p).
+    if p < end_point then
+        y[train]⊕ok.A
+    else
+        y[train]⊕exit<z>.Z
+}
+
+
+TRAIN ::=
+!c(x).x[Admin]&{channel(y).
+    (rec X)<p_dot = v, v_dot = a & true>|>y[part]&{data.DATA}
+}
+
+DATA ::= y[part]⊕data<p, v, a>.y[part]&{cmd(a).X, switch(z).SWITCH}
+
+SWITCH ::= <p_dot = v, v_dot = a & true>|>z[part]&{data.DATA'}
+
+DATA' ::= z[part]⊕data<p, v, a>.z[part]&{cmd(a).LEAVE}
+
+LEAVE ::= (rec Y)<p_dot = v, v_dot = a & true>|>z[part]&{data.DATA''}
+
+DATA'' ::= z[part]⊕data<p, v, a>.z[part]&{cmd(a).y[part]⊕position<p>.y[part]&{ok.Y, exit(y).X}}
+
+
+CENTER ::= !a(x).(new s)x[pre]⊕switch<s[pre]>.x[post]⊕<s[train]>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

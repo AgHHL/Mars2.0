@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 双精度浮点数有效性判断 -->
+<SoftwareIP name="FloatValid64" id="BICE_SOFTIP/FloatValid64-1.05" version="1.05">
+    <IPinformation>
+        <Copyright>北京控制工程研究所</Copyright>
+        <Developer>北京控制工程研究所软件中心</Developer>
+        <Date>
+            <Year>2021</Year>
+            <Month>4</Month>
+            <Day>26</Day>
+        </Date>
+        <Keyword termbase="Terminology Database">
+            <P>floating-point</P>
+            <P>denormalized</P>
+            <P>IEEE754</P>
+        </Keyword>
+        <!-- 所属应用领域（各类卫星领域） -->
+        <Domain/>
+        <!-- 类别（采集、计算等） -->
+        <Category/>
+        <!-- 遵循的开发标准或规范等信息 -->
+        <Criterion>
+            <P>IEEE754</P>
+        </Criterion>
+        <!-- 该软件IP与其他软件IP之间的关系，例如：依赖关系、精化关系、时序关系等 -->
+        <Relation>
+            <Rely/>
+            <Refine/>
+            <Order/>
+        </Relation>
+    </IPinformation>
+    <Knowledge>
+        <Requirement content="functional description">
+            <!-- 软件IP实现的功能描述，体现软件IP特征 -->
+            <!-- 要求：基于领域术语词典进行描述 -->
+            根据IEEE754标准针对浮点数的格式定义，实现对64位双精度浮点数的规格化与非规格化判断，将判断结果(包含非规格化的具体类型)返回给用户，通常用于避免外系统输入的异常格式浮点数导致的计算异常传播。
+        </Requirement>
+        <Design>
+            <Interface>
+                <Service name="FloatValid64" type="provide">
+                    <Input name="byte">
+                        <Type>const unint08 *</Type>
+                        <Specification>64位双精度浮点数首字节地址</Specification>
+                    </Input>
+                    <Output/>
+                    <Return>
+                        <P value="0x0" spec="有效"/>
+                        <P value="0x1" spec="正无穷"/>
+                        <P value="0x2" spec="负无穷"/>
+                        <P value="0x3" spec="无效数"/>
+                        <P value="0x4" spec="非规格化"/>
+                    </Return>
+                    <Parameter/>
+                </Service>
+            </Interface>
+            <Structure flow="control">
+                <!-- 服务调用协议（接口协议）：服务的调用顺序 -->
+                <Protocol format="location">./doc/InterfaceProtocol</Protocol>
+                <!-- 提供服务的控制流图 -->
+                <CFG service_name="FloatValid64" type="provide" format="location">./doc/CFG_FloatValid64</CFG>
+            </Structure>
+            <Structure flow="data"/>
+            <Exception>
+                <!-- 可靠性的保证措施 -->
+                <Reliability>返回值超出规定范围的情况，用户需设计相应的保护措施，建议等同非规格化浮点数(0x4)处理。</Reliability>
+                <!-- 安全性的保证措施 -->
+                <Safety/>
+            </Exception>
+        </Design>
+        <Implementation>
+            <Language>C</Language>
+            <CompilingEnvironment>
+                <P compiler="sparc-rtems-gcc 3.2.3" option="o2"/>
+                <P compiler="sparc-rtems-gcc 2.91.60" option="o2"/>
+                <P compiler="TI DSP 6.08" option="o2"/>
+                <P compiler="TI DSP 7.4.4.0" option="o2"/>
+            </CompilingEnvironment>
+            <!-- 存在形式 -->
+            <Form>
+                <P scenario="嵌入式处理器环境">
+                    <Code>
+                        <P>std_common.h</P>
+                        <P>std_common.h</P>
+                        <P>std_bitop.h</P>
+                        <P>std_utils.h</P>
+                        <P>FloatValid64.c</P>
+                    </Code>
+                    <StaticLib>
+                        <P compiler="sparc-rtems-gcc 3.2.3" CPU="BM3803\AT697">libstdutils8.a</P>
+                        <P compiler="sparc-rtems-gcc 2.91.60" CPU="TSC695\Soc2008">libstdutils7.a</P>
+                        <P compiler="TI DSP 6.08" CPU="dsp6000">libstdutils_dsp.lib</P>
+                        <P compiler="TI DSP 7.4.4.0" CPU="dsp66xx">libstdutils_dsp.lib</P>
+                    </StaticLib>
+                </P>
+                <P scenario="桌面PC仿真环境">
+                    <Code>
+                        <P>std_common.h</P>
+                        <P>std_common.h</P>
+                        <P>std_bitop.h</P>
+                        <P>std_utils.h</P>
+                        <P>FloatValid64.c</P>
+                    </Code>
+                    <StaticLib>
+                        <P compiler="Win32 VC++" CPU="VC6.0">libstdutils.lib</P>
+                        <P compiler="Win32 VC++" CPU="VS2010">libstdutils.lib</P>
+                        <P compiler="X64 VC++" CPU="VS2017">libstdutils.lib</P>
+                    </StaticLib>
+                    <DynamicLib>
+                        <P compiler="Win32 VC++" CPU="VC6.0">libstdutils.dll</P>
+                        <P compiler="Win32 VC++" CPU="VS2010">libstdutils.dll</P>
+                        <P compiler="X64 VC++" CPU="VS2017">libstdutils.dll</P>
+                    </DynamicLib>
+                </P>
+            </Form>
+            <Performance service_name="FloatValid64" type="provide">
+                <TimeSpace compiler="sparc-rtems-gcc 3.2.3" option="o2" CPU="BM3803\AT697" freq="10MHz">
+                    <Time unit="us">27</Time>
+                    <Space unit="B">248</Space>
+                </TimeSpace>
+                <TimeSpace compiler="sparc-rtems-gcc 2.91.60" option="o2" CPU="TSC695\Soc2008" freq="20MHz">
+                    <Time unit="us">18</Time>
+                    <Space unit="B">248</Space>
+                </TimeSpace>
+                <TimeSpace compiler="TI DSP 6.08" option="o2" CPU="dsp6000" freq="128MHz">
+                    <Time unit="us">8</Time>
+                    <Space unit="B">236</Space>
+                </TimeSpace>
+                <TimeSpace compiler="TI DSP 7.4.4.0" option="o2" CPU="dsp66xx" freq="128MHz">
+                    <Time unit="us">8</Time>
+                    <Space unit="B">236</Space>
+                </TimeSpace>
+                <Precision>float64</Precision>
+                <CyclomaticComplexity>6</CyclomaticComplexity>
+                <NodeNumber>12</NodeNumber>
+                <EdgeNumber>15</EdgeNumber>
+                <Exit>1</Exit>
+            </Performance>
+        </Implementation>
+        <Test>
+            <UnitTesting format="location">./sim/tests/unit_testing</UnitTesting>
+            <IntegrationTesting format="location">./sim/tests/integration_testing</IntegrationTesting>
+        </Test>
+        <Maintenance>
+            <!-- 变更历史 -->
+            <UpdateHistory>
+                <!-- 变更内容 -->
+                <Content/>
+                <!-- 变更原因 -->
+                <Reason/>
+            </UpdateHistory>
+            <!-- 应用情况：记录在哪些领域的哪些项目中进行了使用 -->
+            <Application>
+                <!-- 飞行历史 -->
+                <FlightHistory/>
+                <!-- 应用次数 -->
+                <ApplicationNumber/>
+            </Application>
+        </Maintenance>
+        <!-- 给出典型场景的应用实例（包括在不同场景下如何使用不同形态的软件IP） -->
+        <Application content="example"/>
+    </Knowledge>
+    <Specification content="formal model">
+        <InterfaceModel>
+            <Interface>
+                <Service name="FloatValid64" type="provide">
+                    <Functional form="guarded design" format="location">./doc/formal_model/FloatValid64/functional</Functional>
+                    <NonFunctional form="declarative" format="location">./doc/formal_model/FloatValid64/nonfunctional</NonFunctional>
+                </Service>
+            </Interface>
+            <InterfaceProtocol shape="FSM" format="location">./doc/formal_model/InterfaceProtocol</InterfaceProtocol>
+        </InterfaceModel>
+        <GlobalProperty>
+            <IPinvariant/>
+            <Constraint>
+                <RealTime/>
+                <Resource/>
+                <Environment/>
+            </Constraint>
+        </GlobalProperty>
+    </Specification>
+    <Implementation>
+        <SourceCode>
+            <Code format="location">./src</Code>
+            <!-- 代码映射：将接口中的提供服务映射为具体的代码片段（函数） -->
+            <CodeMapping>
+                <Service name="FloatValid64" type="provide"/>
+                <CodeFragment src="FloatValid64.c" fun="unint32 FloatValid64( const unint08 *byte)"/>
+            </CodeMapping>
+        </SourceCode>
+        <Documentation format="location">
+            <!-- 软件制品 -->
+            <Product>./doc/Product</Product>
+        </Documentation>
+        <SimulationTest format="location">./sim</SimulationTest>
+    </Implementation>
+</SoftwareIP>
