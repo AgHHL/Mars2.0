@@ -87,7 +87,8 @@ Note: you may re-build the project before use, by getting in the folder and run 
 ### **Formally verification**
 We provide 2 ways of formally verification
 1) hhlpy, based on Wolfram Engine, and the usage of it see [hhlpy_README](./hhlpy/README.md)
-2) HHLprover+ Isabelle, usage of it see [HHLProver_README](./HHLProver/README.md)
+2) hhlpar, based on Wolfram Engine, and the usage of it see [hhlpar_README](./hhlpar/README.md)
+3) Isabelle/HHL, usage of it see [HHLProver_README](./HHLProver/README.md)
 
 ### **HCSP2C**
 
