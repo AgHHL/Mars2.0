@@ -8,13 +8,13 @@
    3. Launch Isabelle and then change logic session to "Ordinary_Differential_Equations" <br>
       Session change requires restart and then waiting for the session to be proved for the first time. <br>
       If the target session is not found, it means step 2 was not completed. <br> 
-   4. Add the relative mars package path ".../Mars2.0/hhlprover" into the ROOTS file in Isabelle2023 <br>
+   4. Add the relative mars package path ".../Mars2.0/IsabelleHHL" into the ROOTS file in Isabelle <br>
       If an error dialog box is displayed while launching Isabelle, it means this step was not completed.
-   5. Open the following files in this package in Isabelle2023 <br>
+   5. Open the following files in this package in Isabelle <br>
         "Mars2.0\Examples\lander\Lander1.thy" <br>
 	      "Mars2.0\Examples\lander\Lander2.thy" <br>
         "Mars2.0\Examples\CTCS3\C.thy" <br>
-      If step 4 secceeds, Isabelle2023 will automatically import the dependent files in HHLprover. <br>
+      If step 4 secceeds, Isabelle will automatically import the dependent files in HHLprover. <br>
 
 
 ## simple intrudction of theories
