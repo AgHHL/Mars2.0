@@ -14,7 +14,7 @@
         "Mars2.0\Examples\lander\Lander1.thy" <br>
 	      "Mars2.0\Examples\lander\Lander2.thy" <br>
         "Mars2.0\Examples\CTCS3\C.thy" <br>
-      If step 4 secceeds, Isabelle will automatically import the dependent files in HHLprover. <br>
+      If step 4 secceeds, Isabelle will automatically import the dependent files. <br>
 
 
 ## simple intrudction of theories
