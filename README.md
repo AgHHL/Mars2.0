@@ -28,7 +28,7 @@ For the backend of hcsp_simulator, we use Flask to write the backend. Documentat
 Used in: Isabelle/HHL
 
 Isabelle/HHL is an extension of Isabelle,so you may install Isabelle from:
-https://isabelle.in.tum.de/, for details, see [HHLProver_README](./IsabelleHHL/README.md)
+https://isabelle.in.tum.de/, for details, see [IsabelleHHL_README](./IsabelleHHL/README.md)
 
 ### **Ubuntu 20.04**
 Used in: hcsp2c
@@ -88,7 +88,7 @@ Note: you may re-build the project before use, by getting in the folder and run 
 We provide 2 ways of formally verification
 1) hhlpy, based on Wolfram Engine, and the usage of it see [hhlpy_README](./hhlpy/README.md)
 2) hhlpar, based on Wolfram Engine, and the usage of it see [hhlpar_README](./hhlpar/README.md)
-3) Isabelle/HHL, usage of it see [HHLProver_README](./IsabelleHHL/README.md)
+3) Isabelle/HHL, usage of it see [IsabelleHHL_README](./IsabelleHHL/README.md)
 
 ### **HCSP2C**
 
